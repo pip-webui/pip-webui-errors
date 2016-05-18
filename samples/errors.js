@@ -20,10 +20,19 @@
             );
             // Set translation strings for the module
             pipTranslateProvider.translations('en', {
-
+                'NO_CONNECTION': 'No connection',
+                'MAINTENANCE': 'Maintenance error',
+                'ROUTE_FAILS': 'Route fails',
+                'UNSUPPORTED': 'Unsupported error',
+                'UNKNOWN': 'Unknown error'
             });
 
             pipTranslateProvider.translations('ru', {
+                'NO_CONNECTION': 'Нет соединения',
+                'MAINTENANCE': 'Сервер на обслуживании',
+                'ROUTE_FAILS': 'Ошибкак перехода',
+                'UNSUPPORTED': 'Несовместимый браузер',
+                'UNKNOWN': 'Неизвестная ошибка'
             });
 
         }
