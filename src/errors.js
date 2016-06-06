@@ -9,7 +9,8 @@
     'use strict';
 
     angular.module('pipErrorHandling', [
-        'pipErrors.Pages'
+        'pipErrors.Pages',
+        'pipNoConnectionPanel'
     ]);
     
 })();
