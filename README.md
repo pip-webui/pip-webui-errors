@@ -1,4 +1,4 @@
-# Pip.WebUI Help Components
+# Pip.WebUI Errors Module
 
 Errors Web UI component is a sub-module for Pip.Services platform and can be used in applications
 based on the platform.
