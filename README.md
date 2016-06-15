@@ -1,37 +1,166 @@
-# Pip.WebUI Pages http://github.com/pip-webui/pip-webui-pages
+# Pip.WebUI Help Components
 
-Generic Web pages to be used in applications developed on Pip.Services platform
+Errors Web UI component is a sub-module for Pip.Services platform and can be used in applications
+based on the platform.
 
-The module contains the following functionality:
+This module provides next functionality:
 
-* Guidance pages and dialogs
-* Extensible application settings
-* Extensible application help 
-* User feedback page
+* All-sufficient and styled **Errors** UI component
+
+This module covers some widespread errors are happened on a client side (Like 'No connetion', 'Maintenance error',
+'route fails' etc). All states are satisfied with responsive design.
+
+The component is already has predefined states for handy work with implemented errors pages. Thus, the reserved state names:
+ * errors_no_connection
+ * errors_maintenance
+ * errors_missing_route
+ * errors_unsupported
+ * errors_unknown
+
+All implemented pages are cooperates with `pipAppBar` [component](http://link-to-pipAppBar.com)
 
 In the version 1.0.0 the implementation was cleaned up and covered with unit tests.
-Implementation became fully portable across browser and devices. 
+Implementation became fully portable across browser and devices.
 
-Quick Links:
 
-* [Documentation](#documentation)
+### The complete library
+
+ * https://github.com/pip-webui/pip-webui
+
+## Demos
+
+[Examples Online](http://webui.pipdevs.com/pip-webui-errors/index.html)
+
+
+## Quick links
+
+* [Module dependencies](#dependencies)
+* [Components](#components)
+  - ['Errors pages' service](#help-page-component)
+  - ['No Connection' page](#no_connection)
+  - ['Maintenance Error' page](#maintenance_error)
+  - ['Route Fails' page](#route_fails)
+  - ['Unsupported Error' page](#unsupported_error)
+  - ['Unknown Error' page](#unknown_error)
+* [Browsers compatibility](#compatibility)
+* [Community](#community)
 * [Contributing](#contributing)
-* [Building](#building)
-* [Installing](#installing)
+* [Build](#build)
+* [License](#license)
 
-## <a name="documentation"></a> Online Documentation
 
-- Visit [documentation](doc/index.md) page
-- Or build the project, launch and open samples; see [Building](#building) for details
-   
-## <a name="contributing"></a> Contributing
+## <a name="dependencies"></a>Module dependencies
+
+* <a href="https://github.com/pip-webui/pip-webui-tasks">pip-webui-tasks</a> - Helpful tasks for development
+* <a href="https://github.com/pip-webui/pip-webui-lib">pip-webui-lib</a> - Vendor libraries
+* <a href="https://github.com/pip-webui/pip-webui-css">pip-webui-css</a> - CSS Framework
+* <a href="https://github.com/pip-webui/pip-webui-core">pip-webui-core</a> - Core platform module
+* <a href="https://github.com/pip-webui/pip-webui-rest">pip-webui-rest</a> - REST API module
+* <a href="https://github.com/pip-webui/pip-webui-controls">pip-webui-controls</a> - Assets of control components
+* <a href="https://github.com/pip-webui/pip-webui-layouts">pip-webui-layouts</a> - Document layouts
+* <a href="https://github.com/pip-webui/pip-webui-nav">pip-webui-nav</a> - All-sufficient UI navigation components
+* <a href="https://github.com/pip-webui/pip-webui-locations">pip-webui-locations</a> - UI components to define and show users location
+* <a href="https://github.com/pip-webui/pip-webui-pictures">pip-webui-pictures</a> - UI picture components
+* <a href="https://github.com/pip-webui/pip-webui-entry">pip-webui-entry</a> - All-sufficient UI component for any authenticate states
+* <a href="https://github.com/pip-webui/pip-webui-test">pip-webui-test</a> - Provides mocked data needed for unit testing
+
+
+## <a name="components"></a>Module components
+
+### <a name="no_connection"></a>'No Connection' page
+<a href="doc/images/img-no_connection.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="doc/images/img-no_connection.png"/>
+</a>
+
+This page is recommended to use when connection between client and server is absent. This component is not required
+authentication. This one provides a page and directive for perform the error.This directive accepts callbacks on `'pipRetry'`
+and `'pip-error'` message as attributes on `'pipNoConnectionPanel'` directive.
+This component includes `pipAppBar` component.
+
+'No Connection' component [API reference](http://link.com)
+
+[Online Example](http://webui.pipdevs.com/pip-webui-errors/index.html#/errors/no_connection)
+
+<br/>
+
+### <a name="maintenance_error"></a>'Maintenance Error' page
+<a href="doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="doc/images/img-maintenance.png"/>
+</a>
+
+This page is recommended to use when server is not available. This one is not required authentication.
+
+'Maintenance Error' page [API reference](http://link.com)
+
+[Online Example](http://webui.pipdevs.com/pip-webui-errors/index.html#/errors/maintenance)
+
+<br/>
+
+### <a name="route_fails"></a>'Route Fails' page
+<a href="doc/images/img-route_fails.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="doc/images/img-route_fails.png"/>
+</a>
+
+This page is recommended to use when user try to open non-existent page(state). It is also does not required user's
+authentication.
+
+'Route Fails' page [API reference](http://link.com)
+
+[Online Example](http://webui.pipdevs.com/pip-webui-errors/index.html#/errors/missing_route)
+
+<br/>
+
+### <a name="unsupported_error"></a>'Unsupported Error' page
+<a href="doc/images/img-unsupported.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="doc/images/img-unsupported.png"/>
+</a>
+
+This page is recommended to use when user uses non compatible browser and this one notifies user about this.
+
+'Unsupported Error' page [API reference](http://link.com)
+
+[Online Example](http://webui.pipdevs.com/pip-webui-errors/index.html#/errors/unsupported)
+
+<br/>
+
+### <a name="unknown_error"></a>'Unknown Error' page
+<a href="doc/images/img-unknown_error.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="doc/images/img-unknown_error.png"/>
+</a>
+
+This page uses to notify user about some unexpected error but calm user's that app is not crashed.
+
+'Route Fails' page [API reference](http://link.com)
+
+[Online Example](http://webui.pipdevs.com/pip-webui-errors/index.html#/errors/missing_route)
+
+
+## <a name="compatibility"></a>Compatibility
+
+PIP.WEBUI has been thoroughly tested against all major browsers and supports:
+
+ * IE11+,
+ * Edge
+ * Chrome 47+,
+ * Firefox 43
+ * Opera 35
+
+## <a name="community"></a>Community
+
+* Follow [@pip.webui on Twitter](http://link.com)
+* Subscribe to the [PIP.WebUI Newsletter](http://link.com)
+* Have a question that's not a feature request or bug report? Discuss on the [PIP Forum](https://groups.google.com/forum/#!forum/pipdevs)
+* Have a feature request or find a bug? [Submit an issue](http://link.com)
+* Join our Community Slack Group! [PIP Worldwide](http://link.com)
+
+
+## <a name="contributing"></a>Contributing
 
 Developers interested in contributing should read the following guidelines:
 
-- [Issue Guidelines](docs/guides/CONTRIBUTING.md#submit)
-- [Contributing Guidelines](docs/guides/CONTRIBUTING.md)
-- [Coding Guidelines](docs/guides/CODING.md)
-- [ChangeLog](CHANGELOG.md)
+* [Issue Guidelines](http://somelink.com)
+* [Contributing Guidelines](http://somelink.com)
+* [Coding guidelines](http://somelink.com)
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, request
   enhancements, or request new features. For general questions and discussions, use the
@@ -43,12 +172,10 @@ itemize all:
 - Bug Fixes
 - New Features
 - Breaking Changes
-   
-## <a name="building"></a> Building
 
-Developers can easily build the project using NPM and gulp.
+## <a name="build"></a>Build
 
-* [Builds - Under the Hood](docs/guides/BUILD.md)
+Projects environment deploy is occurred using npm and gulp.
 
 First install or update your local project's **npm** tools:
 
@@ -76,26 +203,8 @@ gulp launch
 For more details on how the build process works and additional commands (available for testing and
 debugging) developers should read the [Build Instructions](docs/guides/BUILD.md).
 
-## <a name="installing"></a> Installing Build (Distribution Files)
 
-#### NPM
+## <a name="license"></a>License
 
-Core services have dependency on 3rd party libraries included into pip-webui-lib library.
-Also the entire Pip WebUI framework is packaged into pip-webui library.
+PIP.WebUI is under [MIT licensed](LICENSE).
 
-Change to your project's root directory.
-
-```bash
-# To install only core services with dependencies.
-npm install git+ssh://git@github.com:pip-core/pip-webui-lib.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-core.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-controls.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-rest.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-layouts.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-locations.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-pictures.git
-npm install git+ssh://git@github.com:pip-core/pip-webui-pages.git
-
-# To install the entire pip-webui library
-npm install git+ssh://git@github.com:pip-core/pip-webui.git
-```

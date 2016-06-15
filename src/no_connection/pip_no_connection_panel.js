@@ -27,7 +27,6 @@
     thisModule.controller('pipNoConnectionPanelController',
         function ($scope, $element, $attrs, pipTranslate) {
 
-
             $scope.onRetry = onRetry;
 
             return;
