@@ -36,7 +36,6 @@ Implementation became fully portable across browser and devices.
 
 * [Module dependencies](#dependencies)
 * [Components](#components)
-  - ['Errors pages' service](#help-page-component)
   - ['No Connection' page](#no_connection)
   - ['Maintenance Error' page](#maintenance_error)
   - ['Route Fails' page](#route_fails)
