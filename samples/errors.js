@@ -1,13 +1,10 @@
-/* global angular */
-
-(function () {
+(function (angular) {
     'use strict';
 
     var thisModule = angular.module('pipErrorsSample', ['pipTranslate', 'pipRest', 'pipRest.State', 'pipErrors.Pages']);
 
-
     thisModule.config(
-        function($stateProvider, pipTranslateProvider, pipAuthStateProvider) {
+        function ($stateProvider, pipTranslateProvider, pipAuthStateProvider) {
 
             // Configure module routes
             pipAuthStateProvider
@@ -16,10 +13,11 @@
                     controller: 'SampleErrorsController',
                     templateUrl: 'errors.html',
                     auth: true
-                }
-            );
+                });
             // Set translation strings for the module
             pipTranslateProvider.translations('en', {
+                'ERRORS': 'Errors',
+                'CHOOSE_ERROR': 'Choose type of error',
                 'NO_CONNECTION': 'No connection',
                 'MAINTENANCE': 'Maintenance error',
                 'ROUTE_FAILS': 'Route fails',
@@ -28,6 +26,8 @@
             });
 
             pipTranslateProvider.translations('ru', {
+                'ERRORS': 'Ошибки',
+                'CHOOSE_ERROR': 'Выберите тип ошибки',
                 'NO_CONNECTION': 'Нет соединения',
                 'MAINTENANCE': 'Сервер на обслуживании',
                 'ROUTE_FAILS': 'Ошибкак перехода',
@@ -39,40 +39,58 @@
     );
 
     thisModule.controller('SampleErrorsController',
-        function ($scope, $rootScope, $state) {
-            var date = new Date();
+        function ($scope, $rootScope, $state, pipAppBar) {
+            var date = new Date(),
 
-            var error = {
-                code: 500,
-                config: {},
-                data: {
-                    name: 'error',
-                    message: 'Server down. try again',
-                    offlineUntil:  date.toJSON()
+                error = {
+                    code: 500,
+                    config: {},
+                    data: {
+                        name: 'error',
+                        message: 'Server down. try again',
+                        offlineUntil: date.toJSON()
+                    },
+                    status: 500,
+                    statusText: 'Internal Server Error'
                 },
-                status: 500,
-                statusText: 'Internal Server Error'
-            };
 
-            var params = {
-                error: error,
-                unfoundState: {
-                    to: 'unfaund',
-                    toParams: {}
+                params = {
+                    error: error,
+                    unfoundState: {
+                        to: 'unfound',
+                        toParams: {}
+                    },
+                    fromState: {
+                        to: 'about_me',
+                        fromParams: {}
+                    }
                 },
-                fromState: {
-                    to: 'about_me',
-                    fromParams: {}
-                }
-            };
+                pages = [
+                    {title: 'NO_CONNECTION', state: 'errors_no_connection'},
+                    {title: 'MAINTENANCE', state: 'errors_maintenance'},
+                    {title: 'ROUTE_FAILS', state: 'errors_missing_route'},
+                    {title: 'UNSUPPORTED', state: 'errors_unsupported'},
+                    {title: 'UNKNOWN', state: 'errors_unknown'}
+                ];
+
+            $scope.pages = pages;
 
             $scope.onLostConnection = onLostConnection;
             $scope.onMaintenance = onMaintenance;
             $scope.onRouteFails = onRouteFails;
             $scope.onUnsupported = onUnsupported;
             $scope.onUnknown = onUnknown;
+            $scope.onNavigationSelect = onNavigationSelect;
+
+            pipAppBar.showTitleText('ERRORS');
+            pipAppBar.showMenuNavIcon();
 
             return;
+            // ----------------------------------------------------------------------------------------------------
+
+            function onNavigationSelect(state) {
+                $state.go(state, params);
+            }
 
             function onUnknown() {
                 $state.go('errors_unknown', params);
@@ -97,4 +115,4 @@
         }
     );
 
-})();
+})(window.angular);
