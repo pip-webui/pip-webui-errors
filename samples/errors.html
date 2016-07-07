@@ -2,25 +2,26 @@
 </md-toolbar>
 
 <pip-document width="800" min-height="400">
-    <div class="pip-content-container">
-        <h3 class="m16">{{ 'CHOOSE_ERROR' | translate }}</h3>
-        <md-button ng-click="onLostConnection()">
+    <div class="pip-content-container p24">
+        <h2 class="text-title tm0 bm024">{{ 'ERRORS' | translate }}:</h2>
+        <h3 class="text-subhead2 tm0">{{ 'CHOOSE_ERROR' | translate }}</h3>
+        <md-button class="lm0" ng-click="onLostConnection()">
             {{::'NO_CONNECTION' | translate}}
         </md-button>
 
-        <md-button ng-click="onMaintenance()">
+        <md-button class="lm0" ng-click="onMaintenance()">
             {{::'MAINTENANCE' | translate}}
         </md-button>
 
-        <md-button ng-click="onRouteFails()">
+        <md-button class="lm0" ng-click="onRouteFails()">
             {{::'ROUTE_FAILS' | translate}}
         </md-button>
 
-        <md-button ng-click="onUnsupported()">
+        <md-button class="lm0" ng-click="onUnsupported()">
             {{::'UNSUPPORTED' | translate}}
         </md-button>
 
-        <md-button ng-click="onUnknown()">
+        <md-button class="lm0" ng-click="onUnknown()">
             {{::'UNKNOWN' | translate}}
         </md-button>
     </div>

@@ -6,17 +6,10 @@
     thisModule.config(
         function ($stateProvider, pipTranslateProvider, pipAuthStateProvider) {
 
-            // Configure module routes
-            pipAuthStateProvider
-                .state('error_page', {
-                    url: '/error_page',
-                    controller: 'SampleErrorsController',
-                    templateUrl: 'errors.html',
-                    auth: true
-                });
             // Set translation strings for the module
             pipTranslateProvider.translations('en', {
                 'ERRORS': 'Errors',
+                'SIGNOUT': 'Sing out',
                 'CHOOSE_ERROR': 'Choose type of error',
                 'NO_CONNECTION': 'No connection',
                 'MAINTENANCE': 'Maintenance error',
@@ -27,6 +20,7 @@
 
             pipTranslateProvider.translations('ru', {
                 'ERRORS': 'Ошибки',
+                'SIGNOUT': 'Выйти',
                 'CHOOSE_ERROR': 'Выберите тип ошибки',
                 'NO_CONNECTION': 'Нет соединения',
                 'MAINTENANCE': 'Сервер на обслуживании',
@@ -84,6 +78,8 @@
 
             pipAppBar.showTitleText('ERRORS');
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showLanguage();
+            pipAppBar.hideShadow();
 
             return;
             // ----------------------------------------------------------------------------------------------------

@@ -33,6 +33,14 @@
             pipAuthStateProvider.unauthorizedState('signin');
             pipAuthStateProvider.authorizedState('error_page');
 
+            pipAuthStateProvider
+                .state('error_page', {
+                    url: '/error_page',
+                    controller: 'SampleErrorsController',
+                    templateUrl: 'errors.html',
+                    auth: true
+                });
+
             $urlRouterProvider.otherwise(function ($injector, $location) {
                 return $location.$$path === '' ? '/signin' : '/error_page';
             });
@@ -41,12 +49,12 @@
             pipSideNavProvider.sections([
                 {
                     links: [
-                        {title: 'Errors', url: '/error_page'}
+                        {title: 'ERRORS', url: '/error_page'}
                     ]
                 },
                 {
                     links: [
-                        {title: 'Signout', url: '/signout'}
+                        {title: 'SIGNOUT', url: '/signout'}
                     ]
                 }
             ]);
