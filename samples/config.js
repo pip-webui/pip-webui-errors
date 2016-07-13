@@ -51,12 +51,12 @@
                     links: [
                         {title: 'ERRORS', url: '/error_page'}
                     ]
-                }/*,
+                },
                 {
                     links: [
                         {title: 'SIGNOUT', url: '/signout'}
                     ]
-                }*/
+                }
             ]);
         }
     );
