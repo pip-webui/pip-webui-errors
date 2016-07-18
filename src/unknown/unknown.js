@@ -48,7 +48,7 @@
         };
 
         function onDetails() {
-
+            $scope.showError = true;
         };
 
         function onClose() {

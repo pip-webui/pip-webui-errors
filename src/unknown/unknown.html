@@ -1,14 +1,14 @@
 <div class="pip-error pip-empty layout-column flex layout-align-center-center">
-    <div style="background-image: url('../../dist/images/unknown_error.svg');" class="pip-pic"></div>
+    <div style="background-image: url('images/unknown_error.svg');" class="pip-pic"></div>
     <div class="pip-error-text">{{::'ERROR_UNKNOWN_TITLE' | translate}}</div>
     <div class="pip-error-subtext">{{::'ERROR_UNKNOWN_SUBTITLE' | translate}}</div>
 
-    <div class="pip-error-subtext" ng-if="error_details && error_details.status">
-        <div>Code: {{error_details.code}}</div>
-        <div>Description: {{error_details.description}}</div>
-        <div>HTTP status: {{error_details.status}}</div>
-        <div>Server stacktrace: {{error_details.server_stacktrace}}</div>
-        <div>Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>
+    <div class="pip-error-subtext" ng-if="showError && error_details && error_details.status">
+        <div ng-if="error_details.code">Code: {{error_details.code}}</div>
+        <div ng-if="error_details.description">Description: {{error_details.description}}</div>
+        <div ng-if="error_details.status">HTTP status: {{error_details.status}}</div>
+        <div ng-if="error_details.server_stacktrace">Server stacktrace: {{error_details.server_stacktrace}}</div>
+        <div ng-if="error_details.client_stacktrace">Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>
     </div>
     <div class="pip-error-actions" layout="column" layout-align="center center">
         <div class="h48" ng-if="isCordova">
