@@ -60,11 +60,11 @@
                     }
                 },
                 pages = [
-                    {title: 'NO_CONNECTION', state: 'errors_no_connection'},
-                    {title: 'MAINTENANCE', state: 'errors_maintenance'},
-                    {title: 'ROUTE_FAILS', state: 'errors_missing_route'},
-                    {title: 'UNSUPPORTED', state: 'errors_unsupported'},
-                    {title: 'UNKNOWN', state: 'errors_unknown'}
+                    {title: 'NO_CONNECTION', state: 'errors_no_connection', auth: false},
+                    {title: 'MAINTENANCE', state: 'errors_maintenance', auth: false},
+                    {title: 'ROUTE_FAILS', state: 'errors_missing_route', auth: false},
+                    {title: 'UNSUPPORTED', state: 'errors_unsupported', auth: false},
+                    {title: 'UNKNOWN', state: 'errors_unknown', auth: false}
                 ];
 
             $scope.pages = pages;

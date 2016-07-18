@@ -38,11 +38,11 @@
                     url: '/error_page',
                     controller: 'SampleErrorsController',
                     templateUrl: 'errors.html',
-                    auth: true
+                    auth: false
                 });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {
-                return $location.$$path === '' ? '/signin' : '/error_page';
+                return $location.$$path === '' ? '/error_page' : '/error_page';
             });
 
             // Configure navigation menu
