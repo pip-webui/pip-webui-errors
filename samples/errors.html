@@ -9,20 +9,75 @@
             {{::'NO_CONNECTION' | translate}}
         </md-button>
 
+        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+    <pre class="text-body1 color-window-bg p16">
+            $state.go(<strong>'errors_no_connection'</strong>, <strong>params</strong>);
+
+            var <strong>date</strong> = new Date(),
+
+                <strong>error</strong> = {
+                    code: 500,
+                    config: {},
+                    data: {
+                        name: 'error',
+                        message: 'Server down. try again',
+                        offlineUntil: <strong>date</strong>.toJSON()
+                    },
+                    status: 500,
+                    statusText: 'Internal Server Error'
+                },
+
+                <strong>params</strong> = {
+                    error: <strong>error</strong>,
+                    unfoundState: {
+                        to: 'unfound',
+                        toParams: {}
+                    },
+                    fromState: {
+                        to: 'about_me',
+                        fromParams: {}
+                    }
+                }
+    </pre>
+        <md-divider class="tm8 pip-list-divider"></md-divider>
+
         <md-button class="lm0" ng-click="onMaintenance()">
             {{::'MAINTENANCE' | translate}}
         </md-button>
+
+        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+    <pre class="text-body1 color-window-bg p16">
+            $state.go(<strong>'errors_maintenance'</strong>, params);
+    </pre>
+        <md-divider class="tm8 pip-list-divider"></md-divider>
 
         <md-button class="lm0" ng-click="onRouteFails()">
             {{::'ROUTE_FAILS' | translate}}
         </md-button>
 
+        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+    <pre class="text-body1 color-window-bg p16">
+            $state.go(<strong>'errors_missing_route'</strong>, params);
+    </pre>
+        <md-divider class="tm8 pip-list-divider"></md-divider>
+
         <md-button class="lm0" ng-click="onUnsupported()">
             {{::'UNSUPPORTED' | translate}}
         </md-button>
 
+        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+    <pre class="text-body1 color-window-bg p16">
+            $state.go(<strong>'errors_unsupported'</strong>, params);
+    </pre>
+        <md-divider class="tm8 pip-list-divider"></md-divider>
+
         <md-button class="lm0" ng-click="onUnknown()">
             {{::'UNKNOWN' | translate}}
         </md-button>
+
+        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+    <pre class="text-body1 color-window-bg p16">
+            $state.go(<strong>'errors_unknown'</strong>, params);
+    </pre>
     </div>
 </pip-document>
