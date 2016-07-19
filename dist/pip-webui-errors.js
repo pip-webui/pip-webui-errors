@@ -1,19 +1,58 @@
-/**
- * @file Registration of all error handling components
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    angular.module('pipErrorHandling', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel'
-    ]);
-    
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('maintenance/maintenance.html',
+    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
+    '    <div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div>\n' +
+    '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
+    '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
+    '    </div>\n' +
+    '    <div class="pip-error-actions h48"\n' +
+    '         ng-if="isCordova"\n' +
+    '         layout="column"\n' +
+    '         layout-align="center center">\n' +
+    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
+    '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
+    '        </md-button>\n' +
+    '    </div>\n' +
+    '</div>');
+}]);
 })();
+
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('missing_route/missing_route.html',
+    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
+    '    <div style="background-image: url(\'images/invalid_route.svg\');" class="pip-pic"></div>\n' +
+    '    <div class="pip-error-text">{{::\'ERROR_ROUTE_TITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::\'ERROR_ROUTE_SUBTITLE\' | translate}}</div>\n' +
+    '\n' +
+    '    <div class="pip-error-actions h48" layout="column" layout-align="center center">\n' +
+    '        <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">\n' +
+    '            {{::\'ERROR_ROUTE_CONTINUE\' | translate}}\n' +
+    '        </md-button>\n' +
+    '    </div>\n' +
+    '    <div class="h48" ng-if="url"><a ng-href="{{url}}">\n' +
+    '        {{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{url}}\n' +
+    '    </a></div>\n' +
+    '    <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
+    '        {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
+    '    </a></div>\n' +
+    '</div>');
+}]);
+})();
+
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -23,7 +62,7 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection/no_connection.html',
     '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'../../dist/images/no_response.svg\');" class="pip-pic"></div>\n' +
+    '    <div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div>\n' +
     '    <div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div>\n' +
     '    <div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div>\n' +
     '\n' +
@@ -66,73 +105,18 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('maintenance/maintenance.html',
-    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'../../dist/images/maintenance.svg\');" class="pip-pic"></div>\n' +
-    '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
-    '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
-    '    </div>\n' +
-    '    <div class="pip-error-actions h48"\n' +
-    '         ng-if="isCordova"\n' +
-    '         layout="column"\n' +
-    '         layout-align="center center">\n' +
-    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
-    '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
-    '        </md-button>\n' +
-    '    </div>\n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('missing_route/missing_route.html',
-    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'../../dist/images/invalid_route.svg\');" class="pip-pic"></div>\n' +
-    '    <div class="pip-error-text">{{::\'ERROR_ROUTE_TITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::\'ERROR_ROUTE_SUBTITLE\' | translate}}</div>\n' +
-    '\n' +
-    '    <div class="pip-error-actions h48" layout="column" layout-align="center center">\n' +
-    '        <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">\n' +
-    '            {{::\'ERROR_ROUTE_CONTINUE\' | translate}}\n' +
-    '        </md-button>\n' +
-    '    </div>\n' +
-    '    <div class="h48" ng-if="url"><a ng-href="{{url}}">\n' +
-    '        {{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{url}}\n' +
-    '    </a></div>\n' +
-    '    <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
-    '        {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
-    '    </a></div>\n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('unknown/unknown.html',
     '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'../../dist/images/unknown_error.svg\');" class="pip-pic"></div>\n' +
+    '    <div style="background-image: url(\'images/unknown_error.svg\');" class="pip-pic"></div>\n' +
     '    <div class="pip-error-text">{{::\'ERROR_UNKNOWN_TITLE\' | translate}}</div>\n' +
     '    <div class="pip-error-subtext">{{::\'ERROR_UNKNOWN_SUBTITLE\' | translate}}</div>\n' +
     '\n' +
-    '    <div class="pip-error-subtext" ng-if="error_details && error_details.status">\n' +
-    '        <div>Code: {{error_details.code}}</div>\n' +
-    '        <div>Description: {{error_details.description}}</div>\n' +
-    '        <div>HTTP status: {{error_details.status}}</div>\n' +
-    '        <div>Server stacktrace: {{error_details.server_stacktrace}}</div>\n' +
-    '        <div>Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>\n' +
+    '    <div class="pip-error-subtext" ng-if="showError && error_details && error_details.status">\n' +
+    '        <div ng-if="error_details.code">Code: {{error_details.code}}</div>\n' +
+    '        <div ng-if="error_details.description">Description: {{error_details.description}}</div>\n' +
+    '        <div ng-if="error_details.status">HTTP status: {{error_details.status}}</div>\n' +
+    '        <div ng-if="error_details.server_stacktrace">Server stacktrace: {{error_details.server_stacktrace}}</div>\n' +
+    '        <div ng-if="error_details.client_stacktrace">Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>\n' +
     '    </div>\n' +
     '    <div class="pip-error-actions" layout="column" layout-align="center center">\n' +
     '        <div class="h48" ng-if="isCordova">\n' +
@@ -166,7 +150,7 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '    <div class="pip-error-details" layout="row" layout-align="center center" ng-if="$mdMedia(\'gt-xs\')">\n' +
     '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '            <div style="background-image: url(\'../../dist/images/ie.svg\');" class="pip-pic"></div>\n' +
+    '            <div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
     '                   href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">\n' +
@@ -176,7 +160,7 @@ module.run(['$templateCache', function($templateCache) {
     '            </div>\n' +
     '        </div>\n' +
     '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '            <div style="background-image: url(\'../../dist/images/fm.svg\');" class="pip-pic"></div>\n' +
+    '            <div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
     '                   href="https://www.mozilla.org/ru/firefox/new/">\n' +
@@ -186,7 +170,7 @@ module.run(['$templateCache', function($templateCache) {
     '            </div>\n' +
     '        </div>\n' +
     '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '            <div style="background-image: url(\'../../dist/images/gc.svg\');" class="pip-pic"></div>\n' +
+    '            <div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
     '                   href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">\n' +
@@ -196,7 +180,7 @@ module.run(['$templateCache', function($templateCache) {
     '            </div>\n' +
     '        </div>\n' +
     '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '            <div style="background-image: url(\'../../dist/images/o.svg\');" class="pip-pic"></div>\n' +
+    '            <div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
     '                   href="http://www.opera.com/ru/download">\n' +
@@ -210,7 +194,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="pip-error-details" ng-if="$mdMedia(\'xs\')">\n' +
     '        <div layout="row" layout-align="center center">\n' +
     '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '                <div style="background-image: url(\'../../dist/images/ie.svg\');" class="pip-pic"></div>\n' +
+    '                <div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
     '                       href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">\n' +
@@ -220,7 +204,7 @@ module.run(['$templateCache', function($templateCache) {
     '                </div>\n' +
     '            </div>\n' +
     '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '                <div style="background-image: url(\'../../dist/images/fm.svg\');" class="pip-pic"></div>\n' +
+    '                <div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
     '                       href="https://www.mozilla.org/ru/firefox/new/">\n' +
@@ -232,7 +216,7 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '        <div class="tm16" layout="row" layout-align="center center">\n' +
     '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '                <div style="background-image: url(\'../../dist/images/gc.svg\');" class="pip-pic"></div>\n' +
+    '                <div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
     '                       href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">\n' +
@@ -242,7 +226,7 @@ module.run(['$templateCache', function($templateCache) {
     '                </div>\n' +
     '            </div>\n' +
     '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
-    '                <div style="background-image: url(\'../../dist/images/o.svg\');" class="pip-pic"></div>\n' +
+    '                <div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
     '                       href="http://www.opera.com/ru/download">\n' +
@@ -258,6 +242,22 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
+/**
+ * @file Registration of all error handling components
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    angular.module('pipErrorHandling', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel'
+    ]);
+    
+})();
 /* global angular */
 
 (function () {
@@ -562,7 +562,6 @@ module.run(['$templateCache', function($templateCache) {
     thisModule.controller('pipNoConnectionPanelController',
         ['$scope', '$element', '$attrs', 'pipTranslate', function ($scope, $element, $attrs, pipTranslate) {
 
-
             $scope.onRetry = onRetry;
 
             return;
@@ -627,7 +626,7 @@ module.run(['$templateCache', function($templateCache) {
         };
 
         function onDetails() {
-
+            $scope.showError = true;
         };
 
         function onClose() {
