@@ -70,10 +70,10 @@
                     links: [
                         {title: 'ERRORS', url: '/error_page'}
                     ]
-                },
+                },/* Links for publishing samples
                 {
                     links: links
-                },
+                },*/
                 {
                     links: [
                         {title: 'SIGNOUT', url: '/signout'}
