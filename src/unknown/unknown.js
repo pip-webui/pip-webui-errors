@@ -28,6 +28,7 @@
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };

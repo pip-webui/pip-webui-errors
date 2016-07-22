@@ -3,81 +3,81 @@
 
 <pip-document width="800" min-height="400">
     <div class="pip-content-container p24">
-        <h2 class="text-title tm0 bm024">{{ 'ERRORS' | translate }}:</h2>
-        <h3 class="text-subhead2 tm0">{{ 'CHOOSE_ERROR' | translate }}</h3>
-        <md-button class="lm0" ng-click="onLostConnection()">
-            {{::'NO_CONNECTION' | translate}}
-        </md-button>
+        <div>
+            <h2 class="text-title tm0 bm024">{{ 'ERRORS' | translate }}:</h2>
+            <h3 class="text-subhead2 tm0">{{ 'CHOOSE_ERROR' | translate }}</h3>
+            <div>
+                <md-button class="lm0 md-raised md-accent flat" ng-click="onLostConnection()">
+                    {{::'NO_CONNECTION' | translate}}
+                </md-button>
+            </div>
+<pre class="text-body1 color-window-bg p16">
+<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<code class="language-js">$state.go(<strong>'errors_no_connection'</strong>, <strong>params</strong>);
 
-        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+var <strong>date</strong> = new Date(),
+
+    <strong>error</strong> = {
+        code: 500,
+        config: {},
+        data: {
+            name: 'error',
+            message: 'Server down. try again',
+            offlineUntil: <strong>date</strong>.toJSON()
+        },
+        status: 500,
+        statusText: 'Internal Server Error'
+    },
+
+    <strong>params</strong> = {
+        error: <strong>error</strong>,
+        unfoundState: {
+            to: 'unfound',
+            toParams: {}
+        },
+        fromState: {
+            to: 'about_me',
+            fromParams: {}
+        }
+    }</code></pre>
+            <md-divider class="tm8 pip-list-divider"></md-divider>
+
+            <div>
+                <md-button class="lm0 md-raised md-accent flat" ng-click="onMaintenance()">
+                    {{::'MAINTENANCE' | translate}}
+                </md-button>
+            </div>
     <pre class="text-body1 color-window-bg p16">
-            $state.go(<strong>'errors_no_connection'</strong>, <strong>params</strong>);
-
-            var <strong>date</strong> = new Date(),
-
-                <strong>error</strong> = {
-                    code: 500,
-                    config: {},
-                    data: {
-                        name: 'error',
-                        message: 'Server down. try again',
-                        offlineUntil: <strong>date</strong>.toJSON()
-                    },
-                    status: 500,
-                    statusText: 'Internal Server Error'
-                },
-
-                <strong>params</strong> = {
-                    error: <strong>error</strong>,
-                    unfoundState: {
-                        to: 'unfound',
-                        toParams: {}
-                    },
-                    fromState: {
-                        to: 'about_me',
-                        fromParams: {}
-                    }
-                }
-    </pre>
-        <md-divider class="tm8 pip-list-divider"></md-divider>
-
-        <md-button class="lm0" ng-click="onMaintenance()">
-            {{::'MAINTENANCE' | translate}}
-        </md-button>
-
-        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<code class="language-js">$state.go(<strong>'errors_maintenance'</strong>, params);</code></pre>
+            <md-divider class="tm8 pip-list-divider"></md-divider>
+            <div>
+                <md-button class="lm0 md-raised md-accent flat" ng-click="onRouteFails()">
+                    {{::'ROUTE_FAILS' | translate}}
+                </md-button>
+            </div>
     <pre class="text-body1 color-window-bg p16">
-            $state.go(<strong>'errors_maintenance'</strong>, params);
-    </pre>
-        <md-divider class="tm8 pip-list-divider"></md-divider>
-
-        <md-button class="lm0" ng-click="onRouteFails()">
-            {{::'ROUTE_FAILS' | translate}}
-        </md-button>
-
-        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<code class="language-js">$state.go(<strong>'errors_missing_route'</strong>, params);</code></pre>
+            <md-divider class="tm8 pip-list-divider"></md-divider>
+            <div>
+                <md-button class="lm0 md-raised md-accent flat" ng-click="onUnsupported()">
+                    {{::'UNSUPPORTED' | translate}}
+                </md-button>
+            </div>
     <pre class="text-body1 color-window-bg p16">
-            $state.go(<strong>'errors_missing_route'</strong>, params);
-    </pre>
-        <md-divider class="tm8 pip-list-divider"></md-divider>
-
-        <md-button class="lm0" ng-click="onUnsupported()">
-            {{::'UNSUPPORTED' | translate}}
-        </md-button>
-
-        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
+<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<code class="language-js">$state.go(<strong>'errors_unsupported'</strong>, params);</code></pre>
+            <md-divider class="tm8 pip-list-divider"></md-divider>
+            <div>
+                <md-button class="lm0 md-raised md-accent flat" ng-click="onUnknown()">
+                    {{::'UNKNOWN' | translate}}
+                </md-button>
+            </div>
+            <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
     <pre class="text-body1 color-window-bg p16">
-            $state.go(<strong>'errors_unsupported'</strong>, params);
-    </pre>
-        <md-divider class="tm8 pip-list-divider"></md-divider>
-
-        <md-button class="lm0" ng-click="onUnknown()">
-            {{::'UNKNOWN' | translate}}
-        </md-button>
-
-        <h3 class="text-subhead2">{{:: 'CODE' | translate}}</h3>
-    <pre class="text-body1 color-window-bg p16">
-            $state.go(<strong>'errors_unknown'</strong>, params);
-    </pre>
+<h3 class="text-subhead2 m0">{{:: 'CODE' | translate}}</h3>
+<code class="language-js">$state.go(<strong>'errors_unknown'</strong>, params);</code></pre>
+        </div>
     </div>
 </pip-document>

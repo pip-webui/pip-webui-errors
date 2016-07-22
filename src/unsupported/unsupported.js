@@ -22,6 +22,7 @@
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };

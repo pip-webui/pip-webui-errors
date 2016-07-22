@@ -33,7 +33,14 @@
     );
 
     thisModule.controller('SampleErrorsController',
-        function ($scope, $rootScope, $state, pipAppBar) {
+        function ($scope, $rootScope, $state, pipAppBar, $timeout) {
+
+            $timeout(function() {
+                $('pre code').each(function(i, block) {
+                    Prism.highlightElement(block);
+                });
+            });
+            
             var date = new Date(),
 
                 error = {
@@ -85,27 +92,39 @@
             // ----------------------------------------------------------------------------------------------------
 
             function onNavigationSelect(state) {
+                setUpAppbarForSample();
                 $state.go(state, params);
             }
 
             function onUnknown() {
+                setUpAppbarForSample();
                 $state.go('errors_unknown', params);
             }
 
             function onMaintenance() {
+                setUpAppbarForSample();
                 $state.go('errors_maintenance', params);
             }
 
             function onRouteFails() {
+                setUpAppbarForSample();
                 $state.go('errors_missing_route', params);
             }
 
             function onUnsupported() {
+                setUpAppbarForSample();
                 $state.go('errors_unsupported', params);
             }
 
             function onLostConnection() {
+                setUpAppbarForSample();
                 $state.go('errors_no_connection', params);
+            }
+
+            function setUpAppbarForSample() {
+                $timeout(function () {
+                    pipAppBar.showBackNavIcon();
+                });
             }
 
         }
