@@ -10,7 +10,7 @@
         <div ng-if="error_details.server_stacktrace">Server stacktrace: {{error_details.server_stacktrace}}</div>
         <div ng-if="error_details.client_stacktrace">Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>
     </div>
-    <div class="pip-error-actions" layout="column" layout-align="center center">
+    <div class="pip-error-actions layout-column layout-align-center-center">
         <div class="h48" ng-if="isCordova">
             <md-button aria-label="CLOSE" class="md-accent" ng-click="onClose($event)">
                 {{::'ERROR_UNKNOWN_CLOSE' | translate}}

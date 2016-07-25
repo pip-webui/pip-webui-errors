@@ -1,3 +1,19 @@
+/**
+ * @file Registration of all error handling components
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    angular.module('pipErrorHandling', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel'
+    ]);
+    
+})();
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -242,22 +258,6 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
-/**
- * @file Registration of all error handling components
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    angular.module('pipErrorHandling', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel'
-    ]);
-    
-})();
 /* global angular */
 
 (function () {
@@ -443,6 +443,7 @@ module.run(['$templateCache', function($templateCache) {
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };
@@ -483,6 +484,7 @@ module.run(['$templateCache', function($templateCache) {
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_ROUTE_PAGE_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };
@@ -524,6 +526,7 @@ module.run(['$templateCache', function($templateCache) {
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_RESPONDING_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };
@@ -606,6 +609,7 @@ module.run(['$templateCache', function($templateCache) {
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };
@@ -661,6 +665,7 @@ module.run(['$templateCache', function($templateCache) {
 
         function appHeader() {
             pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };
