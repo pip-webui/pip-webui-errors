@@ -1,19 +1,3 @@
-/**
- * @file Registration of all error handling components
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    angular.module('pipErrorHandling', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel'
-    ]);
-    
-})();
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -29,10 +13,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
     '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
     '    </div>\n' +
-    '    <div class="pip-error-actions h48"\n' +
-    '         ng-if="isCordova"\n' +
-    '         layout="column"\n' +
-    '         layout-align="center center">\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center"\n' +
+    '         ng-if="isCordova">\n' +
     '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
     '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
     '        </md-button>\n' +
@@ -54,7 +36,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="pip-error-text">{{::\'ERROR_ROUTE_TITLE\' | translate}}</div>\n' +
     '    <div class="pip-error-subtext">{{::\'ERROR_ROUTE_SUBTITLE\' | translate}}</div>\n' +
     '\n' +
-    '    <div class="pip-error-actions h48" layout="column" layout-align="center center">\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
     '        <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">\n' +
     '            {{::\'ERROR_ROUTE_CONTINUE\' | translate}}\n' +
     '        </md-button>\n' +
@@ -82,7 +64,7 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div>\n' +
     '    <div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div>\n' +
     '\n' +
-    '    <div class="pip-error-actions h48" layout="column" layout-align="center center">\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
     '        <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">\n' +
     '            {{::\'ERROR_RESPONDING_RETRY\' | translate}}\n' +
     '        </md-button>\n' +
@@ -99,13 +81,13 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection/pip_no_connection_panel.html',
-    '    <div class="pip-empty pip-error" layout="column" layout-align="center center" flex>\n' +
+    '    <div class="pip-empty pip-error layout-column layout-align-center-center flex">\n' +
     '        <img src="images/no_response.svg" class="pip-pic block" >\n' +
     '        \n' +
     '            <div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div>\n' +
     '            <div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div>\n' +
     '\n' +
-    '            <div class="pip-error-actions h48" layout="column" layout-align="center center">\n' +
+    '            <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
     '                <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">\n' +
     '                    {{::\'ERROR_RESPONDING_RETRY\' | translate}}\n' +
     '                </md-button>\n' +
@@ -134,7 +116,7 @@ module.run(['$templateCache', function($templateCache) {
     '        <div ng-if="error_details.server_stacktrace">Server stacktrace: {{error_details.server_stacktrace}}</div>\n' +
     '        <div ng-if="error_details.client_stacktrace">Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>\n' +
     '    </div>\n' +
-    '    <div class="pip-error-actions" layout="column" layout-align="center center">\n' +
+    '    <div class="pip-error-actions layout-column layout-align-center-center">\n' +
     '        <div class="h48" ng-if="isCordova">\n' +
     '            <md-button aria-label="CLOSE" class="md-accent" ng-click="onClose($event)">\n' +
     '                {{::\'ERROR_UNKNOWN_CLOSE\' | translate}}\n' +
@@ -164,8 +146,8 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="pip-error-subtext">\n' +
     '        {{::\'ERROR_UNSUPPORTED_SUBTITLE\' | translate}}\n' +
     '    </div>\n' +
-    '    <div class="pip-error-details" layout="row" layout-align="center center" ng-if="$mdMedia(\'gt-xs\')">\n' +
-    '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '    <div class="pip-error-details layout-row layout-align-center-center" ng-if="$mdMedia(\'gt-xs\')">\n' +
+    '        <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '            <div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
@@ -175,7 +157,7 @@ module.run(['$templateCache', function($templateCache) {
     '                <p class="text-body1 m0"> {{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '        <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '            <div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
@@ -185,7 +167,7 @@ module.run(['$templateCache', function($templateCache) {
     '                <p class="text-body1 m0"> {{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '        <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '            <div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
@@ -195,7 +177,7 @@ module.run(['$templateCache', function($templateCache) {
     '                <p class="text-body1 m0"> {{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '        <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '            <div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
     '                <a class="text-body2 m0" target="_blank"\n' +
@@ -208,8 +190,8 @@ module.run(['$templateCache', function($templateCache) {
     '    </div>\n' +
     '\n' +
     '    <div class="pip-error-details" ng-if="$mdMedia(\'xs\')">\n' +
-    '        <div layout="row" layout-align="center center">\n' +
-    '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '        <div class="layout-row layout-align-center-center">\n' +
+    '            <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '                <div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
@@ -219,7 +201,7 @@ module.run(['$templateCache', function($templateCache) {
     '                    <p class="text-body1 m0"> {{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p>\n' +
     '                </div>\n' +
     '            </div>\n' +
-    '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '            <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '                <div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
@@ -230,8 +212,8 @@ module.run(['$templateCache', function($templateCache) {
     '                </div>\n' +
     '            </div>\n' +
     '        </div>\n' +
-    '        <div class="tm16" layout="row" layout-align="center center">\n' +
-    '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '        <div class="tm16 layout-row layout-align-center-center">\n' +
+    '            <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '                <div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
@@ -241,7 +223,7 @@ module.run(['$templateCache', function($templateCache) {
     '                    <p class="text-body1 m0"> {{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p>\n' +
     '                </div>\n' +
     '            </div>\n' +
-    '            <div class="pip-error-details-item" layout="column" layout-align="center center">\n' +
+    '            <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '                <div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div>\n' +
     '                <div class="h64 tp16 bp16">\n' +
     '                    <a class="text-body2 m0" target="_blank"\n' +
@@ -258,6 +240,22 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
+/**
+ * @file Registration of all error handling components
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    angular.module('pipErrorHandling', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel'
+    ]);
+    
+})();
 /* global angular */
 
 (function () {
