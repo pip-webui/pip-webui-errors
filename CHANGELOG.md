@@ -1,33 +1,18 @@
-# Changelog
+# Pip.WebUI.Errors Changelog
 
-### 1.0.0 (2016-05-01)
------
+## <a name="1.0.0"></a> 1.0.0 (2016-07-30)
 
-#### Enhancements:
+Initial release with few standard error pages, handling lost connections and interception of unhandled errors.
 
-* **error pages** No connection, Maintenance, Unknown, Unsupported, Routing pages
+### Features
 
-#### Breaking Changes
-* API in most controls was changed since the previous version
+* **unhandled exceptions**: interception of unhandled exceptions
+* **routing errors**: attempts to open non-existing page
+* **no connection**: lost connection errors
+* **maintenance**: handling server maintenance (504) errors
 
-#### Bug Fixes
+### Breaking Changes
+No breaking changes in this version
+
+### Bug Fixes
 No fixes in this version
-
-<br/>
-
-### 0.0.0 (2016-01-01) Template
------
-
-#### Enhancements:
-
-* new performed features
-
-#### Breaking Changes
-* what has been changed
-
-#### Bug Fixes
-
-* [#1234](http://link_to_pull_request) Some description of new feature
-* [#1234](http://link_to_pull_request) Some description of new feature
-* [#1234](http://link_to_pull_request) Some description of new feature
-* [#1234](http://link_to_pull_request) Some description of new feature
