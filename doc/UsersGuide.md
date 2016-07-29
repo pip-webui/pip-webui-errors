@@ -50,6 +50,11 @@ angular.module('myApp',[..., 'pipErrorHandling']);
 **No connection** error page is presented when call to REST API fails after timeout or when network status entirely goes down.
 The user has option to retry the last operation.
 
+Navigation to this page can be done using **errors_no_connection** state or **/#errors/no_connection** route.
+
+### Usage
+Todo: Add code snippet that shows how to switch to the page
+
 <a href="../doc/images/img-no_connection.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="../doc/images/img-no_connection.png"/>
 </a>
@@ -68,6 +73,11 @@ Todo: Add screenshot with no connection panel
 **Server maintenance** error page is presented when REST API received 503 (Not available) status code from the server.
 It means that server is down for maintenance. After that user shall close the application and come back after some time.
 
+Navigation to this page can be done using **errors_maintenance** state or **/#errors/maintenance** route.
+
+### Usage
+Todo: Add code snippet that shows how to switch to the page
+
 <a href="../doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="../doc/images/img-maintenance.png"/>
 </a>
@@ -75,8 +85,13 @@ It means that server is down for maintenance. After that user shall close the ap
 
 ## <a name="missing_route_page></a> Missing route page
 
-**Wrong route** error page is presented when user tries to open route that is not recognized by the application. 
+**Missing route** error page is presented when user tries to open route that is not recognized by the application. 
 It may happen when user tries to open obsolete link or makes a mistake while entering page url manually.
+
+Navigation to this page can be done using **errors_missing_route** state or **/#errors/missing_route** route.
+
+### Usage
+Todo: Add code snippet that shows how to switch to the page
 
 <a href="../doc/images/img-route_fails.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="../doc/images/img-route_fails.png"/>
@@ -89,6 +104,11 @@ Pip.WebUI framework uses the latest HTML5 technologies and doesn't support older
 some users may try to open application using something archaic. In that case he will be presented with 
 **Unsupported browser** error page thats user to try a newer version of the browser. 
 
+Navigation to this page can be done using **errors_unsupported** state or **/#errors/unsupported** route.
+
+### Usage
+Todo: Add code snippet that shows how to switch to the page
+
 <a href="../doc/images/img-unsupported.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="../doc/images/img-unsupported.png"/>
 </a>
@@ -97,6 +117,11 @@ some users may try to open application using something archaic. In that case he 
 ## <a name="unknown_error_page></a> Unknown error page
 
 This is a default error page and is show in bad situations, other then listed above.
+
+Navigation to this page can be done using **errors_unknown** state or **/#errors/unknown** route.
+
+### Usage
+Todo: Add code snippet that shows how to switch to the page
 
 <a href="../doc/images/img-unknown_error.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="../doc/images/img-unknown_error.png"/>
