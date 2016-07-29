@@ -55,9 +55,7 @@ Navigation to this page can be done using **errors_no_connection** state or **/#
 ### Usage
 Todo: Add code snippet that shows how to switch to the page
 
-<a href="../doc/images/img-no_connection.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="../doc/images/img-no_connection.png"/>
-</a>
+<img src="../doc/images/img-no_connection.png"/>
 
 
 ## <a name="no_connection_panel></a> pipNoConnectionPanel
@@ -78,9 +76,7 @@ Navigation to this page can be done using **errors_maintenance** state or **/#er
 ### Usage
 Todo: Add code snippet that shows how to switch to the page
 
-<a href="../doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="../doc/images/img-maintenance.png"/>
-</a>
+<img src="../doc/images/img-maintenance.png"/>
 
 
 ## <a name="missing_route_page></a> Missing route page
@@ -93,9 +89,7 @@ Navigation to this page can be done using **errors_missing_route** state or **/#
 ### Usage
 Todo: Add code snippet that shows how to switch to the page
 
-<a href="../doc/images/img-route_fails.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="../doc/images/img-route_fails.png"/>
-</a>
+<img src="../doc/images/img-route_fails.png"/>
 
 
 ## <a name="unsupported_browser_page></a> Unsupported browser page
@@ -109,9 +103,7 @@ Navigation to this page can be done using **errors_unsupported** state or **/#er
 ### Usage
 Todo: Add code snippet that shows how to switch to the page
 
-<a href="../doc/images/img-unsupported.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="../doc/images/img-unsupported.png"/>
-</a>
+<img src="../doc/images/img-unsupported.png"/>
 
 
 ## <a name="unknown_error_page></a> Unknown error page
@@ -123,9 +115,7 @@ Navigation to this page can be done using **errors_unknown** state or **/#errors
 ### Usage
 Todo: Add code snippet that shows how to switch to the page
 
-<a href="../doc/images/img-unknown_error.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="../doc/images/img-unknown_error.png"/>
-</a>
+<img src="../doc/images/img-unknown_error.png"/>
 
 
 ## <a name="issues"></a> Questions and bugs
