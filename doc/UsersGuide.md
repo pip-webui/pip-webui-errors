@@ -76,12 +76,17 @@ In some situations connection can be lost inside forms while user is trying to s
 show 'No connection' panel directly on the form and allow user to retry his attempt when connection comes back.
 
 ### Usage
-Todo: Add HTML snippet that shows directive tag with attributes
+```html
+<pip-no-connection-panel pip-error="error"
+                         pip-retry="updateFunction">
+</pip-no-connection-panel>
+```
 
 Todo: Add screenshot with no connection panel
 
 ### Attributes
-Todo: Document the directive attributes
+* **pip-error** - error object
+* **pip-retry** - retry function
 
 ## <a name="server_maintenance_page"></a> Server maintenance page
 
