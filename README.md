@@ -14,6 +14,13 @@ The user has option to retry the last operation.
     <img src="doc/images/img-no_connection.png"/>
 </a>
 
+### 'No connection' panel
+
+In some situations connection can be lost inside forms while user is trying to save his work or perform operaton that calls the server. Switching to **No connection** page in that case may cause distruptions and lost work. Instead, it is recommended to
+show 'No connection' panel directly on the form and allow user to retry his attempt when connection comes back.
+
+Todo: Add screenshot with no connection panel
+
 ### 'Server maintenance' page
 
 **Server maintenance** error page is presented when REST API received 503 (Not available) status code from the server.
