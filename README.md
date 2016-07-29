@@ -5,45 +5,46 @@
 Errors are inevitable. And professionally written application must handle them gracefully.
 Pip.WebUI.Errors module contains pages for typical errors and provides mechanisms to catch and process them.
 
-### 'No Connection' page
+### 'No connection' page
 
-This page is recommended to use when connection between client and server is absent. This component is not required
-authentication. This one provides a page and directive for perform the error.This directive accepts callbacks on `'pipRetry'`
-and `'pip-error'` message as attributes on `'pipNoConnectionPanel'` directive.
-This component includes `pipAppBar` component.
+**No connection** error page is presented when call to REST API fails after timeout or when network status entirely goes down.
+The user has option to retry the last operation.
 
 <a href="doc/images/img-no_connection.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="doc/images/img-no_connection.png"/>
 </a>
 
-### 'Maintenance Error' page
+### 'Server maintenance' page
 
-This page is recommended to use when server is not available. This one is not required authentication.
+**Server maintenance** error page is presented when REST API received 503 (Not available) status code from the server.
+It means that server is down for maintenance. After that user shall close the application and come back after some time.
 
 <a href="doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="doc/images/img-maintenance.png"/>
 </a>
 
-### 'Route Fails' page
+### 'Wrong route' page
 
-This page is recommended to use when user try to open non-existent page(state). It is also does not required user's
-authentication.
+**Wrong route** error page is presented when user tries to open route that is not recognized by the application. 
+It may happen when user tries to open obsolete link or makes a mistake while entering page url manually.
 
 <a href="doc/images/img-route_fails.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="doc/images/img-route_fails.png"/>
 </a>
 
-### 'Unsupported Error' page
+### 'Unsupported browser' page
 
-This page is recommended to use when user uses non compatible browser and this one notifies user about this.
+Pip.WebUI framework uses the latest HTML5 technologies and doesn't support older browsers. While that is a rare case,
+some users may try to open application using something archaic. In that case he will be presented with 
+**Unsupported browser** error page thats user to try a newer version of the browser. 
 
 <a href="doc/images/img-unsupported.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="doc/images/img-unsupported.png"/>
 </a>
 
-### 'Unknown Error' page
+### 'Unknown error' page
 
-This page uses to notify user about some unexpected error but calm user's that app is not crashed.
+This is a default error page and is show in bad situations, other then listed above.
 
 <a href="doc/images/img-unknown_error.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
     <img src="doc/images/img-unknown_error.png"/>
