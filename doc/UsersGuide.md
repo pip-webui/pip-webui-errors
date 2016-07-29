@@ -53,7 +53,19 @@ The user has option to retry the last operation.
 Navigation to this page can be done using **errors_no_connection** state or **/#errors/no_connection** route.
 
 ### Usage
-Todo: Add code snippet that shows how to switch to the page
+```javascript
+var params = {
+        error: error,
+        unfoundState: {
+            to: 'unfound',
+            toParams: {}
+        },
+        fromState: {
+            to: 'about_me',
+            fromParams: {}
+        }};
+$state.go('errors_unknown', params);
+```
 
 <img src="../doc/images/img-no_connection.png"/>
 
@@ -79,7 +91,19 @@ It means that server is down for maintenance. After that user shall close the ap
 Navigation to this page can be done using **errors_maintenance** state or **/#errors/maintenance** route.
 
 ### Usage
-Todo: Add code snippet that shows how to switch to the page
+```javascript
+var params = {
+        error: error,
+        unfoundState: {
+            to: 'unfound',
+            toParams: {}
+        },
+        fromState: {
+            to: 'about_me',
+            fromParams: {}
+        }};
+$state.go('errors_maintenance', params);
+```
 
 <img src="../doc/images/img-maintenance.png"/>
 
@@ -92,7 +116,19 @@ It may happen when user tries to open obsolete link or makes a mistake while ent
 Navigation to this page can be done using **errors_missing_route** state or **/#errors/missing_route** route.
 
 ### Usage
-Todo: Add code snippet that shows how to switch to the page
+```javascript
+var params = {
+        error: error,
+        unfoundState: {
+            to: 'unfound',
+            toParams: {}
+        },
+        fromState: {
+            to: 'about_me',
+            fromParams: {}
+        }};
+$state.go('errors_missing_route', params);
+```
 
 <img src="../doc/images/img-route_fails.png"/>
 
@@ -106,7 +142,19 @@ some users may try to open application using something archaic. In that case he 
 Navigation to this page can be done using **errors_unsupported** state or **/#errors/unsupported** route.
 
 ### Usage
-Todo: Add code snippet that shows how to switch to the page
+```javascript
+var params = {
+        error: error,
+        unfoundState: {
+            to: 'unfound',
+            toParams: {}
+        },
+        fromState: {
+            to: 'about_me',
+            fromParams: {}
+        }};
+$state.go('errors_unsupported', params);
+```
 
 <img src="../doc/images/img-unsupported.png"/>
 
@@ -118,7 +166,19 @@ This is a default error page and is show in bad situations, other then listed ab
 Navigation to this page can be done using **errors_unknown** state or **/#errors/unknown** route.
 
 ### Usage
-Todo: Add code snippet that shows how to switch to the page
+```javascript
+var params = {
+        error: error,
+        unfoundState: {
+            to: 'unfound',
+            toParams: {}
+        },
+        fromState: {
+            to: 'about_me',
+            fromParams: {}
+        }};
+$state.go('errors_unknown', params);
+```
 
 <img src="../doc/images/img-unknown_error.png"/>
 
