@@ -63,8 +63,13 @@ Todo: Add code snippet that shows how to switch to the page
 In some situations connection can be lost inside forms while user is trying to save his work or perform operaton that calls the server. Switching to **No connection** page in that case may cause distruptions and lost work. Instead, it is recommended to
 show 'No connection' panel directly on the form and allow user to retry his attempt when connection comes back.
 
+### Usage
+Todo: Add HTML snippet that shows directive tag with attributes
+
 Todo: Add screenshot with no connection panel
 
+### Attributes
+Todo: Document the directive attributes
 
 ## <a name="server_maintenance_page"></a> Server maintenance page
 
