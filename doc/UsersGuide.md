@@ -45,7 +45,7 @@ angular.module('myApp',[..., 'pipErrorHandling']);
 ```
 
 
-## <a name="no_connection_page></a> No connection page
+## <a name="no_connection_page"></a> No connection page
 
 **No connection** error page is presented when call to REST API fails after timeout or when network status entirely goes down.
 The user has option to retry the last operation.
@@ -58,7 +58,7 @@ Todo: Add code snippet that shows how to switch to the page
 <img src="../doc/images/img-no_connection.png"/>
 
 
-## <a name="no_connection_panel></a> pipNoConnectionPanel
+## <a name="no_connection_panel"></a> pipNoConnectionPanel
 
 In some situations connection can be lost inside forms while user is trying to save his work or perform operaton that calls the server. Switching to **No connection** page in that case may cause distruptions and lost work. Instead, it is recommended to
 show 'No connection' panel directly on the form and allow user to retry his attempt when connection comes back.
@@ -66,7 +66,7 @@ show 'No connection' panel directly on the form and allow user to retry his atte
 Todo: Add screenshot with no connection panel
 
 
-## <a name="server_maintenance_page></a> Server maintenance page
+## <a name="server_maintenance_page"></a> Server maintenance page
 
 **Server maintenance** error page is presented when REST API received 503 (Not available) status code from the server.
 It means that server is down for maintenance. After that user shall close the application and come back after some time.
@@ -79,7 +79,7 @@ Todo: Add code snippet that shows how to switch to the page
 <img src="../doc/images/img-maintenance.png"/>
 
 
-## <a name="missing_route_page></a> Missing route page
+## <a name="missing_route_page"></a> Missing route page
 
 **Missing route** error page is presented when user tries to open route that is not recognized by the application. 
 It may happen when user tries to open obsolete link or makes a mistake while entering page url manually.
@@ -92,7 +92,7 @@ Todo: Add code snippet that shows how to switch to the page
 <img src="../doc/images/img-route_fails.png"/>
 
 
-## <a name="unsupported_browser_page></a> Unsupported browser page
+## <a name="unsupported_browser_page"></a> Unsupported browser page
 
 Pip.WebUI framework uses the latest HTML5 technologies and doesn't support older browsers. While that is a rare case,
 some users may try to open application using something archaic. In that case he will be presented with 
@@ -106,7 +106,7 @@ Todo: Add code snippet that shows how to switch to the page
 <img src="../doc/images/img-unsupported.png"/>
 
 
-## <a name="unknown_error_page></a> Unknown error page
+## <a name="unknown_error_page"></a> Unknown error page
 
 This is a default error page and is show in bad situations, other then listed above.
 
