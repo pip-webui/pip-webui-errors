@@ -19,7 +19,7 @@ The user has option to retry the last operation.
 In some situations connection can be lost inside forms while user is trying to save his work or perform operaton that calls the server. Switching to **No connection** page in that case may cause distruptions and lost work. Instead, it is recommended to
 show 'No connection' panel directly on the form and allow user to retry his attempt when connection comes back.
 
-<img src="../doc/images/img-no_connection.png"/>
+<img src="doc/images/img-no_connection.png"/>
 
 ### 'Server maintenance' page
 
