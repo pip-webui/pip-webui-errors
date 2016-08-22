@@ -10,24 +10,25 @@ Pip.WebUI.Errors module contains pages for typical errors and provides mechanism
 **No connection** error page is presented when call to REST API fails after timeout or when network status entirely goes down.
 The user has option to retry the last operation.
 
-<a href="doc/images/img-no_connection.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="doc/images/img-no_connection.png"/>
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-no_connection.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-no_connection.png"/>
 </a>
 
 ### 'No connection' panel
 
-In some situations connection can be lost inside forms while user is trying to save his work or perform operaton that calls the server. Switching to **No connection** page in that case may cause distruptions and lost work. Instead, it is recommended to
+In some situations connection can be lost inside forms while user is trying to save his work or perform operaton that calls the server. 
+Switching to **No connection** page in that case may cause distruptions and lost work. Instead, it is recommended to
 show 'No connection' panel directly on the form and allow user to retry his attempt when connection comes back.
-
-<img src="doc/images/img-no_connection.png"/>
-
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-no_connection.png"/>
+</a>
 ### 'Server maintenance' page
 
 **Server maintenance** error page is presented when REST API received 503 (Not available) status code from the server.
 It means that server is down for maintenance. After that user shall close the application and come back after some time.
 
-<a href="doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="doc/images/img-maintenance.png"/>
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-maintenance.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-maintenance.png"/>
 </a>
 
 ### 'Wrong route' page
@@ -35,8 +36,8 @@ It means that server is down for maintenance. After that user shall close the ap
 **Wrong route** error page is presented when user tries to open route that is not recognized by the application. 
 It may happen when user tries to open obsolete link or makes a mistake while entering page url manually.
 
-<a href="doc/images/img-route_fails.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="doc/images/img-route_fails.png"/>
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-route_fails.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-route_fails.png"/>
 </a>
 
 ### 'Unsupported browser' page
@@ -45,25 +46,25 @@ Pip.WebUI framework uses the latest HTML5 technologies and doesn't support older
 some users may try to open application using something archaic. In that case he will be presented with 
 **Unsupported browser** error page thats user to try a newer version of the browser. 
 
-<a href="doc/images/img-unsupported.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="doc/images/img-unsupported.png"/>
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-unsupported.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-unsupported.png"/>
 </a>
 
 ### 'Unknown error' page
 
 This is a default error page and is show in bad situations, other then listed above.
 
-<a href="doc/images/img-unknown_error.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
-    <img src="doc/images/img-unknown_error.png"/>
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-unknown_error.png" style="border: 3px ridge #c8d2df; width: 50%; margin: auto; display: block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-unknown_error.png"/>
 </a>
 
 ## Learn more about the module
 
-- [User's guide](doc/UsersGuide.md)
+- [User's guide](https://github.com/pip-webui/pip-webui-errors/blob/master/doc/UsersGuide.md)
 - [Online samples](http://webui.pipdevs.com/pip-webui-errors/index.html)
 - [API reference](http://webui-api.pipdevs.com/pip-webui-errors/index.html)
-- [Developer's guide](doc/DevelopersGuide.md)
-- [Changelog](CHANGELOG.md)
+- [Developer's guide](https://github.com/pip-webui/pip-webui-errors/blob/master/doc/DevelopersGuide.md)
+- [Changelog](https://github.com/pip-webui/pip-webui-errors/blob/master/CHANGELOG.md)
 - [Pip.WebUI project website](http://www.pipwebui.org)
 - [Pip.WebUI project wiki](https://github.com/pip-webui/pip-webui/wiki)
 - [Pip.WebUI discussion forum](https://groups.google.com/forum/#!forum/pip-webui)
