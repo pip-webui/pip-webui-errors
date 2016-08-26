@@ -414,47 +414,6 @@ module.run(['$templateCache', function($templateCache) {
 
 })();
 /**
- * @file Maintenance error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Maintenance', []);
-
-    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-        $scope.timeoutInterval = $scope.error && $scope.error.config &&
-                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
-
-        $scope.onClose = onClose;
-
-        return;
-
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        };
-
-        function onClose() {
-
-        };
-
-    }]);
-
-})();
-
-/**
  * @file Missing route error controller
  * @copyright Digital Living Software Corp. 2014-2016
  */
@@ -489,6 +448,47 @@ module.run(['$templateCache', function($templateCache) {
 
         function onContinue() {
             pipAuthState.goToAuthorized();
+        };
+
+    }]);
+
+})();
+
+/**
+ * @file Maintenance error controller
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Maintenance', []);
+
+    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+
+        $rootScope.$routing = false;
+        $scope.isCordova = false;
+        appHeader();
+
+        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
+        $scope.timeoutInterval = $scope.error && $scope.error.config &&
+                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
+
+        $scope.onClose = onClose;
+
+        return;
+
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        };
+
+        function onClose() {
+
         };
 
     }]);
@@ -578,39 +578,6 @@ module.run(['$templateCache', function($templateCache) {
 
 
 /**
- * @file Unsupported error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Unsupported', []);
-
-    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', 'pipAppBar', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
-
-        $scope.$mdMedia = $mdMedia;
-        $rootScope.$routing = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-
-        return;
-
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        };
-
-    }]);
-
-})();
-
-/**
  * @file Unknown error controller
  * @copyright Digital Living Software Corp. 2014-2016
  */
@@ -666,6 +633,39 @@ module.run(['$templateCache', function($templateCache) {
 
         function onClose() {
 
+        };
+
+    }]);
+
+})();
+
+/**
+ * @file Unsupported error controller
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Unsupported', []);
+
+    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', 'pipAppBar', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
+
+        $scope.$mdMedia = $mdMedia;
+        $rootScope.$routing = false;
+        appHeader();
+
+        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
+
+        return;
+
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
         };
 
     }]);
