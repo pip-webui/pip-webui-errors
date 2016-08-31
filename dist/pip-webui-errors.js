@@ -1,19 +1,28 @@
-/**
- * @file Registration of all error handling components
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    angular.module('pipErrorHandling', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel'
-    ]);
-    
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('maintenance/maintenance.html',
+    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
+    '    <div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div>\n' +
+    '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
+    '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
+    '    </div>\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center"\n' +
+    '         ng-if="isCordova">\n' +
+    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
+    '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
+    '        </md-button>\n' +
+    '    </div>\n' +
+    '</div>');
+}]);
 })();
+
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -84,31 +93,6 @@ module.run(['$templateCache', function($templateCache) {
     '                </md-button>\n' +
     '            </div>\n' +
     '    </div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('maintenance/maintenance.html',
-    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div>\n' +
-    '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
-    '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
-    '    </div>\n' +
-    '    <div class="pip-error-actions h48 layout-column layout-align-center-center"\n' +
-    '         ng-if="isCordova">\n' +
-    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
-    '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
-    '        </md-button>\n' +
-    '    </div>\n' +
-    '</div>');
 }]);
 })();
 
@@ -256,6 +240,22 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
+/**
+ * @file Registration of all error handling components
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    angular.module('pipErrorHandling', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel'
+    ]);
+    
+})();
 /* global angular */
 
 (function () {
