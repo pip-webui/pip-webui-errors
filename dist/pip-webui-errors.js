@@ -46,6 +46,34 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('missing_route/missing_route.html',
+    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
+    '    <div style="background-image: url(\'images/invalid_route.svg\');" class="pip-pic"></div>\n' +
+    '    <div class="pip-error-text">{{::\'ERROR_ROUTE_TITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::\'ERROR_ROUTE_SUBTITLE\' | translate}}</div>\n' +
+    '\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
+    '        <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">\n' +
+    '            {{::\'ERROR_ROUTE_CONTINUE\' | translate}}\n' +
+    '        </md-button>\n' +
+    '    </div>\n' +
+    '    <div class="h48" ng-if="url"><a ng-href="{{url}}">\n' +
+    '        {{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{url}}\n' +
+    '    </a></div>\n' +
+    '    <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
+    '        {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
+    '    </a></div>\n' +
+    '</div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection/no_connection.html',
     '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
     '    <div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div>\n' +
@@ -116,34 +144,6 @@ module.run(['$templateCache', function($templateCache) {
     '            </md-button>\n' +
     '        </div>\n' +
     '    </div>\n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('missing_route/missing_route.html',
-    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'images/invalid_route.svg\');" class="pip-pic"></div>\n' +
-    '    <div class="pip-error-text">{{::\'ERROR_ROUTE_TITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::\'ERROR_ROUTE_SUBTITLE\' | translate}}</div>\n' +
-    '\n' +
-    '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
-    '        <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">\n' +
-    '            {{::\'ERROR_ROUTE_CONTINUE\' | translate}}\n' +
-    '        </md-button>\n' +
-    '    </div>\n' +
-    '    <div class="h48" ng-if="url"><a ng-href="{{url}}">\n' +
-    '        {{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{url}}\n' +
-    '    </a></div>\n' +
-    '    <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
-    '        {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
-    '    </a></div>\n' +
     '</div>');
 }]);
 })();
@@ -254,6 +254,47 @@ module.run(['$templateCache', function($templateCache) {
     '</div>\n' +
     '');
 }]);
+})();
+
+/**
+ * @file Maintenance error controller
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Maintenance', []);
+
+    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+
+        $rootScope.$routing = false;
+        $scope.isCordova = false;
+        appHeader();
+
+        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
+        $scope.timeoutInterval = $scope.error && $scope.error.config &&
+                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
+
+        $scope.onClose = onClose;
+
+        return;
+
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        };
+
+        function onClose() {
+
+        };
+
+    }]);
+
 })();
 
 /* global angular */
@@ -414,47 +455,6 @@ module.run(['$templateCache', function($templateCache) {
 
 })();
 /**
- * @file Maintenance error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Maintenance', []);
-
-    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-        $scope.timeoutInterval = $scope.error && $scope.error.config &&
-                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
-
-        $scope.onClose = onClose;
-
-        return;
-
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        };
-
-        function onClose() {
-
-        };
-
-    }]);
-
-})();
-
-/**
  * @file Missing route error controller
  * @copyright Digital Living Software Corp. 2014-2016
  */
@@ -489,68 +489,6 @@ module.run(['$templateCache', function($templateCache) {
 
         function onContinue() {
             pipAuthState.goToAuthorized();
-        };
-
-    }]);
-
-})();
-
-/**
- * @file Unknown error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Unknown', []);
-
-    thisModule.controller('pipErrorUnknownController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-        $scope.error_details = null;
-
-        $scope.onDetails = onDetails;
-        $scope.onClose = onClose;
-
-        parseError();
-
-        return;
-
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        };
-
-        function parseError() {
-            $scope.error_details = {};
-            $scope.error_details.code = $scope.error.code;
-            $scope.error_details.description = $scope.error.message;
-            $scope.error_details.status = $scope.error.status;
-
-            $scope.error_details.server_stacktrace = function () {
-
-            };
-
-            $scope.error_details.client_stacktrace = function () {
-
-            };
-        };
-
-        function onDetails() {
-            $scope.showError = true;
-        };
-
-        function onClose() {
-
         };
 
     }]);
@@ -638,6 +576,68 @@ module.run(['$templateCache', function($templateCache) {
 
 })();
 
+
+/**
+ * @file Unknown error controller
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Unknown', []);
+
+    thisModule.controller('pipErrorUnknownController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+
+        $rootScope.$routing = false;
+        $scope.isCordova = false;
+        appHeader();
+
+        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
+        $scope.error_details = null;
+
+        $scope.onDetails = onDetails;
+        $scope.onClose = onClose;
+
+        parseError();
+
+        return;
+
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        };
+
+        function parseError() {
+            $scope.error_details = {};
+            $scope.error_details.code = $scope.error.code;
+            $scope.error_details.description = $scope.error.message;
+            $scope.error_details.status = $scope.error.status;
+
+            $scope.error_details.server_stacktrace = function () {
+
+            };
+
+            $scope.error_details.client_stacktrace = function () {
+
+            };
+        };
+
+        function onDetails() {
+            $scope.showError = true;
+        };
+
+        function onClose() {
+
+        };
+
+    }]);
+
+})();
 
 /**
  * @file Unsupported error controller
