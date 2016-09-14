@@ -11,7 +11,7 @@
 
     // Configure application services before start
     thisModule.config(
-        function ($mdThemingProvider, $urlRouterProvider, pipAuthStateProvider, pipRestProvider, pipSideNavProvider, 
+        function ($mdThemingProvider, $urlRouterProvider, pipAuthStateProvider, pipDataConfigProvider, pipSideNavProvider, 
                   pipAppBarProvider, pipEntryProvider, $mdIconProvider) {
 
             var links = [
@@ -42,8 +42,7 @@
             ]);
 
             // Configure REST API
-            // pipRestProvider.version('1.0');
-            pipRestProvider.serverUrl('http://alpha.pipservices.net');
+            pipDataConfigProvider.serverUrl('http://alpha.pipservices.net');
 
             // Configure entry pages
             // pipEntryProvider.fixedServerUrl('http://alpha.pipservices.net');

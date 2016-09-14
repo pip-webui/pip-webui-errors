@@ -18,8 +18,8 @@
         'pipEntry', 'pipRest.State', 'pipErrorsSample'
     ]);
 
-    thisModule.run(function (pipRest) {
-        pipRest.serverUrl('http://alpha.pipservices.net');
+    thisModule.run(function (pipDataConfigProvider) {
+        pipDataConfigProvider.serverUrl('http://alpha.pipservices.net');
     });
 
     thisModule.controller('pipSampleController',
