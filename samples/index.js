@@ -11,16 +11,13 @@
         'ui.router', 'ui.utils', 'ngResource', 'ngAria', 'ngCookies', 'ngSanitize', 'ngMessages',
         'ngMaterial', 'wu.masonry', 'LocalStorageModule', 'angularFileUpload', 'ngAnimate',
         // Application Configuration must go first
-        'pipSampleConfig', 'pipErrorHandling',
+        'pipSampleConfig', 'pipErrorHandling', 
         // Modules from WebUI Framework
         'pipCore', 'pipRest', 'pipData', 'pipBasicControls', 'pipLayout', 'pipNav',
         // Sample Application Modules
         'pipEntry', 'pipRest.State', 'pipErrorsSample'
     ]);
 
-    thisModule.run(function (pipDataConfigProvider) {
-        pipDataConfigProvider.serverUrl('http://alpha.pipservices.net');
-    });
 
     thisModule.controller('pipSampleController',
         function ($scope, $rootScope) {
