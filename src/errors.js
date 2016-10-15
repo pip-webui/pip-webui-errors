@@ -12,7 +12,7 @@
         'pipErrors.Pages',
         'pipNoConnectionPanel',
         'pipClearErrors',
-	'pipFormErrors'
+	    'pipFormErrors'
     ]);
     
 })();
