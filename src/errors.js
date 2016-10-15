@@ -8,9 +8,11 @@
 (function () {
     'use strict';
 
-    angular.module('pipErrorHandling', [
+    angular.module('pipErrors', [
         'pipErrors.Pages',
-        'pipNoConnectionPanel'
+        'pipNoConnectionPanel',
+        'pipClearErrors',
+	'pipFormErrors'
     ]);
     
 })();
