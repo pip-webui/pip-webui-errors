@@ -4,7 +4,7 @@
     'use strict';
 
     var thisModule = angular.module('pipErrors.Pages', [
-        'pipAppBar', 'pipRest.State', 'pipTransactions', 'pipRest', 'ngMaterial', 
+        'pipAppBar', 'pipState', 'pipTransactions', 'ngMaterial', 
         'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
         'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Templates'
     ]);

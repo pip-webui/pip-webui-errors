@@ -3,7 +3,7 @@
 describe('pipEnums', function () {
     var pipEnums;
 
-    beforeEach(module('pipRest.Enums'));
+    beforeEach(module('pipEnums'));
 
     beforeEach(inject(function(_pipEnums_) {
         pipEnums = _pipEnums_;

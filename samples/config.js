@@ -6,8 +6,7 @@
 (function (angular) {
     'use strict';
 
-    var thisModule = angular.module('pipSampleConfig',
-        [ 'pipRest.State', 'pipRest', 'pipEntry', 'pipSideNav', 'pipAppBar' ]);
+    var thisModule = angular.module('pipSampleConfig', [ 'pipState', 'pipSideNav', 'pipAppBar' ]);
 
     // Configure application services before start
     thisModule.config(
