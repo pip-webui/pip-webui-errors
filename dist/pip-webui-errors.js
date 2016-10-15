@@ -1,21 +1,3 @@
-/**
- * @file Registration of all error handling components
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    angular.module('pipErrors', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel',
-        'pipClearErrors',
-	    'pipFormErrors'
-    ]);
-    
-})();
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -258,6 +240,24 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
+/**
+ * @file Registration of all error handling components
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    angular.module('pipErrors', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel',
+        'pipClearErrors',
+	    'pipFormErrors'
+    ]);
+    
+})();
 /* global angular */
 
 (function () {
