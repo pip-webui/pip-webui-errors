@@ -4,21 +4,20 @@
     'use strict';
 
     var thisModule = angular.module('pipErrors.Pages', [
-        'pipAppBar', 'pipState', 'pipTransactions', 'ngMaterial', 
+        'ngMaterial', 
         'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
-        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Templates'
+        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
     ]);
 
     thisModule.config(
-        function (pipAuthStateProvider) {
+        function ($stateProvider) {
             // Configure module routes
-            pipAuthStateProvider
+            $stateProvider
                 .state('errors_no_connection', {
                     url: '/errors/no_connection',
                     params: {
                         error: null
                     },
-                    auth: false,
                     controller: 'pipErrorNoConnectionController',
                     templateUrl: 'no_connection/no_connection.html'
                 })
@@ -27,7 +26,6 @@
                     params: {
                         error: null
                     },
-                    auth: false,
                     controller: 'pipErrorMaintenanceController',
                     templateUrl: 'maintenance/maintenance.html'
                 })
@@ -37,7 +35,6 @@
                         unfoundState: null,
                         fromState: null
                     },
-                    auth: true,
                     controller: 'pipErrorMissingRouteController',
                     templateUrl: 'missing_route/missing_route.html'
                 })
@@ -46,7 +43,6 @@
                     params: {
                         error: null
                     },
-                    auth: false,
                     controller: 'pipErrorUnsupportedController',
                     templateUrl: 'unsupported/unsupported.html'
                 })
@@ -55,7 +51,6 @@
                     params: {
                         error: null
                     },
-                    auth: false,
                     controller: 'pipErrorUnknownController',
                     templateUrl: 'unknown/unknown.html'
                 });

@@ -8,7 +8,7 @@
 (function () {
     'use strict';
 
-    var thisModule = angular.module("pipNoConnectionPanel", []);
+    var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
 
     thisModule.directive('pipNoConnectionPanel',
         function () {
@@ -18,7 +18,7 @@
                     error: '=pipError',
                     retry: '=pipRetry'
                 },
-                templateUrl: 'no_connection/pip_no_connection_panel.html',
+                templateUrl: 'no_connection_panel/no_connection_panel.html',
                 controller: 'pipNoConnectionPanelController'
             };
         }

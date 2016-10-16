@@ -26,6 +26,7 @@
 
         return;
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();

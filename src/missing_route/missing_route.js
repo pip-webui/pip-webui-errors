@@ -10,7 +10,7 @@
 
     var thisModule = angular.module('pipErrors.MissingRoute', []);
 
-    thisModule.controller('pipErrorMissingRouteController', function ($scope, $state, $rootScope, pipAppBar, pipAuthState) {
+    thisModule.controller('pipErrorMissingRouteController', function ($scope, $state, $rootScope, pipAppBar) {
 
         appHeader();
         $rootScope.$routing = false;
@@ -24,6 +24,7 @@
 
         return;
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();
@@ -32,7 +33,8 @@
         };
 
         function onContinue() {
-            pipAuthState.goToAuthorized();
+            // Todo: Go to default state '/'
+            //pipAuthState.goToAuthorized();
         };
 
     });

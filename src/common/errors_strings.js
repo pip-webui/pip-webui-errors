@@ -10,10 +10,12 @@
 
     var thisModule = angular.module('pipErrors.Strings', ['pipTranslate']);
 
-    thisModule.config(function(pipTranslateProvider) {
+    thisModule.run(function($injector) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate == null) return;
 
         // Set translation strings for the module
-        pipTranslateProvider.translations('en', {
+        pipTranslate.translations('en', {
             'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
             'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
             'ERROR_ROUTE_CONTINUE': 'Continue',
@@ -51,7 +53,7 @@
 
         });
 
-        pipTranslateProvider.translations('ru', {
+        pipTranslate.translations('ru', {
             'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
             'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
             'ERROR_ROUTE_CONTINUE': 'Continue',
@@ -77,7 +79,7 @@
             'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
             'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
             'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-            'technologies. Download on of these great browsers and you\'ll be on your way:',
+            'technologies. Download on of these great browsers and you\'ll be on your way:',            
             'ERROR_UNSUPPORTED_O': 'Opera',
             'ERROR_UNSUPPORTED_O_VER': 'Version 35+',
             'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
