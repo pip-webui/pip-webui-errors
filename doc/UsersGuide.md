@@ -7,6 +7,7 @@
 - [Server maintenance page](#server_maintenance_page)
 - [Unsupported browser page](#unsupported_browser_page)
 - [Unknown error page](#unknown_error_page)
+- [pip-error-panel component](#error_panel)
 - [Questions and bugs](#issues)
 
 
@@ -187,6 +188,28 @@ $state.go('errors_unknown', params);
 ```
 
 <img src="../doc/images/img-unknown_error.png"/>
+
+
+## <a name="error_panel"></a> pip-error-panel components
+
+**pip-error-panel** shows an error embedded into a page.
+
+### Usage
+```html
+ <div class="pip-page-errors">
+        <span class="pip-error-text">Roboto Regular 14px Error Color.Background - rgba (0, 0, 0, 0.08) </span>
+        <a class="pip-error-details">
+            <md-icon md-svg-icon="icons:warn-circle"></md-icon>
+            <span class="flex"> DETAILS  </span>
+        </a>
+    </div>
+```
+
+<img src="images/img-page-errors.png"/>
+
+### CSS Classes
+* **pip-error-text** - text error
+* **pip-error-details** - class for div with details information
 
 
 ## <a name="issues"></a> Questions and bugs

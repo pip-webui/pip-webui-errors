@@ -860,3 +860,123 @@
     margin: 0px 8px;
   }
 }
+/*
+ *
+ */
+.pip-page-errors {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  z-index: 30;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-direction: row;
+  -moz-box-flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+.pip-page-errors.no-transparent-background {
+  background-color: #eeeeee !important;
+}
+.pip-page-errors .pip-error-text {
+  font: normal 400 14px Roboto, 'Helvetica Neue', sans-serif;
+  line-height: 17px;
+}
+.pip-page-errors .pip-error-details {
+  font: normal 500 14px Roboto, 'Helvetica Neue', sans-serif;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-direction: row;
+  -moz-box-flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-left: 24px !important;
+}
+.pip-page-errors .pip-error-details md-icon {
+  height: 20px;
+  width: 20px;
+  margin-right: 8px !important;
+}
+@media (max-width: 1200px) {
+  .pip-page-errors {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    padding-bottom: 0 !important;
+    -webkit-box-flex-direction: column;
+    -moz-box-flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .pip-page-errors .pip-error-details {
+    height: 48px;
+    width: 100%;
+    margin-left: 0 !important;
+  }
+}
+.blue .pip-page-errors .pip-error-details,
+.blue .pip-page-errors .pip-error-text,
+.blue .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.pink .pip-page-errors .pip-error-details,
+.pink .pip-page-errors .pip-error-text,
+.pink .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.orange .pip-page-errors .pip-error-details,
+.orange .pip-page-errors .pip-error-text,
+.orange .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.amber .pip-page-errors .pip-error-details,
+.amber .pip-page-errors .pip-error-text,
+.amber .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.green .pip-page-errors .pip-error-details,
+.green .pip-page-errors .pip-error-text,
+.green .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.navy .pip-page-errors .pip-error-details,
+.navy .pip-page-errors .pip-error-text,
+.navy .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.grey .pip-page-errors .pip-error-details,
+.grey .pip-page-errors .pip-error-text,
+.grey .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.dark .pip-page-errors .pip-error-details,
+.dark .pip-page-errors .pip-error-text,
+.dark .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}
+.black .pip-page-errors .pip-error-details,
+.black .pip-page-errors .pip-error-text,
+.black .pip-page-errors .pip-error-details md-icon {
+  color: #ff5252;
+}

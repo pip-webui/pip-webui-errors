@@ -98,7 +98,7 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection/pip_no_connection_panel.html',
+  $templateCache.put('no_connection_panel/no_connection_panel.html',
     '    <div class="pip-empty pip-error layout-column layout-align-center-center flex">\n' +
     '        <img src="images/no_response.svg" class="pip-pic block" >\n' +
     '        \n' +
@@ -258,70 +258,6 @@ module.run(['$templateCache', function($templateCache) {
 }]);
 })();
 
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Pages', [
-        'pipAppBar', 'pipState', 'pipTransactions', 'ngMaterial', 
-        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
-        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Templates'
-    ]);
-
-    thisModule.config(
-        ['pipAuthStateProvider', function (pipAuthStateProvider) {
-            // Configure module routes
-            pipAuthStateProvider
-                .state('errors_no_connection', {
-                    url: '/errors/no_connection',
-                    params: {
-                        error: null
-                    },
-                    auth: false,
-                    controller: 'pipErrorNoConnectionController',
-                    templateUrl: 'no_connection/no_connection.html'
-                })
-                .state('errors_maintenance', {
-                    url: '/errors/maintenance',
-                    params: {
-                        error: null
-                    },
-                    auth: false,
-                    controller: 'pipErrorMaintenanceController',
-                    templateUrl: 'maintenance/maintenance.html'
-                })
-                .state('errors_missing_route', {
-                    url: '/errors/missing_route',
-                    params: {
-                        unfoundState: null,
-                        fromState: null
-                    },
-                    auth: true,
-                    controller: 'pipErrorMissingRouteController',
-                    templateUrl: 'missing_route/missing_route.html'
-                })
-                .state('errors_unsupported', {
-                    url: '/errors/unsupported',
-                    params: {
-                        error: null
-                    },
-                    auth: false,
-                    controller: 'pipErrorUnsupportedController',
-                    templateUrl: 'unsupported/unsupported.html'
-                })
-                .state('errors_unknown', {
-                    url: '/errors/unknown',
-                    params: {
-                        error: null
-                    },
-                    auth: false,
-                    controller: 'pipErrorUnknownController',
-                    templateUrl: 'unknown/unknown.html'
-                });
-        }]);
-
-})();
 /**
  * @file Errors string resources
  * @copyright Digital Living Software Corp. 2014-2016
@@ -334,10 +270,12 @@ module.run(['$templateCache', function($templateCache) {
 
     var thisModule = angular.module('pipErrors.Strings', ['pipTranslate']);
 
-    thisModule.config(['pipTranslateProvider', function(pipTranslateProvider) {
+    thisModule.run(['$injector', function($injector) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate == null) return;
 
         // Set translation strings for the module
-        pipTranslateProvider.translations('en', {
+        pipTranslate.translations('en', {
             'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
             'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
             'ERROR_ROUTE_CONTINUE': 'Continue',
@@ -375,7 +313,7 @@ module.run(['$templateCache', function($templateCache) {
 
         });
 
-        pipTranslateProvider.translations('ru', {
+        pipTranslate.translations('ru', {
             'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
             'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
             'ERROR_ROUTE_CONTINUE': 'Continue',
@@ -401,7 +339,7 @@ module.run(['$templateCache', function($templateCache) {
             'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
             'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
             'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-            'technologies. Download on of these great browsers and you\'ll be on your way:',
+            'technologies. Download on of these great browsers and you\'ll be on your way:',            
             'ERROR_UNSUPPORTED_O': 'Opera',
             'ERROR_UNSUPPORTED_O_VER': 'Version 35+',
             'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
@@ -413,6 +351,88 @@ module.run(['$templateCache', function($templateCache) {
 
         });
     }]);
+
+})();
+/**
+ * @file Optional filter to translate string resources
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+ 
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Translate', []);
+
+    thisModule.filter('translate', ['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate') 
+            ? $injector.get('pipTranslate') : null;
+
+        return function (key) {
+            return pipTranslate  ? pipTranslate.translate(key) || key : key;
+        }
+    }]);
+
+})();
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Pages', [
+        'ngMaterial', 
+        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
+        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
+    ]);
+
+    thisModule.config(
+        ['$stateProvider', function ($stateProvider) {
+            // Configure module routes
+            $stateProvider
+                .state('errors_no_connection', {
+                    url: '/errors/no_connection',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorNoConnectionController',
+                    templateUrl: 'no_connection/no_connection.html'
+                })
+                .state('errors_maintenance', {
+                    url: '/errors/maintenance',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorMaintenanceController',
+                    templateUrl: 'maintenance/maintenance.html'
+                })
+                .state('errors_missing_route', {
+                    url: '/errors/missing_route',
+                    params: {
+                        unfoundState: null,
+                        fromState: null
+                    },
+                    controller: 'pipErrorMissingRouteController',
+                    templateUrl: 'missing_route/missing_route.html'
+                })
+                .state('errors_unsupported', {
+                    url: '/errors/unsupported',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorUnsupportedController',
+                    templateUrl: 'unsupported/unsupported.html'
+                })
+                .state('errors_unknown', {
+                    url: '/errors/unknown',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorUnknownController',
+                    templateUrl: 'unknown/unknown.html'
+                });
+        }]);
 
 })();
 /**
@@ -663,6 +683,7 @@ module.run(['$templateCache', function($templateCache) {
 
         return;
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();
@@ -690,7 +711,7 @@ module.run(['$templateCache', function($templateCache) {
 
     var thisModule = angular.module('pipErrors.MissingRoute', []);
 
-    thisModule.controller('pipErrorMissingRouteController', ['$scope', '$state', '$rootScope', 'pipAppBar', 'pipAuthState', function ($scope, $state, $rootScope, pipAppBar, pipAuthState) {
+    thisModule.controller('pipErrorMissingRouteController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
 
         appHeader();
         $rootScope.$routing = false;
@@ -704,6 +725,7 @@ module.run(['$templateCache', function($templateCache) {
 
         return;
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();
@@ -712,7 +734,8 @@ module.run(['$templateCache', function($templateCache) {
         };
 
         function onContinue() {
-            pipAuthState.goToAuthorized();
+            // Todo: Go to default state '/'
+            //pipAuthState.goToAuthorized();
         };
 
     }]);
@@ -746,6 +769,7 @@ module.run(['$templateCache', function($templateCache) {
             $window.history.back();
         };
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();
@@ -768,7 +792,7 @@ module.run(['$templateCache', function($templateCache) {
 (function () {
     'use strict';
 
-    var thisModule = angular.module("pipNoConnectionPanel", []);
+    var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
 
     thisModule.directive('pipNoConnectionPanel',
         function () {
@@ -778,7 +802,7 @@ module.run(['$templateCache', function($templateCache) {
                     error: '=pipError',
                     retry: '=pipRetry'
                 },
-                templateUrl: 'no_connection/pip_no_connection_panel.html',
+                templateUrl: 'no_connection_panel/no_connection_panel.html',
                 controller: 'pipNoConnectionPanelController'
             };
         }
@@ -829,6 +853,7 @@ module.run(['$templateCache', function($templateCache) {
 
         return;
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();
@@ -885,6 +910,7 @@ module.run(['$templateCache', function($templateCache) {
 
         return;
 
+        // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
             pipAppBar.showShadow();

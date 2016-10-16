@@ -1,0 +1,76 @@
+// @file Page errors CSS styles
+// @copyright Digital Living Software Corp. 2014-2015
+
+/*
+ *
+ */
+
+.generate-page-error(@name, @palette) {
+  .@{name} {
+    .pip-page-errors{
+      .pip-error-details, .pip-error-text, .pip-error-details md-icon {
+        color: @palette;
+      }
+    }
+  }
+}
+
+.pip-page-errors {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-bottom: @divider-border;
+  z-index: 30;
+  .flex();
+  .flex-direction-row();
+  .tp(16px);
+  .bp(16px);
+  .lp(24px);
+  .rp(24px);
+
+  &.no-transparent-background {
+    background-color: @color-window !important;
+  }
+
+  .pip-error-text {
+    font: @font-body1;
+    line-height: 17px;
+  }
+
+  .pip-error-details {
+    font: @font-body2;
+    .flex();
+    .flex-direction-row();
+    .flex-vertical-center();
+    .flex-horizontal-start();
+    .lm(24px);
+    md-icon {
+      height: 20px;
+      width: 20px;
+      .rm(8px);
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .pip-page-errors {
+    .lp(16px);
+    .rp(16px);
+    .bp(0);
+    .flex-direction-column();
+
+    .pip-error-details {
+      height: 48px;
+      width: 100%;
+      .lm(0);
+    }
+  }
+}
+
+.generate-page-error(blue,                @color-badge);
+.generate-page-error(pink,                @color-badge);
+.generate-page-error(orange,              @color-badge);
+.generate-page-error(amber,               @color-badge);
+.generate-page-error(green,               @color-badge);
+.generate-page-error(navy,                @color-badge);
+.generate-page-error(grey,                @color-badge);
+.generate-page-error(dark,                @color-badge);
+.generate-page-error(black,               @color-badge);
