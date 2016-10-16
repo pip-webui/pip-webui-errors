@@ -15,7 +15,7 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             '../node_modules/pip-webui-lib/dist/pip-webui-lib.js',
-            '../node_modules/pip-webui-core/dist/pip-webui-core.js',
+            '../node_modules/pip-webui-services/dist/pip-webui-services.js',
             '../node_modules/pip-webui-rest/dist/pip-webui-rest.js',
             '../node_modules/pip-webui-controls/dist/pip-webui-controls.js',
             '../node_modules/pip-webui-connected/dist/pip-webui-connected.js',
