@@ -60,8 +60,8 @@ This is a default error page and is show in bad situations, other then listed ab
 
 **Error panel** shows an error embedded into a page.
 
-<a href="https://github.com/pip-webui/pip-webui-csscomponents/raw/master/doc/images/img-page-errors.png" style="border: 3px ridge #c8d2df; margin: auto; display: inline-block">
-    <img src="https://github.com/pip-webui/pip-webui-csscomponents/raw/master/doc/images/img-page-errors.png"/>
+<a href="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-page-errors.png" style="border: 3px ridge #c8d2df; margin: auto; display: inline-block">
+    <img src="https://github.com/pip-webui/pip-webui-errors/raw/master/doc/images/img-page-errors.png"/>
 </a>
 
 ## Learn more about the module
