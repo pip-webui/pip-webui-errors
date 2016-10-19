@@ -1,21 +1,28 @@
-/**
- * @file Registration of all error handling components
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    angular.module('pipErrors', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel',
-        'pipClearErrors',
-	    'pipFormErrors'
-    ]);
-    
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('maintenance/maintenance.html',
+    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
+    '    <div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div>\n' +
+    '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
+    '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
+    '    </div>\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center"\n' +
+    '         ng-if="isCordova">\n' +
+    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
+    '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
+    '        </md-button>\n' +
+    '    </div>\n' +
+    '</div>');
+}]);
 })();
+
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -40,31 +47,6 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
     '        {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
     '    </a></div>\n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('maintenance/maintenance.html',
-    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div>\n' +
-    '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
-    '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
-    '    </div>\n' +
-    '    <div class="pip-error-actions h48 layout-column layout-align-center-center"\n' +
-    '         ng-if="isCordova">\n' +
-    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
-    '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
-    '        </md-button>\n' +
-    '    </div>\n' +
     '</div>');
 }]);
 })();
@@ -259,6 +241,24 @@ module.run(['$templateCache', function($templateCache) {
 })();
 
 /**
+ * @file Registration of all error handling components
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    angular.module('pipErrors', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel',
+        'pipClearErrors',
+	    'pipFormErrors'
+    ]);
+    
+})();
+/**
  * @file Errors string resources
  * @copyright Digital Living Software Corp. 2014-2016
  */
@@ -376,6 +376,65 @@ module.run(['$templateCache', function($templateCache) {
 
 })();
 
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Pages', [
+        'ngMaterial', 
+        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
+        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
+    ]);
+
+    thisModule.config(
+        ['$stateProvider', function ($stateProvider) {
+            // Configure module routes
+            $stateProvider
+                .state('errors_no_connection', {
+                    url: '/errors/no_connection',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorNoConnectionController',
+                    templateUrl: 'no_connection/no_connection.html'
+                })
+                .state('errors_maintenance', {
+                    url: '/errors/maintenance',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorMaintenanceController',
+                    templateUrl: 'maintenance/maintenance.html'
+                })
+                .state('errors_missing_route', {
+                    url: '/errors/missing_route',
+                    params: {
+                        unfoundState: null,
+                        fromState: null
+                    },
+                    controller: 'pipErrorMissingRouteController',
+                    templateUrl: 'missing_route/missing_route.html'
+                })
+                .state('errors_unsupported', {
+                    url: '/errors/unsupported',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorUnsupportedController',
+                    templateUrl: 'unsupported/unsupported.html'
+                })
+                .state('errors_unknown', {
+                    url: '/errors/unknown',
+                    params: {
+                        error: null
+                    },
+                    controller: 'pipErrorUnknownController',
+                    templateUrl: 'unknown/unknown.html'
+                });
+        }]);
+
+})();
 /**
  * @file Special error handling for forms
  * @copyright Digital Living Software Corp. 2014-2016
@@ -598,65 +657,48 @@ module.run(['$templateCache', function($templateCache) {
 	}]);
 
 })();
+/**
+ * @file Maintenance error controller
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
 /* global angular */
 
 (function () {
     'use strict';
 
-    var thisModule = angular.module('pipErrors.Pages', [
-        'ngMaterial', 
-        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
-        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
-    ]);
+    var thisModule = angular.module('pipErrors.Maintenance', []);
 
-    thisModule.config(
-        ['$stateProvider', function ($stateProvider) {
-            // Configure module routes
-            $stateProvider
-                .state('errors_no_connection', {
-                    url: '/errors/no_connection',
-                    params: {
-                        error: null
-                    },
-                    controller: 'pipErrorNoConnectionController',
-                    templateUrl: 'no_connection/no_connection.html'
-                })
-                .state('errors_maintenance', {
-                    url: '/errors/maintenance',
-                    params: {
-                        error: null
-                    },
-                    controller: 'pipErrorMaintenanceController',
-                    templateUrl: 'maintenance/maintenance.html'
-                })
-                .state('errors_missing_route', {
-                    url: '/errors/missing_route',
-                    params: {
-                        unfoundState: null,
-                        fromState: null
-                    },
-                    controller: 'pipErrorMissingRouteController',
-                    templateUrl: 'missing_route/missing_route.html'
-                })
-                .state('errors_unsupported', {
-                    url: '/errors/unsupported',
-                    params: {
-                        error: null
-                    },
-                    controller: 'pipErrorUnsupportedController',
-                    templateUrl: 'unsupported/unsupported.html'
-                })
-                .state('errors_unknown', {
-                    url: '/errors/unknown',
-                    params: {
-                        error: null
-                    },
-                    controller: 'pipErrorUnknownController',
-                    templateUrl: 'unknown/unknown.html'
-                });
-        }]);
+    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+
+        $rootScope.$routing = false;
+        $scope.isCordova = false;
+        appHeader();
+
+        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
+        $scope.timeoutInterval = $scope.error && $scope.error.config &&
+                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
+
+        $scope.onClose = onClose;
+
+        return;
+
+        // Todo: Made dependencies optional
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        };
+
+        function onClose() {
+
+        };
+
+    }]);
 
 })();
+
 /**
  * @file Missing route error controller
  * @copyright Digital Living Software Corp. 2014-2016
@@ -694,48 +736,6 @@ module.run(['$templateCache', function($templateCache) {
         function onContinue() {
             // Todo: Go to default state '/'
             //pipAuthState.goToAuthorized();
-        };
-
-    }]);
-
-})();
-
-/**
- * @file Maintenance error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Maintenance', []);
-
-    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-        $scope.timeoutInterval = $scope.error && $scope.error.config &&
-                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
-
-        $scope.onClose = onClose;
-
-        return;
-
-        // Todo: Made dependencies optional
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        };
-
-        function onClose() {
-
         };
 
     }]);
@@ -826,40 +826,6 @@ module.run(['$templateCache', function($templateCache) {
 
 
 /**
- * @file Unsupported error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
-
-/* global angular */
-
-(function () {
-    'use strict';
-
-    var thisModule = angular.module('pipErrors.Unsupported', []);
-
-    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', 'pipAppBar', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
-
-        $scope.$mdMedia = $mdMedia;
-        $rootScope.$routing = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-
-        return;
-
-        // Todo: Made dependencies optional
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        };
-
-    }]);
-
-})();
-
-/**
  * @file Unknown error controller
  * @copyright Digital Living Software Corp. 2014-2016
  */
@@ -916,6 +882,40 @@ module.run(['$templateCache', function($templateCache) {
 
         function onClose() {
 
+        };
+
+    }]);
+
+})();
+
+/**
+ * @file Unsupported error controller
+ * @copyright Digital Living Software Corp. 2014-2016
+ */
+
+/* global angular */
+
+(function () {
+    'use strict';
+
+    var thisModule = angular.module('pipErrors.Unsupported', []);
+
+    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', 'pipAppBar', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
+
+        $scope.$mdMedia = $mdMedia;
+        $rootScope.$routing = false;
+        appHeader();
+
+        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
+
+        return;
+
+        // Todo: Made dependencies optional
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
         };
 
     }]);
