@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    var thisModule = angular.module('pipErrorsSample', ['pipTranslate', 'pipState', 'pipErrors.Pages']);
+    var thisModule = angular.module('pipErrorsSample', ['pipTranslate', 'ui.router', 'pipErrors.Pages']);
 
     thisModule.config(
         function ($stateProvider, pipTranslateProvider, pipAuthStateProvider) {

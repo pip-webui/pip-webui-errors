@@ -15,7 +15,7 @@
         // Modules from WebUI Framework
         'pipServices', 'pipData', 'pipControls', 'pipLayout', 'pipNav',
         // Sample Application Modules
-        'pipEntry', 'pipState', 'pipErrorsSample'
+        'pipEntry', 'pipErrorsSample'
     ]);
 
 
