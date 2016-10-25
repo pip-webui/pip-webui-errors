@@ -14,7 +14,7 @@
         return {
             restrict: 'A',
             require: ['ngModel', '^?form'],
-            link: function ($scope, $element, $attrs, $ctrls) {
+            link: function ($scope, $element, $attrs: any, $ctrls) {
                 var 
                     fieldController = $ctrls[0],
                     formController = $ctrls[1];
