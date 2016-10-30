@@ -1,3 +1,445 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.Strings', ['pipTranslate']);
+    thisModule.run(['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+        if (pipTranslate == null)
+            return;
+        pipTranslate.translations('en', {
+            'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
+            'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
+            'ERROR_ROUTE_CONTINUE': 'Continue',
+            'ERROR_ROUTE_TRY_AGAIN': 'Try again',
+            'ERROR_ROUTE_GO_BACK': 'Go Back',
+            'ERROR_ROUTE_PAGE_TITLE': 'Wrong page',
+            'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
+            'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
+            'ERROR_UNKNOWN_CLOSE': 'Close',
+            'ERROR_UNKNOWN_DETAILS': 'Details',
+            'ERROR_AVAILABLE_TITLE': 'The server is on maintenance',
+            'ERROR_AVAILABLE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
+                'a short period. We\'ll be back soon. Thank for your patience.',
+            'ERROR_AVAILABLE_CLOSE': 'Close',
+            'ERROR_AVAILABLE_TRY_AGAIN': 'Try after',
+            'ERROR_RESPONDING_TITLE': 'No connection to the server',
+            'ERROR_RESPONDING_SUBTITLE': 'Unable to connect to the server. Check your Internet connection and try again.',
+            'ERROR_RESPONDING_RETRY': 'Retry',
+            'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
+            'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
+                'and easier to use. Unfortunately, your browser doesn\'t support those ' +
+                'technologies. Download on of these great browsers and you\'ll be on your way:',
+            'ERROR_UNSUPPORTED_O': 'Opera',
+            'ERROR_UNSUPPORTED_O_VER': 'Version 36+',
+            'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
+            'ERROR_UNSUPPORTED_IE_VER': 'Version 11+',
+            'ERROR_UNSUPPORTED_GC': 'Google Chrome',
+            'ERROR_UNSUPPORTED_GC_VER': 'Version 48+',
+            'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
+            'ERROR_UNSUPPORTED_FM_VER': 'Version 45+'
+        });
+        pipTranslate.translations('ru', {
+            'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
+            'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
+            'ERROR_ROUTE_CONTINUE': 'Continue',
+            'ERROR_ROUTE_TRY_AGAIN': 'Try again',
+            'ERROR_ROUTE_GO_BACK': 'Go Back',
+            'ERROR_ROUTE_PAGE_TITLE': 'Wrong page',
+            'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
+            'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
+            'ERROR_UNKNOWN_CLOSE': 'Close',
+            'ERROR_UNKNOWN_DETAILS': 'Details',
+            'ERROR_AVAILABLE_TITLE': 'The server is on maintenance',
+            'ERROR_AVAILABLE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
+                'a short period. We\'ll be back soon. Thank for your patience.',
+            'ERROR_AVAILABLE_CLOSE': 'Close',
+            'ERROR_AVAILABLE_TRY_AGAIN': 'Try after',
+            'ERROR_RESPONDING_TITLE': 'No connection to the server',
+            'ERROR_RESPONDING_SUBTITLE': 'Unable to connect to server. Check your Internet connection and try again.',
+            'ERROR_RESPONDING_RETRY': 'Retry',
+            'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
+            'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
+                'and easier to use. Unfortunately, your browser doesn\'t support those ' +
+                'technologies. Download on of these great browsers and you\'ll be on your way:',
+            'ERROR_UNSUPPORTED_O': 'Opera',
+            'ERROR_UNSUPPORTED_O_VER': 'Version 35+',
+            'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
+            'ERROR_UNSUPPORTED_IE_VER': 'Version 11+',
+            'ERROR_UNSUPPORTED_GC': 'Google Chrome',
+            'ERROR_UNSUPPORTED_GC_VER': 'Version 47+',
+            'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
+            'ERROR_UNSUPPORTED_FM_VER': 'Version 43+'
+        });
+    }]);
+})();
+},{}],2:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.Translate', []);
+    thisModule.filter('translate', ['$injector', function ($injector) {
+        var pipTranslate = $injector.has('pipTranslate')
+            ? $injector.get('pipTranslate') : null;
+        return function (key) {
+            return pipTranslate ? pipTranslate.translate(key) || key : key;
+        };
+    }]);
+})();
+},{}],3:[function(require,module,exports){
+(function () {
+    'use strict';
+    angular.module('pipErrors', [
+        'pipErrors.Pages',
+        'pipNoConnectionPanel',
+        'pipClearErrors',
+        'pipFormErrors'
+    ]);
+})();
+},{}],4:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.Pages', [
+        'ngMaterial',
+        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
+        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
+    ]);
+    thisModule.config(['$stateProvider', function ($stateProvider) {
+        $stateProvider
+            .state('errors_no_connection', {
+            url: '/errors/no_connection',
+            params: {
+                error: null
+            },
+            controller: 'pipErrorNoConnectionController',
+            templateUrl: 'no_connection/no_connection.html'
+        })
+            .state('errors_maintenance', {
+            url: '/errors/maintenance',
+            params: {
+                error: null
+            },
+            controller: 'pipErrorMaintenanceController',
+            templateUrl: 'maintenance/maintenance.html'
+        })
+            .state('errors_missing_route', {
+            url: '/errors/missing_route',
+            params: {
+                unfoundState: null,
+                fromState: null
+            },
+            controller: 'pipErrorMissingRouteController',
+            templateUrl: 'missing_route/missing_route.html'
+        })
+            .state('errors_unsupported', {
+            url: '/errors/unsupported',
+            params: {
+                error: null
+            },
+            controller: 'pipErrorUnsupportedController',
+            templateUrl: 'unsupported/unsupported.html'
+        })
+            .state('errors_unknown', {
+            url: '/errors/unknown',
+            params: {
+                error: null
+            },
+            controller: 'pipErrorUnknownController',
+            templateUrl: 'unknown/unknown.html'
+        });
+    }]);
+})();
+},{}],5:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipClearErrors', []);
+    thisModule.directive('pipClearErrors', function () {
+        return {
+            restrict: 'A',
+            require: ['ngModel', '^?form'],
+            link: function ($scope, $element, $attrs, $ctrls) {
+                var fieldController = $ctrls[0], formController = $ctrls[1];
+                $scope.$watch($attrs.ngModel, function (newValue) {
+                    clearFieldErrors();
+                    clearFormErrors();
+                });
+                function clearFieldErrors() {
+                    var errors = fieldController.$error;
+                    for (var prop in errors) {
+                        if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
+                            fieldController.$setValidity(prop, true);
+                        }
+                    }
+                    ;
+                }
+                function clearFormErrors() {
+                    formController.$serverError = {};
+                }
+                ;
+            }
+        };
+    });
+})();
+},{}],6:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipFormErrors', []);
+    thisModule.factory('pipFormErrors', ['$rootScope', function ($rootScope) {
+        return {
+            errorsWithHint: errorsWithHint,
+            touchedErrorsWithHint: touchedErrorsWithHint,
+            resetFormErrors: resetFormErrors,
+            setFormError: setFormError,
+            resetFieldsErrors: resetFieldsErrors
+        };
+        function errorsWithHint(field) {
+            if (field == null)
+                return;
+            return _.isEmpty(field.$error) ? { hint: true } : field.$error;
+        }
+        ;
+        function touchedErrorsWithHint(form, field) {
+            if (form == null)
+                return;
+            if (field == null)
+                return;
+            if (form.$submitted && (field.$touched || form.$dirty) || !form.$submitted && (field.$touched || field.$dirty)) {
+                var result = _.isEmpty(field.$error) ? { hint: true } : field.$error;
+                return result;
+            }
+            return { hint: true };
+        }
+        ;
+        function resetFormErrors(form, errors) {
+            form.$setPristine();
+            form.$setUntouched();
+            if (errors) {
+                form.$setDirty();
+                form.$setSubmitted();
+            }
+            form.$serverError = {};
+        }
+        ;
+        function resetFieldsErrors(form, field) {
+            if (!form)
+                return;
+            if (field && form[field] && form[field].$error) {
+                form[field].$error = {};
+            }
+            else {
+                for (var prop in form) {
+                    if (form[prop] && form[prop].$error) {
+                        form[prop].$error = {};
+                    }
+                    ;
+                }
+                if (form && form.$error)
+                    form.$error = {};
+            }
+        }
+        ;
+        function setFormError(form, error, errorFieldMap) {
+            if (error == null)
+                return;
+            form.$serverError = form.$serverError || {};
+            var code = error.code || (error.data || {}).code || null;
+            if (!code && error.status)
+                code = error.status;
+            if (code) {
+                var errorName = 'ERROR_' + code, field = errorFieldMap ? errorFieldMap[code] : null;
+                if (field && form[field] && form[field].$setValidity) {
+                    form[field].$setValidity(errorName, false);
+                    return;
+                }
+                if (field == 'form') {
+                    form.$serverError[errorName] = true;
+                    return;
+                }
+            }
+            if (error.data && error.data.message) {
+                form.$serverError['ERROR_UNKNOWN'] = error.data.message;
+                goToUnhandledErrorPage(error);
+                return;
+            }
+            if (error.message) {
+                form.$serverError['ERROR_UNKNOWN'] = error.message;
+                goToUnhandledErrorPage(error);
+                return;
+            }
+            if (error.name) {
+                form.$serverError['ERROR_UNKNOWN'] = error.name;
+                goToUnhandledErrorPage(error);
+                return;
+            }
+            form.$serverError['ERROR_UNKNOWN'] = error;
+            goToUnhandledErrorPage(error);
+        }
+        ;
+        function goToUnhandledErrorPage(error) {
+            $rootScope.$emit('pipUnhandledInternalError', {
+                error: error
+            });
+        }
+        ;
+    }]);
+})();
+},{}],7:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.Maintenance', []);
+    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+        $rootScope.$routing = false;
+        $scope.isCordova = false;
+        appHeader();
+        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
+        $scope.timeoutInterval = $scope.error && $scope.error.config &&
+            $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
+        $scope.onClose = onClose;
+        return;
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        }
+        ;
+        function onClose() {
+        }
+        ;
+    }]);
+})();
+},{}],8:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.MissingRoute', []);
+    thisModule.controller('pipErrorMissingRouteController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+        appHeader();
+        $rootScope.$routing = false;
+        $scope.error = $state && $state.params && $state.params.error ? $state.params.fromState : {};
+        $scope.unfoundState = $state && $state.params ? $state.params.unfoundState : {};
+        $scope.url = $scope.unfoundState && $scope.unfoundState.to ? $state.href($scope.unfoundState.to, $scope.unfoundState.toParams, { absolute: true }) : '';
+        $scope.urlBack = $scope.fromState && $scope.fromState.to ? $state.href($scope.fromState.to, $scope.fromState.fromParams, { absolute: true }) : '';
+        $scope.onContinue = onContinue;
+        return;
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_ROUTE_PAGE_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        }
+        ;
+        function onContinue() {
+        }
+        ;
+    }]);
+})();
+},{}],9:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.NoConnection', []);
+    thisModule.controller('pipErrorNoConnectionController', ['$scope', '$state', '$rootScope', '$window', 'pipAppBar', function ($scope, $state, $rootScope, $window, pipAppBar) {
+        $rootScope.$routing = false;
+        appHeader();
+        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
+        $scope.onRetry = onRetry;
+        return;
+        function onRetry() {
+            $window.history.back();
+        }
+        ;
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_RESPONDING_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        }
+        ;
+    }]);
+})();
+},{}],10:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
+    thisModule.directive('pipNoConnectionPanel', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                error: '=pipError',
+                retry: '=pipRetry'
+            },
+            templateUrl: 'no_connection_panel/no_connection_panel.html',
+            controller: 'pipNoConnectionPanelController'
+        };
+    });
+    thisModule.controller('pipNoConnectionPanelController', ['$scope', '$element', '$attrs', 'pipTranslate', function ($scope, $element, $attrs, pipTranslate) {
+        $scope.onRetry = onRetry;
+        return;
+        function onRetry() {
+            if ($scope.retry && angular.isFunction($scope.retry))
+                $scope.retry();
+        }
+        ;
+    }]);
+})();
+},{}],11:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.Unknown', []);
+    thisModule.controller('pipErrorUnknownController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
+        $rootScope.$routing = false;
+        $scope.isCordova = false;
+        appHeader();
+        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
+        $scope.error_details = null;
+        $scope.onDetails = onDetails;
+        $scope.onClose = onClose;
+        parseError();
+        return;
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        }
+        ;
+        function parseError() {
+            $scope.error_details = {};
+            $scope.error_details.code = $scope.error.code;
+            $scope.error_details.description = $scope.error.message;
+            $scope.error_details.status = $scope.error.status;
+            $scope.error_details.server_stacktrace = function () {
+            };
+            $scope.error_details.client_stacktrace = function () {
+            };
+        }
+        ;
+        function onDetails() {
+            $scope.showError = true;
+        }
+        ;
+        function onClose() {
+        }
+        ;
+    }]);
+})();
+},{}],12:[function(require,module,exports){
+(function () {
+    'use strict';
+    var thisModule = angular.module('pipErrors.Unsupported', []);
+    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', 'pipAppBar', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
+        $scope.$mdMedia = $mdMedia;
+        $rootScope.$routing = false;
+        appHeader();
+        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
+        return;
+        function appHeader() {
+            pipAppBar.showMenuNavIcon();
+            pipAppBar.showShadow();
+            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
+            pipAppBar.showLocalActions(null, []);
+        }
+        ;
+    }]);
+})();
+},{}],13:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -242,447 +684,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-(function () {
-    'use strict';
-    angular.module('pipErrors', [
-        'pipErrors.Pages',
-        'pipNoConnectionPanel',
-        'pipClearErrors',
-        'pipFormErrors'
-    ]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Strings', ['pipTranslate']);
-    thisModule.run(['$injector', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
-        if (pipTranslate == null)
-            return;
-        pipTranslate.translations('en', {
-            'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
-            'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
-            'ERROR_ROUTE_CONTINUE': 'Continue',
-            'ERROR_ROUTE_TRY_AGAIN': 'Try again',
-            'ERROR_ROUTE_GO_BACK': 'Go Back',
-            'ERROR_ROUTE_PAGE_TITLE': 'Wrong page',
-            'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
-            'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
-            'ERROR_UNKNOWN_CLOSE': 'Close',
-            'ERROR_UNKNOWN_DETAILS': 'Details',
-            'ERROR_AVAILABLE_TITLE': 'The server is on maintenance',
-            'ERROR_AVAILABLE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
-                'a short period. We\'ll be back soon. Thank for your patience.',
-            'ERROR_AVAILABLE_CLOSE': 'Close',
-            'ERROR_AVAILABLE_TRY_AGAIN': 'Try after',
-            'ERROR_RESPONDING_TITLE': 'No connection to the server',
-            'ERROR_RESPONDING_SUBTITLE': 'Unable to connect to the server. Check your Internet connection and try again.',
-            'ERROR_RESPONDING_RETRY': 'Retry',
-            'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
-            'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
-                'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-                'technologies. Download on of these great browsers and you\'ll be on your way:',
-            'ERROR_UNSUPPORTED_O': 'Opera',
-            'ERROR_UNSUPPORTED_O_VER': 'Version 36+',
-            'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
-            'ERROR_UNSUPPORTED_IE_VER': 'Version 11+',
-            'ERROR_UNSUPPORTED_GC': 'Google Chrome',
-            'ERROR_UNSUPPORTED_GC_VER': 'Version 48+',
-            'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
-            'ERROR_UNSUPPORTED_FM_VER': 'Version 45+'
-        });
-        pipTranslate.translations('ru', {
-            'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
-            'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
-            'ERROR_ROUTE_CONTINUE': 'Continue',
-            'ERROR_ROUTE_TRY_AGAIN': 'Try again',
-            'ERROR_ROUTE_GO_BACK': 'Go Back',
-            'ERROR_ROUTE_PAGE_TITLE': 'Wrong page',
-            'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
-            'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
-            'ERROR_UNKNOWN_CLOSE': 'Close',
-            'ERROR_UNKNOWN_DETAILS': 'Details',
-            'ERROR_AVAILABLE_TITLE': 'The server is on maintenance',
-            'ERROR_AVAILABLE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
-                'a short period. We\'ll be back soon. Thank for your patience.',
-            'ERROR_AVAILABLE_CLOSE': 'Close',
-            'ERROR_AVAILABLE_TRY_AGAIN': 'Try after',
-            'ERROR_RESPONDING_TITLE': 'No connection to the server',
-            'ERROR_RESPONDING_SUBTITLE': 'Unable to connect to server. Check your Internet connection and try again.',
-            'ERROR_RESPONDING_RETRY': 'Retry',
-            'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
-            'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
-                'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-                'technologies. Download on of these great browsers and you\'ll be on your way:',
-            'ERROR_UNSUPPORTED_O': 'Opera',
-            'ERROR_UNSUPPORTED_O_VER': 'Version 35+',
-            'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
-            'ERROR_UNSUPPORTED_IE_VER': 'Version 11+',
-            'ERROR_UNSUPPORTED_GC': 'Google Chrome',
-            'ERROR_UNSUPPORTED_GC_VER': 'Version 47+',
-            'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
-            'ERROR_UNSUPPORTED_FM_VER': 'Version 43+'
-        });
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Translate', []);
-    thisModule.filter('translate', ['$injector', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate')
-            ? $injector.get('pipTranslate') : null;
-        return function (key) {
-            return pipTranslate ? pipTranslate.translate(key) || key : key;
-        };
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipClearErrors', []);
-    thisModule.directive('pipClearErrors', function () {
-        return {
-            restrict: 'A',
-            require: ['ngModel', '^?form'],
-            link: function ($scope, $element, $attrs, $ctrls) {
-                var fieldController = $ctrls[0], formController = $ctrls[1];
-                $scope.$watch($attrs.ngModel, function (newValue) {
-                    clearFieldErrors();
-                    clearFormErrors();
-                });
-                function clearFieldErrors() {
-                    var errors = fieldController.$error;
-                    for (var prop in errors) {
-                        if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
-                            fieldController.$setValidity(prop, true);
-                        }
-                    }
-                    ;
-                }
-                function clearFormErrors() {
-                    formController.$serverError = {};
-                }
-                ;
-            }
-        };
-    });
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipFormErrors', []);
-    thisModule.factory('pipFormErrors', ['$rootScope', function ($rootScope) {
-        return {
-            errorsWithHint: errorsWithHint,
-            touchedErrorsWithHint: touchedErrorsWithHint,
-            resetFormErrors: resetFormErrors,
-            setFormError: setFormError,
-            resetFieldsErrors: resetFieldsErrors
-        };
-        function errorsWithHint(field) {
-            if (field == null)
-                return;
-            return _.isEmpty(field.$error) ? { hint: true } : field.$error;
-        }
-        ;
-        function touchedErrorsWithHint(form, field) {
-            if (form == null)
-                return;
-            if (field == null)
-                return;
-            if (form.$submitted && (field.$touched || form.$dirty) || !form.$submitted && (field.$touched || field.$dirty)) {
-                var result = _.isEmpty(field.$error) ? { hint: true } : field.$error;
-                return result;
-            }
-            return { hint: true };
-        }
-        ;
-        function resetFormErrors(form, errors) {
-            form.$setPristine();
-            form.$setUntouched();
-            if (errors) {
-                form.$setDirty();
-                form.$setSubmitted();
-            }
-            form.$serverError = {};
-        }
-        ;
-        function resetFieldsErrors(form, field) {
-            if (!form)
-                return;
-            if (field && form[field] && form[field].$error) {
-                form[field].$error = {};
-            }
-            else {
-                for (var prop in form) {
-                    if (form[prop] && form[prop].$error) {
-                        form[prop].$error = {};
-                    }
-                    ;
-                }
-                if (form && form.$error)
-                    form.$error = {};
-            }
-        }
-        ;
-        function setFormError(form, error, errorFieldMap) {
-            if (error == null)
-                return;
-            form.$serverError = form.$serverError || {};
-            var code = error.code || (error.data || {}).code || null;
-            if (!code && error.status)
-                code = error.status;
-            if (code) {
-                var errorName = 'ERROR_' + code, field = errorFieldMap ? errorFieldMap[code] : null;
-                if (field && form[field] && form[field].$setValidity) {
-                    form[field].$setValidity(errorName, false);
-                    return;
-                }
-                if (field == 'form') {
-                    form.$serverError[errorName] = true;
-                    return;
-                }
-            }
-            if (error.data && error.data.message) {
-                form.$serverError['ERROR_UNKNOWN'] = error.data.message;
-                goToUnhandledErrorPage(error);
-                return;
-            }
-            if (error.message) {
-                form.$serverError['ERROR_UNKNOWN'] = error.message;
-                goToUnhandledErrorPage(error);
-                return;
-            }
-            if (error.name) {
-                form.$serverError['ERROR_UNKNOWN'] = error.name;
-                goToUnhandledErrorPage(error);
-                return;
-            }
-            form.$serverError['ERROR_UNKNOWN'] = error;
-            goToUnhandledErrorPage(error);
-        }
-        ;
-        function goToUnhandledErrorPage(error) {
-            $rootScope.$emit('pipUnhandledInternalError', {
-                error: error
-            });
-        }
-        ;
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Pages', [
-        'ngMaterial',
-        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
-        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
-    ]);
-    thisModule.config(['$stateProvider', function ($stateProvider) {
-        $stateProvider
-            .state('errors_no_connection', {
-            url: '/errors/no_connection',
-            params: {
-                error: null
-            },
-            controller: 'pipErrorNoConnectionController',
-            templateUrl: 'no_connection/no_connection.html'
-        })
-            .state('errors_maintenance', {
-            url: '/errors/maintenance',
-            params: {
-                error: null
-            },
-            controller: 'pipErrorMaintenanceController',
-            templateUrl: 'maintenance/maintenance.html'
-        })
-            .state('errors_missing_route', {
-            url: '/errors/missing_route',
-            params: {
-                unfoundState: null,
-                fromState: null
-            },
-            controller: 'pipErrorMissingRouteController',
-            templateUrl: 'missing_route/missing_route.html'
-        })
-            .state('errors_unsupported', {
-            url: '/errors/unsupported',
-            params: {
-                error: null
-            },
-            controller: 'pipErrorUnsupportedController',
-            templateUrl: 'unsupported/unsupported.html'
-        })
-            .state('errors_unknown', {
-            url: '/errors/unknown',
-            params: {
-                error: null
-            },
-            controller: 'pipErrorUnknownController',
-            templateUrl: 'unknown/unknown.html'
-        });
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Maintenance', []);
-    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        $scope.timeoutInterval = $scope.error && $scope.error.config &&
-            $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
-        $scope.onClose = onClose;
-        return;
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        }
-        ;
-        function onClose() {
-        }
-        ;
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.MissingRoute', []);
-    thisModule.controller('pipErrorMissingRouteController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-        appHeader();
-        $rootScope.$routing = false;
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.fromState : {};
-        $scope.unfoundState = $state && $state.params ? $state.params.unfoundState : {};
-        $scope.url = $scope.unfoundState && $scope.unfoundState.to ? $state.href($scope.unfoundState.to, $scope.unfoundState.toParams, { absolute: true }) : '';
-        $scope.urlBack = $scope.fromState && $scope.fromState.to ? $state.href($scope.fromState.to, $scope.fromState.fromParams, { absolute: true }) : '';
-        $scope.onContinue = onContinue;
-        return;
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_ROUTE_PAGE_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        }
-        ;
-        function onContinue() {
-        }
-        ;
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.NoConnection', []);
-    thisModule.controller('pipErrorNoConnectionController', ['$scope', '$state', '$rootScope', '$window', 'pipAppBar', function ($scope, $state, $rootScope, $window, pipAppBar) {
-        $rootScope.$routing = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        $scope.onRetry = onRetry;
-        return;
-        function onRetry() {
-            $window.history.back();
-        }
-        ;
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_RESPONDING_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        }
-        ;
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
-    thisModule.directive('pipNoConnectionPanel', function () {
-        return {
-            restrict: 'E',
-            scope: {
-                error: '=pipError',
-                retry: '=pipRetry'
-            },
-            templateUrl: 'no_connection_panel/no_connection_panel.html',
-            controller: 'pipNoConnectionPanelController'
-        };
-    });
-    thisModule.controller('pipNoConnectionPanelController', ['$scope', '$element', '$attrs', 'pipTranslate', function ($scope, $element, $attrs, pipTranslate) {
-        $scope.onRetry = onRetry;
-        return;
-        function onRetry() {
-            if ($scope.retry && angular.isFunction($scope.retry))
-                $scope.retry();
-        }
-        ;
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Unknown', []);
-    thisModule.controller('pipErrorUnknownController', ['$scope', '$state', '$rootScope', 'pipAppBar', function ($scope, $state, $rootScope, pipAppBar) {
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        $scope.error_details = null;
-        $scope.onDetails = onDetails;
-        $scope.onClose = onClose;
-        parseError();
-        return;
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        }
-        ;
-        function parseError() {
-            $scope.error_details = {};
-            $scope.error_details.code = $scope.error.code;
-            $scope.error_details.description = $scope.error.message;
-            $scope.error_details.status = $scope.error.status;
-            $scope.error_details.server_stacktrace = function () {
-            };
-            $scope.error_details.client_stacktrace = function () {
-            };
-        }
-        ;
-        function onDetails() {
-            $scope.showError = true;
-        }
-        ;
-        function onClose() {
-        }
-        ;
-    }]);
-})();
-
-(function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Unsupported', []);
-    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', 'pipAppBar', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
-        $scope.$mdMedia = $mdMedia;
-        $rootScope.$routing = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        return;
-        function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
-        }
-        ;
-    }]);
-})();
-
+},{}]},{},[1,2,4,3,5,6,7,8,10,9,11,12,13])
 
 
 //# sourceMappingURL=pip-webui-errors.js.map
