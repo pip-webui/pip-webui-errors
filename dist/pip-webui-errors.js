@@ -472,6 +472,28 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('no_connection/no_connection.html',
+    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
+    '    <div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div>\n' +
+    '    <div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div>\n' +
+    '\n' +
+    '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
+    '        <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">\n' +
+    '            {{::\'ERROR_RESPONDING_RETRY\' | translate}}\n' +
+    '        </md-button>\n' +
+    '    </div>\n' +
+    '</div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('missing_route/missing_route.html',
     '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
     '    <div style="background-image: url(\'images/invalid_route.svg\');" class="pip-pic"></div>\n' +
@@ -489,28 +511,6 @@ module.run(['$templateCache', function($templateCache) {
     '    <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
     '        {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
     '    </a></div>\n' +
-    '</div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection/no_connection.html',
-    '<div class="pip-error pip-empty layout-column flex layout-align-center-center">\n' +
-    '    <div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div>\n' +
-    '    <div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div>\n' +
-    '\n' +
-    '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
-    '        <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">\n' +
-    '            {{::\'ERROR_RESPONDING_RETRY\' | translate}}\n' +
-    '        </md-button>\n' +
-    '    </div>\n' +
     '</div>');
 }]);
 })();
