@@ -86,7 +86,7 @@
             pipAppBar.showTitleText('ERRORS');
             pipAppBar.showMenuNavIcon();
             pipAppBar.showLanguage();
-            pipAppBar.hideShadow();
+            pipAppBar.removeShadow();
 
             return;
             // ----------------------------------------------------------------------------------------------------

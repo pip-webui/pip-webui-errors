@@ -27,7 +27,7 @@
         // Todo: Made dependencies optional
         function appHeader() {
             pipAppBar.showMenuNavIcon();
-            pipAppBar.showShadow();
+            pipAppBar.addShadow();
             pipAppBar.showTitleBreadcrumb('ERROR_ROUTE_PAGE_TITLE', []);
             pipAppBar.showLocalActions(null, []);
         };
