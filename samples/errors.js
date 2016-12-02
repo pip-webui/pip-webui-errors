@@ -4,7 +4,7 @@
     var thisModule = angular.module('pipErrorsSample', ['pipTranslate', 'ui.router', 'pipErrors.Pages']);
 
     thisModule.config(
-        function ($stateProvider, pipTranslateProvider, pipAuthStateProvider) {
+        function ($stateProvider, pipTranslateProvider) {
 
             // Set translation strings for the module
             pipTranslateProvider.translations('en', {
@@ -33,7 +33,7 @@
     );
 
     thisModule.controller('SampleErrorsController',
-        function ($scope, $rootScope, $state, pipAppBar, $timeout) {
+        function ($scope, $rootScope, $state, $timeout) {
 
             $timeout(function() {
                 $('pre code').each(function(i, block) {
@@ -83,49 +83,40 @@
             $scope.onUnknown = onUnknown;
             $scope.onNavigationSelect = onNavigationSelect;
 
-            pipAppBar.showTitleText('ERRORS');
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.showLanguage();
-            pipAppBar.removeShadow();
 
             return;
             // ----------------------------------------------------------------------------------------------------
 
             function onNavigationSelect(state) {
-                setUpAppbarForSample();
+                
                 $state.go(state, params);
             }
 
             function onUnknown() {
-                setUpAppbarForSample();
+                
                 $state.go('errors_unknown', params);
             }
 
             function onMaintenance() {
-                setUpAppbarForSample();
+                
                 $state.go('errors_maintenance', params);
             }
 
             function onRouteFails() {
-                setUpAppbarForSample();
+                
                 $state.go('errors_missing_route', params);
             }
 
             function onUnsupported() {
-                setUpAppbarForSample();
+                
                 $state.go('errors_unsupported', params);
             }
 
             function onLostConnection() {
-                setUpAppbarForSample();
+                
                 $state.go('errors_no_connection', params);
             }
 
-            function setUpAppbarForSample() {
-                $timeout(function () {
-                    pipAppBar.showBackNavIcon();
-                });
-            }
 
         }
     );
