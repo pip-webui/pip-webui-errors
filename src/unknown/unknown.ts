@@ -10,10 +10,16 @@
 
     var thisModule = angular.module('pipErrors.Unknown', []);
 
-    thisModule.controller('pipErrorUnknownController', function ($scope, $state, $rootScope, pipAppBar) {
+    thisModule.controller('pipErrorUnknownController', function ($scope, $state, $rootScope, $injector, $mdMedia) {
+
+        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+
+        $scope.media = pipMedia ? pipMedia : $mdMedia;
 
         $rootScope.$routing = false;
         $scope.isCordova = false;
+
         appHeader();
 
         $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
@@ -26,12 +32,13 @@
 
         return;
 
-        // Todo: Made dependencies optional
         function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.addShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNKNOWN_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
+            if (!pipNavService) return;
+
+            pipNavService.appbar.addShadow();
+            pipNavService.icon.showMenu();
+            pipNavService.breadcrumb.text = 'ERROR_UNKNOWN_TITLE';
+            pipNavService.actions.hide();
         };
 
         function parseError() {

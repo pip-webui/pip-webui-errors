@@ -10,11 +10,17 @@
 
     var thisModule = angular.module('pipErrors.Unsupported', []);
 
-    thisModule.controller('pipErrorUnsupportedController', function ($scope, $state, $rootScope, $mdMedia, pipAppBar) {
+    thisModule.controller('pipErrorUnsupportedController', function ($scope, $state, $rootScope, $mdMedia, $injector) {
 
-        $scope.$mdMedia = $mdMedia;
+        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+
+        $scope.media = pipMedia ? pipMedia : $mdMedia;
         $rootScope.$routing = false;
-        appHeader();
+        
+        if (pipNavService) {
+            appHeader();
+        }
 
         $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
 
@@ -22,10 +28,10 @@
 
         // Todo: Made dependencies optional
         function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.addShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_UNSUPPORTED_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
+            pipNavService.appbar.addShadow();
+            pipNavService.icon.showMenu();
+            pipNavService.breadcrumb.text = 'ERROR_UNSUPPORTED_TITLE';
+            pipNavService.actions.hide();
         };
 
     });
