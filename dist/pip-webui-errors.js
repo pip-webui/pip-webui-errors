@@ -102,7 +102,8 @@
         'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
         'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
     ]);
-    thisModule.config(['$stateProvider', function ($stateProvider) {
+    thisModule.config(['$stateProvider', '$httpProvider', function ($stateProvider, $httpProvider) {
+        $httpProvider.interceptors.push('pipAuthHttpResponseInterceptor');
         $stateProvider
             .state('errors_no_connection', {
             url: '/errors/no_connection',
@@ -145,6 +146,86 @@
             controller: 'pipErrorUnknownController',
             templateUrl: 'unknown/unknown.html'
         });
+    }]);
+    thisModule.run(['$rootScope', '$state', '$injector', function ($rootScope, $state, $injector) {
+        checkSupported();
+        $rootScope.$on('pipMaintenanceError', maintenanceError);
+        $rootScope.$on('pipNoConnectionError', noConnectionError);
+        $rootScope.$on('pipUnknownError', unknownError);
+        $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+            event.preventDefault();
+            $state.go('errors_missing_route', {
+                unfoundState: unfoundState,
+                fromState: {
+                    to: fromState ? fromState.name : '',
+                    fromParams: fromParams
+                }
+            });
+            $rootScope.$routing = false;
+        });
+        function goToErrors(toState, params) {
+            if (toState == null)
+                throw new Error('Error state was not defined');
+            $state.go(toState, params);
+        }
+        ;
+        function maintenanceError(event, params) {
+            goToErrors('errors_maintenance', params);
+        }
+        function noConnectionError(event, params) {
+            goToErrors('errors_no_connection', params);
+        }
+        function unknownError(event, params) {
+            goToErrors('errors_unknown', params);
+        }
+        function checkSupported(supported) {
+            var pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
+            if (!pipSystemInfo) {
+                return;
+            }
+            if (!supported) {
+                supported = {
+                    edge: 11,
+                    ie: 11,
+                    firefox: 43,
+                    opera: 35,
+                    chrome: 47
+                };
+            }
+            var browser = pipSystemInfo.browserName;
+            var version = pipSystemInfo.browserVersion;
+            version = version.split(".")[0];
+            if (browser && supported[browser] && version >= supported[browser]) {
+                return;
+            }
+            $state.go('errors_unsupported');
+        }
+    }]);
+    thisModule.factory('pipAuthHttpResponseInterceptor', ['$q', '$location', '$rootScope', function ($q, $location, $rootScope) {
+        return {
+            responseError: function (rejection) {
+                var toState = $rootScope.$state && $rootScope.$state.name ? $rootScope.$state.name : null, toParams = $rootScope.$state && $rootScope.$state.params ? $rootScope.$state.params : null;
+                switch (rejection.status) {
+                    case 503:
+                        $rootScope.$emit('pipMaintenanceError', {
+                            error: rejection
+                        });
+                        console.error("errors_maintenance", rejection);
+                        break;
+                    case -1:
+                        if (!$rootScope.$identity)
+                            $rootScope.$emit('pipNoConnectionError', {
+                                error: rejection
+                            });
+                        console.error("errors_no_connection", rejection);
+                        break;
+                    default:
+                        console.error("errors_unknown", rejection);
+                        break;
+                }
+                return $q.reject(rejection);
+            }
+        };
     }]);
 })();
 },{}],5:[function(require,module,exports){
@@ -483,18 +564,6 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection/no_connection.html',
-    '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('missing_route/missing_route.html',
     '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/invalid_route.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_ROUTE_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_ROUTE_SUBTITLE\' | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">{{::\'ERROR_ROUTE_CONTINUE\' | translate}}</md-button></div><div class="h48" ng-if="url"><a ng-href="{{url}}">{{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{url}}</a></div><div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">{{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}</a></div></div>');
 }]);
@@ -509,6 +578,18 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection_panel/no_connection_panel.html',
     '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="images/no_response.svg" class="pip-pic block"><div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('no_connection/no_connection.html',
+    '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
 }]);
 })();
 

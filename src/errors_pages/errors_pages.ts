@@ -10,7 +10,10 @@
     ]);
 
     thisModule.config(
-        function ($stateProvider) {
+        function ($stateProvider, $httpProvider) {
+            // Attach interceptor to react on unauthorized errors
+            $httpProvider.interceptors.push('pipAuthHttpResponseInterceptor');
+
             // Configure module routes
             $stateProvider
                 .state('errors_no_connection', {
@@ -56,4 +59,114 @@
                 });
         });
 
+
+    thisModule.run(
+        function($rootScope, $state, $injector) {
+            checkSupported();
+
+            // Handle other errors
+            $rootScope.$on('pipMaintenanceError', maintenanceError);
+            $rootScope.$on('pipNoConnectionError', noConnectionError); 
+            $rootScope.$on('pipUnknownError', unknownError); 
+            $rootScope.$on('$stateNotFound',
+                function(event, unfoundState, fromState, fromParams) {
+                    event.preventDefault();
+
+                    $state.go('errors_missing_route',  {
+                            unfoundState: unfoundState,
+                            fromState : {
+                                to: fromState ? fromState.name : '',
+                                fromParams: fromParams
+                            }
+                        }
+                    );
+                    $rootScope.$routing = false;
+                }
+            );
+
+            function goToErrors (toState, params) {
+                if (toState == null)
+                    throw new Error('Error state was not defined');
+
+                $state.go(toState, params);
+            };
+
+            function maintenanceError(event, params) {
+                goToErrors('errors_maintenance', params);
+            }
+
+            function noConnectionError(event, params) {
+                goToErrors('errors_no_connection', params);
+            }
+
+            function unknownError(event, params) {
+                goToErrors('errors_unknown', params);
+            }
+
+            function checkSupported(supported?: any) {
+                 let pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
+                 if (!pipSystemInfo) { return ; }
+
+                // todo make configured
+                if (!supported) {
+                    supported = {
+                        edge: 11,
+                        ie: 11,
+                        firefox: 43, //4, for testing
+                        opera: 35,
+                        chrome: 47
+                    };
+                }
+
+                let browser = pipSystemInfo.browserName;
+                let version = pipSystemInfo.browserVersion;
+                version = version.split(".")[0]
+
+                if (browser && supported[browser] && version >= supported[browser]) {
+
+                    return;
+                }
+                // if not supported
+                $state.go('errors_unsupported');
+            }
+
+        }
+    );
+
+    thisModule.factory('pipAuthHttpResponseInterceptor',
+        function ($q, $location, $rootScope) {
+            return {
+                responseError: function (rejection) {
+                    var toState = $rootScope.$state && $rootScope.$state.name ? $rootScope.$state.name : null,
+                        toParams = $rootScope.$state && $rootScope.$state.params ? $rootScope.$state.params : null;
+
+                    switch (rejection.status) {
+                        case 503:
+                             //available (maintenance)
+                            $rootScope.$emit('pipMaintenanceError', {
+                                error: rejection
+                            });
+
+                            console.error("errors_maintenance", rejection);
+                            break;
+                        case -1:
+                            if (!$rootScope.$identity)
+                                $rootScope.$emit('pipNoConnectionError', {
+                                error: rejection
+                            });
+
+                            console.error("errors_no_connection", rejection);
+                            break;
+                        default:
+                            console.error("errors_unknown", rejection);
+                            break;
+                    }
+
+                    return $q.reject(rejection);
+                }
+            }
+        }
+    );
+
 })();
+ 
