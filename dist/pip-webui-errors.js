@@ -552,8 +552,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection/no_connection.html',
-    '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
+  $templateCache.put('maintenance/maintenance.html',
+    '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div><div class="pip-error-subtext" ng-if="timeoutInterval">{{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.</div><div class="pip-error-actions h48 layout-column layout-align-center-center" ng-if="isCordova"><md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE">{{::\'ERROR_AVAILABLE_CLOSE\' | translate}}</md-button></div></div>');
 }]);
 })();
 
@@ -576,8 +576,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('maintenance/maintenance.html',
-    '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/maintenance.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div><div class="pip-error-subtext" ng-if="timeoutInterval">{{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.</div><div class="pip-error-actions h48 layout-column layout-align-center-center" ng-if="isCordova"><md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE">{{::\'ERROR_AVAILABLE_CLOSE\' | translate}}</md-button></div></div>');
+  $templateCache.put('no_connection/no_connection.html',
+    '<div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div style="background-image: url(\'images/no_response.svg\');" class="pip-pic"></div><div class="pip-error-text">{{::\'ERROR_RESPONDING_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_RESPONDING_SUBTITLE\' | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
 }]);
 })();
 
