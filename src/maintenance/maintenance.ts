@@ -10,7 +10,12 @@
 
     var thisModule = angular.module('pipErrors.Maintenance', []);
 
-    thisModule.controller('pipErrorMaintenanceController', function ($scope, $state, $rootScope, pipAppBar) {
+    thisModule.controller('pipErrorMaintenanceController', function ($scope, $state, $rootScope, $mdMedia, $injector) {
+
+        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+
+        $scope.media = pipMedia ? pipMedia : $mdMedia;
 
         $rootScope.$routing = false;
         $scope.isCordova = false;
@@ -24,12 +29,13 @@
 
         return;
 
-        // Todo: Made dependencies optional
         function appHeader() {
-            pipAppBar.showMenuNavIcon();
-            pipAppBar.addShadow();
-            pipAppBar.showTitleBreadcrumb('ERROR_AVAILABLE_TITLE', []);
-            pipAppBar.showLocalActions(null, []);
+            if (!pipNavService) return;
+
+            pipNavService.appbar.addShadow();
+            pipNavService.icon.showMenu();
+            pipNavService.breadcrumb.text = 'ERROR_AVAILABLE_TITLE';
+            pipNavService.actions.hide();
         };
 
         function onClose() {

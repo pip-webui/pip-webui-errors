@@ -1,0 +1,19 @@
+        html, body {
+            overflow-x: hidden !important;
+        }
+
+        .pip-content-container {
+            overflow-y: auto;
+        }
+
+        pre {
+            border-radius: 4px;
+        }
+
+        .flat {
+            box-shadow: none !important;
+        }
+
+        pre[class*="language-"] {
+            overflow-y: visible;
+        }
