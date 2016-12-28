@@ -119,13 +119,13 @@ class pipErrorsProvider implements IpipErrorsProvider {
         if (!errorName || !errorParams) return;
         if (!this._config[errorName]) return;
 
-        this._config[errorName] = _.assign(this._config[errorName], errorParams);
+        this._config[errorName] = <ErrorStateItem>_.defaultsDeep(errorParams, this._config[errorName]);
     }
 
     public configureErrors(value: pipErrorsConfig): void {
         if (!value) return;
 
-        this._config = _.assign(this._config, value);
+        this._config = <pipErrorsConfig>_.defaultsDeep(value, this._config);
     }
 
     public $get(

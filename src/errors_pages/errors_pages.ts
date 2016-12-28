@@ -163,10 +163,9 @@
                             });
                             break;
                         case -1:
-                            if (!$rootScope.$identity)
-                                $rootScope.$emit('pipNoConnectionError', {
-                                    error: rejection
-                                });
+                            $rootScope.$emit('pipNoConnectionError', {
+                                error: rejection
+                            });
                             break;
                         default:
                             console.error("errors_unknown", rejection);
