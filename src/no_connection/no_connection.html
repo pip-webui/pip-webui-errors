@@ -1,7 +1,7 @@
 <div class="pip-error pip-error-page layout-column flex layout-align-center-center">
-    <div style="background-image: url('images/no_response.svg');" class="pip-pic"></div>
-    <div class="pip-error-text">{{::'ERROR_RESPONDING_TITLE' | translate}}</div>
-    <div class="pip-error-subtext">{{::'ERROR_RESPONDING_SUBTITLE' | translate}}</div>
+    <div style="background-image: url({{errorConfig.Image}});" class="pip-pic"></div>
+    <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>
+    <div class="pip-error-subtext">{{::errorConfig.SubTitle | translate}}</div>
 
     <div class="pip-error-actions h48 layout-column layout-align-center-center">
         <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">

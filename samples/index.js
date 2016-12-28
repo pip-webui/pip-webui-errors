@@ -23,7 +23,7 @@
 
     thisModule.config(
         function ($stateProvider, $urlRouterProvider, $mdIconProvider,
-                  $compileProvider, $httpProvider, $mdDateLocaleProvider) { 
+                  $compileProvider, $httpProvider, $mdDateLocaleProvider, pipErrorsServiceProvider) { 
 
             $compileProvider.debugInfoEnabled(false);
             $httpProvider.useApplyAsync(true);
@@ -38,6 +38,16 @@
             }
 
             $urlRouterProvider.otherwise('/error_example');
+
+            // pipErrorsServiceProvider.configureErrorByKey('MissingRoute', {
+            //         Active: true,
+            //         Name: 'errors_missing_route',
+            //         Event: '$stateNotFound',
+            //         Title: '111111111111',
+            //         SubTitle: '22222222222222',
+            //         Breadcrumb: '333333333333333333',
+            //         Image: 'images/invalid_route.svg'                
+            // });
         }        
     );
 

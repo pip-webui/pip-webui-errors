@@ -10,7 +10,10 @@
 
     var thisModule = angular.module('pipErrors.Unsupported', []);
 
-    thisModule.controller('pipErrorUnsupportedController', function ($scope, $state, $rootScope, $mdMedia, $injector) {
+    thisModule.controller('pipErrorUnsupportedController', function ($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
+
+        var errorKey = 'Unsupported';
+        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
 
         var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
         var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
@@ -30,7 +33,7 @@
         function appHeader() {
             pipNavService.appbar.addShadow();
             pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = 'ERROR_UNSUPPORTED_TITLE';
+            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
             pipNavService.actions.hide();
         };
 

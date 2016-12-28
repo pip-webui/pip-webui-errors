@@ -10,7 +10,10 @@
 
     var thisModule = angular.module('pipErrors.NoConnection', []);
 
-    thisModule.controller('pipErrorNoConnectionController', function ($scope, $state, $rootScope, $window, $mdMedia, $injector) {
+    thisModule.controller('pipErrorNoConnectionController', function ($scope, $state, $rootScope, $window, $mdMedia, $injector, pipErrorsService) {
+
+        var errorKey = 'NoConnection';
+        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
 
         var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
         var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
@@ -35,7 +38,7 @@
 
             pipNavService.appbar.addShadow();
             pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = 'ERROR_RESPONDING_TITLE';
+            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
             pipNavService.actions.hide();
         };
 

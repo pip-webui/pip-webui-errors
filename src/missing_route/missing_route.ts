@@ -10,7 +10,10 @@
 
     var thisModule = angular.module('pipErrors.MissingRoute', []);
 
-    thisModule.controller('pipErrorMissingRouteController', function ($scope, $state, $rootScope, $mdMedia, $injector) {
+    thisModule.controller('pipErrorMissingRouteController', function ($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
+
+        var errorKey = 'MissingRoute';
+        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
 
         var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
         var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
@@ -34,7 +37,7 @@
 
             pipNavService.appbar.addShadow();
             pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = 'ERROR_ROUTE_PAGE_TITLE';
+            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
             pipNavService.actions.hide();
         };
 
