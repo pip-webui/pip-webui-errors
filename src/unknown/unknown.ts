@@ -47,7 +47,7 @@
         function parseError() {
             $scope.error_details = {};
             $scope.error_details.code = $scope.error.code;
-            $scope.error_details.description = $scope.error.message;
+            $scope.error_details.message = $scope.error.message;
             $scope.error_details.status = $scope.error.status;
 
             $scope.error_details.server_stacktrace = function () {

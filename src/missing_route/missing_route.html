@@ -1,8 +1,7 @@
 <div class="pip-error pip-error-page layout-column flex layout-align-center-center">
-    <div style="background-image: url({{errorConfig.Image}});" class="pip-pic"></div>
+    <img src="{{errorConfig.Image}}" class="pip-pic block" >
     <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>
     <div class="pip-error-subtext">{{::errorConfig.SubTitle | translate}}</div>
-
     <div class="pip-error-actions h48 layout-column layout-align-center-center">
         <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">
             {{::'ERROR_ROUTE_CONTINUE' | translate}}
