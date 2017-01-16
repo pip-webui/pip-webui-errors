@@ -10,7 +10,10 @@
 
     var thisModule = angular.module('pipErrors.Unknown', []);
 
-    thisModule.controller('pipErrorUnknownController', function ($scope, $state, $rootScope, $injector, $mdMedia) {
+    thisModule.controller('pipErrorUnknownController', function ($scope, $state, $rootScope, $injector, $mdMedia, pipErrorsService) {
+
+        var errorKey = 'Unknown';
+        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
 
         var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
         var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
@@ -37,14 +40,14 @@
 
             pipNavService.appbar.addShadow();
             pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = 'ERROR_UNKNOWN_TITLE';
+            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
             pipNavService.actions.hide();
         };
 
         function parseError() {
             $scope.error_details = {};
             $scope.error_details.code = $scope.error.code;
-            $scope.error_details.description = $scope.error.message;
+            $scope.error_details.message = $scope.error.message;
             $scope.error_details.status = $scope.error.status;
 
             $scope.error_details.server_stacktrace = function () {

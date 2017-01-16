@@ -4,7 +4,7 @@
     'use strict';
 
     var thisModule = angular.module('pipErrors.Pages', [
-        'ngMaterial', 
+        'ngMaterial',
         'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
         'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
     ]);
@@ -61,30 +61,45 @@
 
 
     thisModule.run(
-        function($rootScope, $state, $injector) {
-            checkSupported();
+        function ($rootScope, $state, $injector, pipErrorsService) {
 
-            // Handle other errors
-            $rootScope.$on('pipMaintenanceError', maintenanceError);
-            $rootScope.$on('pipNoConnectionError', noConnectionError); 
-            $rootScope.$on('pipUnknownError', unknownError); 
-            $rootScope.$on('$stateNotFound',
-                function(event, unfoundState, fromState, fromParams) {
-                    event.preventDefault();
+            var errorConfig = pipErrorsService.config;
 
-                    $state.go('errors_missing_route',  {
+            if (errorConfig.Unsupported.Active) {
+                checkSupported();
+            }
+
+            if (errorConfig.MissingRoute.Active) {
+                $rootScope.$on('$stateNotFound',
+                    function (event, unfoundState, fromState, fromParams) {
+                        event.preventDefault();
+
+                        $state.go('errors_missing_route', {
                             unfoundState: unfoundState,
-                            fromState : {
+                            fromState: {
                                 to: fromState ? fromState.name : '',
                                 fromParams: fromParams
                             }
                         }
-                    );
-                    $rootScope.$routing = false;
-                }
-            );
+                        );
+                        $rootScope.$routing = false;
+                    }
+                );
+            }
 
-            function goToErrors (toState, params) {
+            if (errorConfig.NoConnection.Active) {
+                $rootScope.$on('pipNoConnectionError', noConnectionError);
+            }
+
+            if (errorConfig.Unknown.Active) {
+                $rootScope.$on('pipUnknownError', unknownError);
+            }
+
+            if (errorConfig.Maintenance.Active) {
+                $rootScope.$on('pipMaintenanceError', maintenanceError);
+            }
+
+            function goToErrors(toState, params) {
                 if (toState == null)
                     throw new Error('Error state was not defined');
 
@@ -104,8 +119,8 @@
             }
 
             function checkSupported(supported?: any) {
-                 let pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
-                 if (!pipSystemInfo) { return ; }
+                let pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
+                if (!pipSystemInfo) { return; }
 
                 // todo make configured
                 if (!supported) {
@@ -142,20 +157,15 @@
 
                     switch (rejection.status) {
                         case 503:
-                             //available (maintenance)
+                            //available (maintenance)
                             $rootScope.$emit('pipMaintenanceError', {
                                 error: rejection
                             });
-
-                            console.error("errors_maintenance", rejection);
                             break;
                         case -1:
-                            if (!$rootScope.$identity)
-                                $rootScope.$emit('pipNoConnectionError', {
+                            $rootScope.$emit('pipNoConnectionError', {
                                 error: rejection
                             });
-
-                            console.error("errors_no_connection", rejection);
                             break;
                         default:
                             console.error("errors_unknown", rejection);
@@ -169,4 +179,4 @@
     );
 
 })();
- 
+
