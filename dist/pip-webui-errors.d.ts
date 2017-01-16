@@ -4,8 +4,6 @@ declare module pip.errors {
 
 
 
-
-
 export class ErrorStateItem {
     Active: boolean;
     Name: string;
@@ -31,6 +29,8 @@ export interface IpipErrorsProvider extends ng.IServiceProvider {
     configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void;
     configureErrors(value: pipErrorsConfig): void;
 }
+
+
 
 
 
