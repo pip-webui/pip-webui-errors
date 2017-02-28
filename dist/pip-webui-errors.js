@@ -28,7 +28,7 @@
             'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
             'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
                 'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-                'technologies. Download on of these great browsers and you\'ll be on your way:',
+                'technologies. Download one of these great browsers and you\'ll be on your way:',
             'ERROR_UNSUPPORTED_O': 'Opera',
             'ERROR_UNSUPPORTED_O_VER': 'Version 36+',
             'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
@@ -60,7 +60,7 @@
             'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
             'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
                 'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-                'technologies. Download on of these great browsers and you\'ll be on your way:',
+                'technologies. Download one of these great browsers and you\'ll be on your way:',
             'ERROR_UNSUPPORTED_O': 'Opera',
             'ERROR_UNSUPPORTED_O_VER': 'Version 35+',
             'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
