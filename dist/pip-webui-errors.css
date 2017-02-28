@@ -279,6 +279,7 @@ button:focus {
 }
 .pip-error-scroll-body {
   overflow: auto;
+  width: 100%;
 }
 .pip-error-page {
   margin: 0 auto;
