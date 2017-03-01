@@ -9,16 +9,16 @@
 
   .pip-error-text {
     margin-top: 32px;
-    font: @font-title;
-    opacity: @opacity-primary;
+    font: $font-title;
+    opacity: $opacity-primary;
     text-align: center;
   }
 
   .pip-error-subtext {
     margin-top: 16px;
-    font: @font-body1;
+    font: $font-body1;
     margin-bottom: 16px;
-    opacity: @opacity-secondary;
+    opacity: $opacity-secondary;
     text-align: center;
   }
 
@@ -32,7 +32,7 @@
       }
 
       .text-body1 {
-        opacity: @opacity-secondary;
+        opacity: $opacity-secondary;
         text-align: center;
       }
 
