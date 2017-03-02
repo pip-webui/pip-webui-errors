@@ -117,7 +117,7 @@
             function unknownError(event, params) {
                 goToErrors('errors_unknown', params);
             }
-
+// todo: implement this into puplic service
             function checkSupported(supported?: any) {
                 let pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
                 if (!pipSystemInfo) { return; }
