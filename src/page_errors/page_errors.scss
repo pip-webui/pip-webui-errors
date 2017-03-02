@@ -1,11 +1,11 @@
-// @file Page errors CSS styles
-// @copyright Digital Living Software Corp. 2014-2015
+// $file Page errors CSS styles
+// $copyright Digital Living Software Corp. 2014-2015
 
-.generate-page-error(@name, @palette) {
-  .@{name} {
+@mixin generate-page-error($name, $palette) {
+  #{$name} {
     .pip-page-errors{
       .pip-error-details, .pip-error-text, .pip-error-details md-icon {
-        color: @palette;
+        color: $palette;
       }
     }
   }
@@ -13,27 +13,27 @@
 
 .pip-page-errors {
   background-color: rgba(0, 0, 0, 0.08);
-  border-bottom: @divider-border;
+  border-bottom: $divider-border;
   z-index: 30;
-  .flex();
-  .flex-direction(row);
+  @include flex();
+  @include flex-direction(row);
   padding: 16px 24px!important; 
 
   &.no-transparent-background {
-    background-color: @color-window !important;
+    background-color: $color-window !important;
   }
 
   .pip-error-text {
-    font: @font-body1;
+    font: $font-body1;
     line-height: 17px;
   }
 
   .pip-error-details {
-    font: @font-body2;
-    .flex();
-    .flex-direction(row);
-    .flex-vertical-content(center);
-    .flex-justify-content(start, flex-start);
+    font: $font-body2;
+    @include flex();
+    @include flex-direction(row);
+    @include flex-vertical-content(center);
+    @include flex-justify-content(start, flex-start);
     margin-left: 24px;
     md-icon {
       height: 20px;
@@ -48,7 +48,7 @@
     padding-left: 16px!important;
     padding-right: 16px!important;
     padding-bottom: 0px!important;
-    .flex-direction(column);
+    @include flex-direction(column);
 
     .pip-error-details {
       height: 48px;
@@ -58,15 +58,15 @@
   }
 }
 
-.generate-page-error(blue,                @color-badge);
-.generate-page-error(pink,                @color-badge);
-.generate-page-error(orange,              @color-badge);
-.generate-page-error(amber,               @color-badge);
-.generate-page-error(green,               @color-badge);
-.generate-page-error(navy,                @color-badge);
-.generate-page-error(grey,                @color-badge);
-.generate-page-error(dark,                @color-badge);
-.generate-page-error(black,               @color-badge);
+@include generate-page-error('.blue',                $color-badge);
+@include generate-page-error('.pink',                $color-badge);
+@include generate-page-error('.orange',              $color-badge);
+@include generate-page-error('.amber',               $color-badge);
+@include generate-page-error('.green',               $color-badge);
+@include generate-page-error('.navy',                $color-badge);
+@include generate-page-error('.grey',                $color-badge);
+@include generate-page-error('.dark',                $color-badge);
+@include generate-page-error('.black',               $color-badge);
 
 .pip-error-scroll-body {
   overflow: auto;
@@ -74,12 +74,12 @@
 }
 .pip-error-page {
   margin: 0 auto;
-  height: ~"calc(100vh - 64px)";
+  height: calc(100vh - 64px);
   @media (max-width: 1200px) {
-    height: ~"calc(100vh - 48px)";
+    height: calc(100vh - 48px);
   }
   @media (max-width: 768px) {
-    height: ~"calc(100vh - 56px)";
+    height: calc(100vh - 56px);
   }    
   display: -webkit-box;
   display: -moz-box;
