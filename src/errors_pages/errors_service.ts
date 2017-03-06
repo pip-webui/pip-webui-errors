@@ -107,11 +107,9 @@ class ErrorsService implements IErrorsService {
 
 class ErrorsProvider implements IErrorsProvider {
     private _service: ErrorsService;
-    private _config: ErrorsConfig;
+    private _config: ErrorsConfig = new ErrorsConfig();
 
-    constructor() {
-        this._config = new ErrorsConfig();
-    }
+    constructor() {}
 
     public configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void {
         if (!errorName || !errorParams) return;
@@ -129,8 +127,9 @@ class ErrorsProvider implements IErrorsProvider {
     public $get(): ErrorsService {
         "ngInject";
 
-        if (this._service == null)
+        if (_.isNull(this._service) || _.isFunction(this._service)) {
             this._service = new ErrorsService(this._config);
+        }
 
         return this._service;
     }

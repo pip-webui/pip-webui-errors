@@ -350,8 +350,9 @@ var ErrorsProvider = (function () {
     };
     ErrorsProvider.prototype.$get = function () {
         "ngInject";
-        if (this._service == null)
+        if (_.isNull(this._service) || _.isFunction(this._service)) {
             this._service = new ErrorsService(this._config);
+        }
         return this._service;
     };
     return ErrorsProvider;
@@ -397,6 +398,7 @@ var ClearErrorsLink = (function () {
 })();
 },{}],8:[function(require,module,exports){
 var FormErrors = (function () {
+    FormErrors.$inject = ['$rootScope'];
     function FormErrors($rootScope) {
         this.$rootScope = $rootScope;
     }
@@ -489,105 +491,8 @@ var FormErrors = (function () {
 }());
 (function () {
     'use strict';
-    var thisModule = angular.module('pipFormErrors', []);
-    thisModule.factory('pipFormErrors', ['$rootScope', function ($rootScope) {
-        return {
-            errorsWithHint: errorsWithHint,
-            touchedErrorsWithHint: touchedErrorsWithHint,
-            resetFormErrors: resetFormErrors,
-            setFormError: setFormError,
-            resetFieldsErrors: resetFieldsErrors
-        };
-        function errorsWithHint(field) {
-            if (field == null)
-                return;
-            return _.isEmpty(field.$error) ? { hint: true } : field.$error;
-        }
-        ;
-        function touchedErrorsWithHint(form, field) {
-            if (form == null)
-                return;
-            if (field == null)
-                return;
-            if (form.$submitted && (field.$touched || form.$dirty) || !form.$submitted && (field.$touched || field.$dirty)) {
-                var result = _.isEmpty(field.$error) ? { hint: true } : field.$error;
-                return result;
-            }
-            return { hint: true };
-        }
-        ;
-        function resetFormErrors(form, errors) {
-            form.$setPristine();
-            form.$setUntouched();
-            if (errors) {
-                form.$setDirty();
-                form.$setSubmitted();
-            }
-            form.$serverError = {};
-        }
-        ;
-        function resetFieldsErrors(form, field) {
-            if (!form)
-                return;
-            if (field && form[field] && form[field].$error) {
-                form[field].$error = {};
-            }
-            else {
-                for (var prop in form) {
-                    if (form[prop] && form[prop].$error) {
-                        form[prop].$error = {};
-                    }
-                    ;
-                }
-                if (form && form.$error)
-                    form.$error = {};
-            }
-        }
-        ;
-        function setFormError(form, error, errorFieldMap) {
-            if (error == null)
-                return;
-            form.$serverError = form.$serverError || {};
-            var code = error.code || (error.data || {}).code || null;
-            if (!code && error.status)
-                code = error.status;
-            if (code) {
-                var errorName = 'ERROR_' + code, field = errorFieldMap ? errorFieldMap[code] : null;
-                if (field && form[field] && form[field].$setValidity) {
-                    form[field].$setValidity(errorName, false);
-                    return;
-                }
-                if (field == 'form') {
-                    form.$serverError[errorName] = true;
-                    return;
-                }
-            }
-            if (error.data && error.data.message) {
-                form.$serverError['ERROR_UNKNOWN'] = error.data.message;
-                goToUnhandledErrorPage(error);
-                return;
-            }
-            if (error.message) {
-                form.$serverError['ERROR_UNKNOWN'] = error.message;
-                goToUnhandledErrorPage(error);
-                return;
-            }
-            if (error.name) {
-                form.$serverError['ERROR_UNKNOWN'] = error.name;
-                goToUnhandledErrorPage(error);
-                return;
-            }
-            form.$serverError['ERROR_UNKNOWN'] = error;
-            goToUnhandledErrorPage(error);
-        }
-        ;
-        function goToUnhandledErrorPage(error) {
-            $rootScope.$emit('pipUnhandledInternalError', {
-                error: error
-            });
-        }
-        ;
-    }]);
+    angular.module('pipFormErrors', [])
+        .service('pipFormErrors', FormErrors);
 })();
 },{}],9:[function(require,module,exports){
 (function () {
