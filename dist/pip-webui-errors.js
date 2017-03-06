@@ -251,8 +251,8 @@ var ErrorStateItem = (function () {
     return ErrorStateItem;
 }());
 exports.ErrorStateItem = ErrorStateItem;
-var pipErrorsConfig = (function () {
-    function pipErrorsConfig() {
+var ErrorsConfig = (function () {
+    function ErrorsConfig() {
         this.Maintenance = {
             Active: true,
             Name: 'errors_maintenance',
@@ -308,57 +308,57 @@ var pipErrorsConfig = (function () {
             }
         };
     }
-    return pipErrorsConfig;
+    return ErrorsConfig;
 }());
-exports.pipErrorsConfig = pipErrorsConfig;
-var pipErrorsService = (function () {
-    pipErrorsService.$inject = ['config'];
-    function pipErrorsService(config) {
+exports.ErrorsConfig = ErrorsConfig;
+var ErrorsService = (function () {
+    ErrorsService.$inject = ['config'];
+    function ErrorsService(config) {
         "ngInject";
-        this._config = config || new pipErrorsConfig();
+        this._config = config || new ErrorsConfig();
     }
-    Object.defineProperty(pipErrorsService.prototype, "config", {
+    Object.defineProperty(ErrorsService.prototype, "config", {
         get: function () {
             return this._config;
         },
         enumerable: true,
         configurable: true
     });
-    pipErrorsService.prototype.getErrorItemByKey = function (errorName) {
+    ErrorsService.prototype.getErrorItemByKey = function (errorName) {
         if (!errorName || !this._config[errorName]) {
             return null;
         }
         return this._config[errorName];
     };
-    return pipErrorsService;
+    return ErrorsService;
 }());
-var pipErrorsProvider = (function () {
-    function pipErrorsProvider() {
-        this._config = new pipErrorsConfig();
+var ErrorsProvider = (function () {
+    function ErrorsProvider() {
+        this._config = new ErrorsConfig();
     }
-    pipErrorsProvider.prototype.configureErrorByKey = function (errorName, errorParams) {
+    ErrorsProvider.prototype.configureErrorByKey = function (errorName, errorParams) {
         if (!errorName || !errorParams)
             return;
         if (!this._config[errorName])
             return;
         this._config[errorName] = _.defaultsDeep(errorParams, this._config[errorName]);
     };
-    pipErrorsProvider.prototype.configureErrors = function (value) {
+    ErrorsProvider.prototype.configureErrors = function (value) {
         if (!value)
             return;
         this._config = _.defaultsDeep(value, this._config);
     };
-    pipErrorsProvider.prototype.$get = function () {
+    ErrorsProvider.prototype.$get = function () {
         "ngInject";
         if (this._service == null)
-            this._service = new pipErrorsService(this._config);
+            this._service = new ErrorsService(this._config);
         return this._service;
     };
-    return pipErrorsProvider;
+    return ErrorsProvider;
 }());
 angular
     .module('pipErrorsService')
-    .provider('pipErrorsService', pipErrorsProvider);
+    .provider('pipErrorsService', ErrorsProvider);
 },{}],7:[function(require,module,exports){
 (function () {
     'use strict';

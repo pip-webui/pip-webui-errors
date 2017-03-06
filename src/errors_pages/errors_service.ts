@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 export class ErrorStateItem {
     Active: boolean;
     Name: string;
@@ -13,7 +11,7 @@ export class ErrorStateItem {
     Params?: any;
 }
 
-export class pipErrorsConfig {
+export class ErrorsConfig {
     Maintenance: ErrorStateItem = {
         Active: true,
         Name: 'errors_maintenance',
@@ -71,29 +69,29 @@ export class pipErrorsConfig {
     }
 }
 
-export interface IpipErrorsService {
+export interface IErrorsService {
     getErrorItemByKey(errorName: string): ErrorStateItem;
 
-    config: pipErrorsConfig;
+    config: ErrorsConfig;
 }
 
-export interface IpipErrorsProvider extends ng.IServiceProvider {
+export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void;
-    configureErrors(value: pipErrorsConfig): void;
+    configureErrors(value: ErrorsConfig): void;
 }
 
-class pipErrorsService implements IpipErrorsService {
-    private _config: pipErrorsConfig;
+class ErrorsService implements IErrorsService {
+    private _config: ErrorsConfig;
 
     public constructor(
-        config: pipErrorsConfig
+        config: ErrorsConfig
     ) {
         "ngInject";
 
-        this._config = config || new pipErrorsConfig();
+        this._config = config || new ErrorsConfig();
     }
 
-    public get config(): pipErrorsConfig {
+    public get config(): ErrorsConfig {
         return this._config;
     }
 
@@ -107,12 +105,12 @@ class pipErrorsService implements IpipErrorsService {
 
 }
 
-class pipErrorsProvider implements IpipErrorsProvider {
-    private _service: pipErrorsService;
-    private _config: pipErrorsConfig;
+class ErrorsProvider implements IErrorsProvider {
+    private _service: ErrorsService;
+    private _config: ErrorsConfig;
 
     constructor() {
-        this._config = new pipErrorsConfig();
+        this._config = new ErrorsConfig();
     }
 
     public configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void {
@@ -122,19 +120,17 @@ class pipErrorsProvider implements IpipErrorsProvider {
         this._config[errorName] = <ErrorStateItem>_.defaultsDeep(errorParams, this._config[errorName]);
     }
 
-    public configureErrors(value: pipErrorsConfig): void {
+    public configureErrors(value: ErrorsConfig): void {
         if (!value) return;
 
-        this._config = <pipErrorsConfig>_.defaultsDeep(value, this._config);
+        this._config = <ErrorsConfig>_.defaultsDeep(value, this._config);
     }
 
-    public $get(
-
-    ) {
+    public $get(): ErrorsService {
         "ngInject";
 
         if (this._service == null)
-            this._service = new pipErrorsService(this._config);
+            this._service = new ErrorsService(this._config);
 
         return this._service;
     }
@@ -142,4 +138,4 @@ class pipErrorsProvider implements IpipErrorsProvider {
 
 angular
     .module('pipErrorsService')
-    .provider('pipErrorsService', pipErrorsProvider);
+    .provider('pipErrorsService', ErrorsProvider);

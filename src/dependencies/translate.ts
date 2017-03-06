@@ -5,7 +5,7 @@
  
 /* global angular */
 
-(function () {
+(() => {
     'use strict';
 
     var thisModule = angular.module('pipErrors.Translate', []);

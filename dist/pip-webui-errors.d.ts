@@ -14,20 +14,20 @@ export class ErrorStateItem {
     Image: string;
     Params?: any;
 }
-export class pipErrorsConfig {
+export class ErrorsConfig {
     Maintenance: ErrorStateItem;
     MissingRoute: ErrorStateItem;
     NoConnection: ErrorStateItem;
     Unknown: ErrorStateItem;
     Unsupported: ErrorStateItem;
 }
-export interface IpipErrorsService {
+export interface IErrorsService {
     getErrorItemByKey(errorName: string): ErrorStateItem;
-    config: pipErrorsConfig;
+    config: ErrorsConfig;
 }
-export interface IpipErrorsProvider extends ng.IServiceProvider {
+export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void;
-    configureErrors(value: pipErrorsConfig): void;
+    configureErrors(value: ErrorsConfig): void;
 }
 
 
