@@ -6,7 +6,7 @@
  
  /* global _, angular */
  
-(function () {
+(() => {
     'use strict';
 
     var thisModule = angular.module('pipFormErrors', []);

@@ -30,6 +30,13 @@ export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrors(value: ErrorsConfig): void;
 }
 
+class ClearErrorsLink {
+    private _fieldController;
+    private _formController;
+    constructor($scope: ng.IScope, $element: ng.IRootElementService, $attrs: ng.IAttributes, $ctrls: any);
+    private clearFieldErrors();
+    private clearFormErrors();
+}
 
 
 

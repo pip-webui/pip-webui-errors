@@ -360,35 +360,40 @@ angular
     .module('pipErrorsService')
     .provider('pipErrorsService', ErrorsProvider);
 },{}],7:[function(require,module,exports){
+var ClearErrorsLink = (function () {
+    function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
+        var _this = this;
+        this._fieldController = $ctrls[0],
+            this._formController = $ctrls[1];
+        $scope.$watch($attrs['ngModel'], function (newValue) {
+            _this.clearFieldErrors();
+            _this.clearFormErrors();
+        });
+    }
+    ClearErrorsLink.prototype.clearFieldErrors = function () {
+        var errors = this._fieldController.$error;
+        for (var prop in errors) {
+            if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
+                this._fieldController.$setValidity(prop, true);
+            }
+        }
+    };
+    ClearErrorsLink.prototype.clearFormErrors = function () {
+        this._formController.$serverError = {};
+    };
+    return ClearErrorsLink;
+}());
 (function () {
     'use strict';
-    var thisModule = angular.module('pipClearErrors', []);
-    thisModule.directive('pipClearErrors', function () {
+    function clearErrors() {
         return {
             restrict: 'A',
             require: ['ngModel', '^?form'],
-            link: function ($scope, $element, $attrs, $ctrls) {
-                var fieldController = $ctrls[0], formController = $ctrls[1];
-                $scope.$watch($attrs.ngModel, function (newValue) {
-                    clearFieldErrors();
-                    clearFormErrors();
-                });
-                function clearFieldErrors() {
-                    var errors = fieldController.$error;
-                    for (var prop in errors) {
-                        if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
-                            fieldController.$setValidity(prop, true);
-                        }
-                    }
-                    ;
-                }
-                function clearFormErrors() {
-                    formController.$serverError = {};
-                }
-                ;
-            }
+            link: ClearErrorsLink
         };
-    });
+    }
+    var thisModule = angular.module('pipClearErrors', []);
+    thisModule.directive('pipClearErrors', clearErrors);
 })();
 },{}],8:[function(require,module,exports){
 (function () {
