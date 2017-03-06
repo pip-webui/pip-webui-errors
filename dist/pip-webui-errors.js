@@ -396,6 +396,97 @@ var ClearErrorsLink = (function () {
     thisModule.directive('pipClearErrors', clearErrors);
 })();
 },{}],8:[function(require,module,exports){
+var FormErrors = (function () {
+    function FormErrors($rootScope) {
+        this.$rootScope = $rootScope;
+    }
+    FormErrors.prototype.errorsWithHint = function (field) {
+        if (field == null)
+            return;
+        return _.isEmpty(field.$error) ? { hint: true } : field.$error;
+    };
+    ;
+    FormErrors.prototype.touchedErrorsWithHint = function (form, field) {
+        if (form == null)
+            return;
+        if (field == null)
+            return;
+        if (form.$submitted && (field.$touched || form.$dirty) || !form.$submitted && (field.$touched || field.$dirty)) {
+            var result = _.isEmpty(field.$error) ? { hint: true } : field.$error;
+            return result;
+        }
+        return { hint: true };
+    };
+    FormErrors.prototype.resetFormErrors = function (form, errors) {
+        form.$setPristine();
+        form.$setUntouched();
+        if (errors) {
+            form.$setDirty();
+            form.$setSubmitted();
+        }
+        form['$serverError'] = {};
+    };
+    FormErrors.prototype.resetFieldsErrors = function (form, field) {
+        if (!form)
+            return;
+        if (field && form[field] && form[field].$error) {
+            form[field].$error = {};
+        }
+        else {
+            for (var prop in form) {
+                if (form[prop] && form[prop].$error) {
+                    form[prop].$error = {};
+                }
+            }
+            if (form && form.$error) {
+                form.$error = {};
+            }
+        }
+    };
+    FormErrors.prototype.setFormError = function (form, error, errorFieldMap) {
+        if (error == null)
+            return;
+        form['$serverError'] = form['$serverError'] || {};
+        var code = error.code || (error.data || {}).code || null;
+        if (!code && error.status)
+            code = error.status;
+        if (code) {
+            var errorName = 'ERROR_' + code, field = errorFieldMap ? errorFieldMap[code] : null;
+            if (field && form[field] && form[field].$setValidity) {
+                form[field].$setValidity(errorName, false);
+                return;
+            }
+            if (field == 'form') {
+                form['$serverError'][errorName] = true;
+                return;
+            }
+        }
+        if (error.data && error.data.message) {
+            form['$serverError']['ERROR_UNKNOWN'] = error.data.message;
+            this.goToUnhandledErrorPage(error);
+            return;
+        }
+        if (error.message) {
+            form['$serverError']['ERROR_UNKNOWN'] = error.message;
+            this.goToUnhandledErrorPage(error);
+            return;
+        }
+        if (error.name) {
+            form['$serverError']['ERROR_UNKNOWN'] = error.name;
+            this.goToUnhandledErrorPage(error);
+            return;
+        }
+        form['$serverError']['ERROR_UNKNOWN'] = error;
+        this.goToUnhandledErrorPage(error);
+    };
+    FormErrors.prototype.goToUnhandledErrorPage = function (error) {
+        this.$rootScope.$emit('pipUnhandledInternalError', {
+            error: error
+        });
+    };
+    ;
+    return FormErrors;
+}());
 (function () {
     'use strict';
     var thisModule = angular.module('pipFormErrors', []);

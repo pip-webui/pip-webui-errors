@@ -38,6 +38,16 @@ class ClearErrorsLink {
     private clearFormErrors();
 }
 
+class FormErrors {
+    private $rootScope;
+    constructor($rootScope: ng.IRootScopeService);
+    errorsWithHint(field: any): any;
+    touchedErrorsWithHint(form: ng.IFormController, field: any): any;
+    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
+    resetFieldsErrors(form: ng.IFormController, field: any): void;
+    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
+    private goToUnhandledErrorPage(error);
+}
 
 
 
