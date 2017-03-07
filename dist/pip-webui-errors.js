@@ -126,13 +126,19 @@ var ErrorsPageRun = (function () {
             });
         }
         if (errorConfig.NoConnection.Active) {
-            $rootScope.$on('pipNoConnectionError', function (event, params) { _this.noConnectionError(event, params); });
+            $rootScope.$on('pipNoConnectionError', function (event, params) {
+                _this.noConnectionError(event, params);
+            });
         }
         if (errorConfig.Unknown.Active) {
-            $rootScope.$on('pipUnknownError', function (event, params) { _this.unknownError(event, params); });
+            $rootScope.$on('pipUnknownError', function (event, params) {
+                _this.unknownError(event, params);
+            });
         }
         if (errorConfig.Maintenance.Active) {
-            $rootScope.$on('pipMaintenanceError', function (event, params) { _this.maintenanceError(event, params); });
+            $rootScope.$on('pipMaintenanceError', function (event, params) {
+                _this.maintenanceError(event, params);
+            });
         }
     }
     ErrorsPageRun.prototype.goToErrors = function (toState, params) {

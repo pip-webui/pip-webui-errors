@@ -1,6 +1,6 @@
 /* global angular */
 
-import {IErrorsService} from './errors_service';
+import {IErrorsService, ErrorsConfig} from './errors_service';
 
 class ErrorsPageRun {
     constructor(
@@ -9,7 +9,7 @@ class ErrorsPageRun {
         private $injector: angular.auto.IInjectorService, 
         pipErrorsService: IErrorsService) {
 
-        let errorConfig = pipErrorsService.config;
+        let errorConfig: ErrorsConfig = pipErrorsService.config;
 
             if (errorConfig.Unsupported.Active) {
                 this.checkSupported();
@@ -17,7 +17,11 @@ class ErrorsPageRun {
 
             if (errorConfig.MissingRoute.Active) {
                 $rootScope.$on('$stateNotFound',
-                    function (event, unfoundState, fromState, fromParams) {
+                    (
+                        event: angular.IAngularEvent, 
+                        unfoundState: ng.ui.IState, 
+                        fromState: ng.ui.IState, 
+                        fromParams: any) => {
                         event.preventDefault();
 
                         $state.go('errors_missing_route', {
@@ -34,34 +38,43 @@ class ErrorsPageRun {
             }
 
             if (errorConfig.NoConnection.Active) {
-                $rootScope.$on('pipNoConnectionError', (event, params) => { this.noConnectionError(event, params)});
+                $rootScope.$on('pipNoConnectionError', 
+                (event: angular.IAngularEvent, params) => { 
+                    this.noConnectionError(event, params)
+                });
             }
 
             if (errorConfig.Unknown.Active) {
-                $rootScope.$on('pipUnknownError', (event, params) => { this.unknownError(event, params)});
+                $rootScope.$on('pipUnknownError',
+                (event: angular.IAngularEvent, params) => { 
+                    this.unknownError(event, params)
+                });
             }
 
             if (errorConfig.Maintenance.Active) {
-                $rootScope.$on('pipMaintenanceError', (event, params) => { this.maintenanceError(event, params)});
+                $rootScope.$on('pipMaintenanceError',
+                (event: angular.IAngularEvent, params) => { 
+                    this.maintenanceError(event, params)
+                });
             }
     }
 
-    private goToErrors(toState, params) {
+    private goToErrors(toState: string, params) {
         if (toState == null)
             throw new Error('Error state was not defined');
 
         this.$state.go(toState, params);
     }
 
-    private maintenanceError(event, params) {
+    private maintenanceError(event: angular.IAngularEvent, params) {
         this.goToErrors('errors_maintenance', params);
     }
 
-    private noConnectionError(event, params) {
+    private noConnectionError(event: angular.IAngularEvent, params) {
         this.goToErrors('errors_no_connection', params);
     }
 
-    private unknownError(event, params) {
+    private unknownError(event: angular.IAngularEvent, params) {
         this.goToErrors('errors_unknown', params);
     }
 // todo: implement this into puplic service
