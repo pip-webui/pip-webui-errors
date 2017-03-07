@@ -190,7 +190,8 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     url: '/errors/unknown',
                     params: {
                         error: null
-                    },
+                    }, 
+                    controllerAs: '$ctrl',
                     controller: 'pipErrorUnknownController',
                     templateUrl: 'unknown/unknown.html'
                 });

@@ -94,6 +94,27 @@ class NoConnectionPanelController {
     onRetry(): void;
 }
 
+export class PipUnknownErrorDetails {
+    code: number;
+    message: string;
+    status: string;
+    server_stacktrace: Function;
+    client_stacktrace: Function;
+}
+export class ErrorUnknownController {
+    private _errorKey;
+    private pipNavService;
+    errorConfig: ErrorStateItem;
+    isCordova: boolean;
+    media: any;
+    error: PipUnknownErrorDetails;
+    error_details: PipUnknownErrorDetails;
+    showError: boolean;
+    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    private appHeader();
+    private parseError();
+    onDetails(): void;
+}
 
 
 }

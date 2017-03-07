@@ -253,6 +253,7 @@ var maintenance_1 = require("../maintenance/maintenance");
             params: {
                 error: null
             },
+            controllerAs: '$ctrl',
             controller: 'pipErrorUnknownController',
             templateUrl: 'unknown/unknown.html'
         });
@@ -689,52 +690,55 @@ var NoConnectionPanelController = (function () {
     thisModule.controller('pipNoConnectionPanelController', NoConnectionPanelController);
 })();
 },{}],13:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PipUnknownErrorDetails = (function () {
+    function PipUnknownErrorDetails() {
+    }
+    return PipUnknownErrorDetails;
+}());
+exports.PipUnknownErrorDetails = PipUnknownErrorDetails;
+var ErrorUnknownController = (function () {
+    ErrorUnknownController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService'];
+    function ErrorUnknownController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
+        this._errorKey = 'Unknown';
+        this.isCordova = false;
+        this.showError = false;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        this.media = pipMedia ? pipMedia : $mdMedia;
+        $rootScope['$routing'] = false;
+        this.appHeader();
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
+        this.parseError();
+    }
+    ErrorUnknownController.prototype.appHeader = function () {
+        if (!this.pipNavService)
+            return;
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    };
+    ErrorUnknownController.prototype.parseError = function () {
+        this.error_details = new PipUnknownErrorDetails();
+        this.error_details.code = this.error.code;
+        this.error_details.message = this.error.message;
+        this.error_details.status = this.error.status;
+        this.error_details.server_stacktrace = function () { };
+        this.error_details.client_stacktrace = function () { };
+    };
+    ErrorUnknownController.prototype.onDetails = function () {
+        this.showError = true;
+    };
+    return ErrorUnknownController;
+}());
+exports.ErrorUnknownController = ErrorUnknownController;
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrors.Unknown', []);
-    thisModule.controller('pipErrorUnknownController', ['$scope', '$state', '$rootScope', '$injector', '$mdMedia', 'pipErrorsService', function ($scope, $state, $rootScope, $injector, $mdMedia, pipErrorsService) {
-        var errorKey = 'Unknown';
-        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
-        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-        $scope.media = pipMedia ? pipMedia : $mdMedia;
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        $scope.error_details = null;
-        $scope.onDetails = onDetails;
-        $scope.onClose = onClose;
-        parseError();
-        return;
-        function appHeader() {
-            if (!pipNavService)
-                return;
-            pipNavService.appbar.addShadow();
-            pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
-            pipNavService.actions.hide();
-        }
-        ;
-        function parseError() {
-            $scope.error_details = {};
-            $scope.error_details.code = $scope.error.code;
-            $scope.error_details.message = $scope.error.message;
-            $scope.error_details.status = $scope.error.status;
-            $scope.error_details.server_stacktrace = function () {
-            };
-            $scope.error_details.client_stacktrace = function () {
-            };
-        }
-        ;
-        function onDetails() {
-            $scope.showError = true;
-        }
-        ;
-        function onClose() {
-        }
-        ;
-    }]);
+    thisModule.controller('pipErrorUnknownController', ErrorUnknownController);
 })();
 },{}],14:[function(require,module,exports){
 (function () {
@@ -873,26 +877,26 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('unknown/unknown.html',
     '<div class="pip-error-scroll-body pip-scroll">\n' +
     '<div class="pip-error pip-error-page layout-column flex layout-align-center-center">\n' +
-    '    <img src="{{errorConfig.Image}}" class="pip-pic block" >\n' +
-    '    <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::errorConfig.SubTitle | translate}}</div>\n' +
+    '    <img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block" >\n' +
+    '    <div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div>\n' +
     '\n' +
-    '    <div class="pip-error-subtext" ng-if="showError && error_details && error_details.message">\n' +
-    '        <div ng-if="error_details.code">Code: {{error_details.code}}</div>\n' +
-    '        <div ng-if="error_details.message">Description: {{error_details.message}}</div>\n' +
-    '        <div ng-if="error_details.status">HTTP status: {{error_details.status}}</div>\n' +
-    '        <div ng-if="error_details.server_stacktrace">Server stacktrace: {{error_details.server_stacktrace}}</div>\n' +
-    '        <div ng-if="error_details.client_stacktrace">Client stacktrace stacktrace: {{error_details.client_stacktrace}}</div>\n' +
+    '    <div class="pip-error-subtext" ng-if="$ctrl.showError && $ctrl.error_details && $ctrl.error_details.message">\n' +
+    '        <div ng-if="$ctrl.error_details.code">Code: {{$ctrl.error_details.code}}</div>\n' +
+    '        <div ng-if="$ctrl.error_details.message">Description: {{$ctrl.error_details.message}}</div>\n' +
+    '        <div ng-if="$ctrl.error_details.status">HTTP status: {{$ctrl.error_details.status}}</div>\n' +
+    '        <div ng-if="$ctrl.error_details.server_stacktrace">Server stacktrace: {{$ctrl.error_details.server_stacktrace}}</div>\n' +
+    '        <div ng-if="$ctrl.error_details.client_stacktrace">Client stacktrace stacktrace: {{$ctrl.error_details.client_stacktrace}}</div>\n' +
     '    </div>\n' +
     '\n' +
     '    <div class="pip-error-actions layout-column layout-align-center-center">\n' +
-    '        <div class="h48" ng-if="isCordova">\n' +
-    '            <md-button aria-label="CLOSE" class="md-accent" ng-click="onClose($event)">\n' +
+    '        <div class="h48" ng-if="$ctrl.isCordova">\n' +
+    '            <md-button aria-label="CLOSE" class="md-accent" ng-click="$ctrl.onClose($event)">\n' +
     '                {{::\'ERROR_UNKNOWN_CLOSE\' | translate}}\n' +
     '            </md-button>\n' +
     '        </div>\n' +
-    '        <div class="h48" ng-if="error_details && error_details.status">\n' +
-    '            <md-button aria-label="DETAILS" class="md-accent" ng-click="onDetails($event)">\n' +
+    '        <div class="h48" ng-if="$ctrl.error_details && $ctrl.error_details.status">\n' +
+    '            <md-button aria-label="DETAILS" class="md-accent" ng-click="$ctrl.onDetails($event)">\n' +
     '                {{::\'ERROR_UNKNOWN_DETAILS\' | translate}}\n' +
     '            </md-button>\n' +
     '        </div>\n' +
