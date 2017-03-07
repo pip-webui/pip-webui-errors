@@ -78,6 +78,7 @@ export interface IErrorsService {
 export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void;
     configureErrors(value: ErrorsConfig): void;
+    config: ErrorsConfig;
 }
 
 class ErrorsService implements IErrorsService {
@@ -92,6 +93,7 @@ class ErrorsService implements IErrorsService {
     }
 
     public get config(): ErrorsConfig {
+        console.log(this._config);
         return this._config;
     }
 
@@ -107,34 +109,39 @@ class ErrorsService implements IErrorsService {
 
 class ErrorsProvider implements IErrorsProvider {
     private _service: ErrorsService;
-    private _config: ErrorsConfig = new ErrorsConfig();
+    public config: ErrorsConfig;
 
-    constructor() {}
+    constructor() {
+        this.config = new ErrorsConfig();
+    }
 
     public configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void {
         if (!errorName || !errorParams) return;
-        if (!this._config[errorName]) return;
+        if (!this.config[errorName]) return;
 
-        this._config[errorName] = <ErrorStateItem>_.defaultsDeep(errorParams, this._config[errorName]);
+        this.config[errorName] = <ErrorStateItem>_.defaultsDeep(errorParams, this.config[errorName]);
     }
 
     public configureErrors(value: ErrorsConfig): void {
         if (!value) return;
 
-        this._config = <ErrorsConfig>_.defaultsDeep(value, this._config);
+        this.config = <ErrorsConfig>_.defaultsDeep(value, this.config);
     }
 
     public $get(): ErrorsService {
         "ngInject";
 
-        if (_.isNull(this._service) || _.isFunction(this._service)) {
-            this._service = new ErrorsService(this._config);
+        if (this._service == null ) {
+            this._service = new ErrorsService(this.config);
         }
 
         return this._service;
     }
 }
 
+(() => {
 angular
     .module('pipErrorsService')
     .provider('pipErrorsService', ErrorsProvider);
+
+})();

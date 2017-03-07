@@ -28,6 +28,7 @@ export interface IErrorsService {
 export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void;
     configureErrors(value: ErrorsConfig): void;
+    config: ErrorsConfig;
 }
 
 class ClearErrorsLink {

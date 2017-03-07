@@ -1,5 +1,97 @@
 /* global angular */
 
+import {IErrorsService} from './errors_service';
+
+class ErrorsPageRun {
+    constructor(
+        $rootScope: ng.IRootScopeService, 
+        private $state: ng.ui.IStateService, 
+        private $injector: angular.auto.IInjectorService, 
+        pipErrorsService: IErrorsService) {
+
+        let errorConfig = pipErrorsService.config;
+
+            if (errorConfig.Unsupported.Active) {
+                this.checkSupported();
+            }
+
+            if (errorConfig.MissingRoute.Active) {
+                $rootScope.$on('$stateNotFound',
+                    function (event, unfoundState, fromState, fromParams) {
+                        event.preventDefault();
+
+                        $state.go('errors_missing_route', {
+                            unfoundState: unfoundState,
+                            fromState: {
+                                to: fromState ? fromState.name : '',
+                                fromParams: fromParams
+                            }
+                        }
+                        );
+                        $rootScope['$routing'] = false;
+                    }
+                );
+            }
+
+            if (errorConfig.NoConnection.Active) {
+                $rootScope.$on('pipNoConnectionError', (event, params) => { this.noConnectionError(event, params)});
+            }
+
+            if (errorConfig.Unknown.Active) {
+                $rootScope.$on('pipUnknownError', (event, params) => { this.unknownError(event, params)});
+            }
+
+            if (errorConfig.Maintenance.Active) {
+                $rootScope.$on('pipMaintenanceError', (event, params) => { this.maintenanceError(event, params)});
+            }
+    }
+
+    private goToErrors(toState, params) {
+        if (toState == null)
+            throw new Error('Error state was not defined');
+
+        this.$state.go(toState, params);
+    }
+
+    private maintenanceError(event, params) {
+        this.goToErrors('errors_maintenance', params);
+    }
+
+    private noConnectionError(event, params) {
+        this.goToErrors('errors_no_connection', params);
+    }
+
+    private unknownError(event, params) {
+        this.goToErrors('errors_unknown', params);
+    }
+// todo: implement this into puplic service
+    private checkSupported(supported?: any) {
+        let pipSystemInfo: any = this.$injector.has('pipSystemInfo') ? this.$injector.get('pipSystemInfo') : null;
+        if (!pipSystemInfo) { return; }
+
+                // todo make configured
+        if (!supported) {
+            supported = {
+                edge: 11,
+                ie: 11,
+                firefox: 43, //4, for testing
+                opera: 35,
+                chrome: 47
+            };
+        }
+
+        let browser: string = pipSystemInfo.browserName;
+        let version: string = pipSystemInfo.browserVersion;
+            version = version.split(".")[0]
+
+        if (browser && supported[browser] && version >= supported[browser]) {
+            return;
+        }
+                // if not supported
+        this.$state.go('errors_unsupported');
+    }
+}
+
 (() => {
     'use strict';
 
@@ -60,93 +152,7 @@
         });
 
 
-    thisModule.run(
-        function ($rootScope, $state, $injector, pipErrorsService) {
-
-            var errorConfig = pipErrorsService.config;
-
-            if (errorConfig.Unsupported.Active) {
-                checkSupported();
-            }
-
-            if (errorConfig.MissingRoute.Active) {
-                $rootScope.$on('$stateNotFound',
-                    function (event, unfoundState, fromState, fromParams) {
-                        event.preventDefault();
-
-                        $state.go('errors_missing_route', {
-                            unfoundState: unfoundState,
-                            fromState: {
-                                to: fromState ? fromState.name : '',
-                                fromParams: fromParams
-                            }
-                        }
-                        );
-                        $rootScope.$routing = false;
-                    }
-                );
-            }
-
-            if (errorConfig.NoConnection.Active) {
-                $rootScope.$on('pipNoConnectionError', noConnectionError);
-            }
-
-            if (errorConfig.Unknown.Active) {
-                $rootScope.$on('pipUnknownError', unknownError);
-            }
-
-            if (errorConfig.Maintenance.Active) {
-                $rootScope.$on('pipMaintenanceError', maintenanceError);
-            }
-
-            function goToErrors(toState, params) {
-                if (toState == null)
-                    throw new Error('Error state was not defined');
-
-                $state.go(toState, params);
-            };
-
-            function maintenanceError(event, params) {
-                goToErrors('errors_maintenance', params);
-            }
-
-            function noConnectionError(event, params) {
-                goToErrors('errors_no_connection', params);
-            }
-
-            function unknownError(event, params) {
-                goToErrors('errors_unknown', params);
-            }
-// todo: implement this into puplic service
-            function checkSupported(supported?: any) {
-                let pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
-                if (!pipSystemInfo) { return; }
-
-                // todo make configured
-                if (!supported) {
-                    supported = {
-                        edge: 11,
-                        ie: 11,
-                        firefox: 43, //4, for testing
-                        opera: 35,
-                        chrome: 47
-                    };
-                }
-
-                let browser = pipSystemInfo.browserName;
-                let version = pipSystemInfo.browserVersion;
-                version = version.split(".")[0]
-
-                if (browser && supported[browser] && version >= supported[browser]) {
-
-                    return;
-                }
-                // if not supported
-                $state.go('errors_unsupported');
-            }
-
-        }
-    );
+    thisModule.run(ErrorsPageRun);
 
     thisModule.factory('pipAuthHttpResponseInterceptor',
         function ($q, $location, $rootScope) {
