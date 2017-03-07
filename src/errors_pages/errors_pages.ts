@@ -162,6 +162,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                         error: null
                     },
                     controller: 'pipErrorMaintenanceController',
+                    controllerAs: '$ctrl',
                     templateUrl: 'maintenance/maintenance.html'
                 })
                 .state('errors_missing_route', {

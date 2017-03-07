@@ -4,47 +4,67 @@
  */
 
 /* global angular */
+import {IErrorsService, ErrorsConfig, ErrorStateItem} from '../errors_pages/errors_service';
 
-(function () {
+class PipMaintenanceError {
+    config?: PipMaintenanceErrorConfig;
+}
+class PipMaintenanceErrorConfig {
+    params?: PipMaintenanceErrorParams;
+}
+class PipMaintenanceErrorParams {
+    interval?: number = 0;
+}
+
+class ErrorMaintenanceController {
+    private _errorKey: string = 'Maintenance';
+    private pipNavService;
+
+    public errorConfig: ErrorStateItem;
+    public isCordova: boolean = false;
+    public media;
+    public error: PipMaintenanceError;
+    public timeoutInterval: number;
+
+    constructor(
+        $scope: ng.IScope,
+        $state: ng.ui.IStateService, 
+        $rootScope: ng.IRootScopeService,
+        $mdMedia: angular.material.IMedia, 
+        $injector: angular.auto.IInjectorService, 
+        PipMaintenanceErrorsService: IErrorsService) {
+
+        let pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.errorConfig = PipMaintenanceErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+
+        this.media = pipMedia ? pipMedia : $mdMedia;
+
+        $rootScope['$routing'] = false;
+        this.appHeader();
+
+        this.error = $state && $state.params && $state.params['error'] ?  $state.params['error'] : {};
+        this.timeoutInterval = this.error && this.error.config &&
+            this.error.config.params && this.error.config.params.interval ? this.error.config.params.interval : 0;
+
+    }
+
+    private appHeader(): void {
+        if (!this.pipNavService) return;
+
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    }
+}
+
+
+(() => {
     'use strict';
 
-    var thisModule = angular.module('pipErrors.Maintenance', []);
+    var thisModule = angular.module('PipMaintenanceErrors.Maintenance', []);
 
-    thisModule.controller('pipErrorMaintenanceController', function ($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
-
-        var errorKey = 'Maintenance';
-        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
-
-        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-
-        $scope.media = pipMedia ? pipMedia : $mdMedia;
-
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-        $scope.timeoutInterval = $scope.error && $scope.error.config &&
-                        $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
-
-        $scope.onClose = onClose;
-
-        return;
-
-        function appHeader() {
-            if (!pipNavService) return;
-
-            pipNavService.appbar.addShadow();
-            pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
-            pipNavService.actions.hide();
-        };
-
-        function onClose() {
-
-        };
-
-    });
+    thisModule.controller('PipMaintenanceErrorMaintenanceController', ErrorMaintenanceController);
 
 })();

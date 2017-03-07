@@ -225,6 +225,7 @@ var AuthHttpResponseInterceptor = (function () {
                 error: null
             },
             controller: 'pipErrorMaintenanceController',
+            controllerAs: '$ctrl',
             templateUrl: 'maintenance/maintenance.html'
         })
             .state('errors_missing_route', {
@@ -520,36 +521,53 @@ var FormErrors = (function () {
         .service('pipFormErrors', FormErrors);
 })();
 },{}],9:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PipError = (function () {
+    function PipError() {
+    }
+    return PipError;
+}());
+var PipErrorConfig = (function () {
+    function PipErrorConfig() {
+    }
+    return PipErrorConfig;
+}());
+var PipErrorParams = (function () {
+    function PipErrorParams() {
+        this.interval = 0;
+    }
+    return PipErrorParams;
+}());
+var ErrorMaintenanceController = (function () {
+    ErrorMaintenanceController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService'];
+    function ErrorMaintenanceController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
+        this._errorKey = 'Maintenance';
+        this.isCordova = false;
+        this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.media = pipMedia ? pipMedia : $mdMedia;
+        $rootScope['$routing'] = false;
+        this.appHeader();
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
+        this.timeoutInterval = this.error && this.error.config &&
+            this.error.config.params && this.error.config.params.interval ? this.error.config.params.interval : 0;
+    }
+    ErrorMaintenanceController.prototype.appHeader = function () {
+        if (!this.pipNavService)
+            return;
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    };
+    return ErrorMaintenanceController;
+}());
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrors.Maintenance', []);
-    thisModule.controller('pipErrorMaintenanceController', ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService', function ($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
-        var errorKey = 'Maintenance';
-        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
-        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-        $scope.media = pipMedia ? pipMedia : $mdMedia;
-        $rootScope.$routing = false;
-        $scope.isCordova = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        $scope.timeoutInterval = $scope.error && $scope.error.config &&
-            $scope.error.config.params && $scope.error.config.params.interval ? $scope.error.config.params.interval : 0;
-        $scope.onClose = onClose;
-        return;
-        function appHeader() {
-            if (!pipNavService)
-                return;
-            pipNavService.appbar.addShadow();
-            pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
-            pipNavService.actions.hide();
-        }
-        ;
-        function onClose() {
-        }
-        ;
-    }]);
+    thisModule.controller('pipErrorMaintenanceController', ErrorMaintenanceController);
 })();
 },{}],10:[function(require,module,exports){
 (function () {
@@ -722,15 +740,15 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('maintenance/maintenance.html',
     '<div class="pip-error-scroll-body pip-scroll">\n' +
     '<div class="pip-error pip-error-page layout-column flex layout-align-center-center">\n' +
-    '    <img src="{{errorConfig.Image}}" class="pip-pic block" > \n' +
+    '    <img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block" > \n' +
     '    <div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div>\n' +
     '    <div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div>\n' +
-    '    <div class="pip-error-subtext" ng-if="timeoutInterval">\n' +
+    '    <div class="pip-error-subtext" ng-if="$ctrl.timeoutInterval">\n' +
     '        {{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.\n' +
     '    </div>\n' +
     '    <div class="pip-error-actions h48 layout-column layout-align-center-center"\n' +
-    '         ng-if="isCordova">\n' +
-    '        <md-button class="md-accent" ng-click="onClose($event)" aria-label="CLOSE" >\n' +
+    '         ng-if="$ctrl.isCordova">\n' +
+    '        <md-button class="md-accent" ng-click="$ctrl.onClose($event)" aria-label="CLOSE" >\n' +
     '            {{::\'ERROR_AVAILABLE_CLOSE\' | translate}}\n' +
     '        </md-button>\n' +
     '    </div>\n' +
