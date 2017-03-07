@@ -5,13 +5,13 @@
 
 /* global angular */
 
-(function () {
+(() => {
     'use strict';
 
     var thisModule = angular.module('pipErrors.Strings', ['pipTranslate']);
 
-    thisModule.run(function($injector) {
-        var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
+    thisModule.run(($injector: angular.auto.IInjectorService) => {
+        let pipTranslate: any = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate == null) return;
 
         // Set translation strings for the module
