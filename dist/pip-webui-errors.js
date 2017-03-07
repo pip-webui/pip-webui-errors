@@ -75,14 +75,16 @@
 },{}],2:[function(require,module,exports){
 (function () {
     'use strict';
-    var thisModule = angular.module('pipErrors.Translate', []);
-    thisModule.filter('translate', ['$injector', function ($injector) {
+    filterTranslate.$inject = ['$injector'];
+    function filterTranslate($injector) {
         var pipTranslate = $injector.has('pipTranslate')
             ? $injector.get('pipTranslate') : null;
         return function (key) {
             return pipTranslate ? pipTranslate.translate(key) || key : key;
         };
-    }]);
+    }
+    var thisModule = angular.module('pipErrors.Translate', []);
+    thisModule.filter('translate', filterTranslate);
 })();
 },{}],3:[function(require,module,exports){
 (function () {

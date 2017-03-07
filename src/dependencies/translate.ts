@@ -8,15 +8,17 @@
 (() => {
     'use strict';
 
-    var thisModule = angular.module('pipErrors.Translate', []);
-
-    thisModule.filter('translate', function ($injector) {
-        var pipTranslate = $injector.has('pipTranslate') 
+    function filterTranslate($injector: angular.auto.IInjectorService) {
+        let pipTranslate: any = $injector.has('pipTranslate') 
             ? $injector.get('pipTranslate') : null;
 
-        return function (key) {
+        return (key) => {
             return pipTranslate  ? pipTranslate.translate(key) || key : key;
         }
-    });
+    }
+
+    var thisModule = angular.module('pipErrors.Translate', []);
+
+    thisModule.filter('translate', filterTranslate);
 
 })();
