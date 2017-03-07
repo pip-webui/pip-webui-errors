@@ -245,6 +245,7 @@ var maintenance_1 = require("../maintenance/maintenance");
             params: {
                 error: null
             },
+            controllerAs: '$ctrl',
             controller: 'pipErrorUnsupportedController',
             templateUrl: 'unsupported/unsupported.html'
         })
@@ -703,12 +704,12 @@ var ErrorUnknownController = (function () {
     function ErrorUnknownController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
         this._errorKey = 'Unknown';
         this.isCordova = false;
-        this.showError = false;
         var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
         this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
         this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
         this.media = pipMedia ? pipMedia : $mdMedia;
         $rootScope['$routing'] = false;
+        this.showError = $scope['showError'];
         this.appHeader();
         this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
         this.parseError();
@@ -741,29 +742,42 @@ exports.ErrorUnknownController = ErrorUnknownController;
     thisModule.controller('pipErrorUnknownController', ErrorUnknownController);
 })();
 },{}],14:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PipUnsupportedError = (function () {
+    function PipUnsupportedError() {
+    }
+    return PipUnsupportedError;
+}());
+exports.PipUnsupportedError = PipUnsupportedError;
+var ErrorUnsupportedController = (function () {
+    ErrorUnsupportedController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService'];
+    function ErrorUnsupportedController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
+        this._errorKey = 'Unsupported';
+        this.isCordova = false;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        this.media = pipMedia ? pipMedia : $mdMedia;
+        $rootScope['$routing'] = false;
+        this.appHeader();
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
+    }
+    ErrorUnsupportedController.prototype.appHeader = function () {
+        if (!this.pipNavService)
+            return;
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    };
+    return ErrorUnsupportedController;
+}());
+exports.ErrorUnsupportedController = ErrorUnsupportedController;
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrors.Unsupported', []);
-    thisModule.controller('pipErrorUnsupportedController', ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService', function ($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
-        var errorKey = 'Unsupported';
-        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
-        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-        $scope.media = pipMedia ? pipMedia : $mdMedia;
-        $rootScope.$routing = false;
-        if (pipNavService) {
-            appHeader();
-        }
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        return;
-        function appHeader() {
-            pipNavService.appbar.addShadow();
-            pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
-            pipNavService.actions.hide();
-        }
-        ;
-    }]);
+    thisModule.controller('pipErrorUnsupportedController', ErrorUnsupportedController);
 })();
 },{}],15:[function(require,module,exports){
 (function(module) {
@@ -918,11 +932,11 @@ module.run(['$templateCache', function($templateCache) {
     '<div class="pip-error-scroll-body pip-scroll">\n' +
     '<div class="pip-error pip-error-page layout-column flex layout-align-center-center">\n' +
     '\n' +
-    '    <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>\n' +
+    '    <div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div>\n' +
     '    <div class="pip-error-subtext">\n' +
-    '        {{::errorConfig.SubTitle | translate}}\n' +
+    '        {{::$ctrl.errorConfig.SubTitle | translate}}\n' +
     '    </div>\n' +
-    '    <div class="pip-error-details layout-row layout-align-center-center" ng-if="media(\'gt-xs\')">\n' +
+    '    <div class="pip-error-details layout-row layout-align-center-center" ng-if="$ctrl.media(\'gt-xs\')">\n' +
     '        <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '            <div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div>\n' +
     '            <div class="h64 tp16 bp16">\n' +
@@ -965,7 +979,7 @@ module.run(['$templateCache', function($templateCache) {
     '        </div>\n' +
     '    </div>\n' +
     '\n' +
-    '    <div class="pip-error-details" ng-if="media(\'xs\')">\n' +
+    '    <div class="pip-error-details" ng-if="$ctrl.media(\'xs\')">\n' +
     '        <div class="layout-row layout-align-center-center">\n' +
     '            <div class="pip-error-details-item layout-column layout-align-center-center">\n' +
     '                <div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div>\n' +

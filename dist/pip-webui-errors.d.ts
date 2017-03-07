@@ -116,6 +116,19 @@ export class ErrorUnknownController {
     onDetails(): void;
 }
 
+export class PipUnsupportedError {
+    config?: any;
+}
+export class ErrorUnsupportedController {
+    private _errorKey;
+    private pipNavService;
+    errorConfig: ErrorStateItem;
+    isCordova: boolean;
+    media: any;
+    error: PipUnsupportedError;
+    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    private appHeader();
+}
 
 }
 

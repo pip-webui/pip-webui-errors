@@ -1,11 +1,11 @@
 <div class="pip-error-scroll-body pip-scroll">
 <div class="pip-error pip-error-page layout-column flex layout-align-center-center">
 
-    <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>
+    <div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div>
     <div class="pip-error-subtext">
-        {{::errorConfig.SubTitle | translate}}
+        {{::$ctrl.errorConfig.SubTitle | translate}}
     </div>
-    <div class="pip-error-details layout-row layout-align-center-center" ng-if="media('gt-xs')">
+    <div class="pip-error-details layout-row layout-align-center-center" ng-if="$ctrl.media('gt-xs')">
         <div class="pip-error-details-item layout-column layout-align-center-center">
             <div style="background-image: url('images/ie.svg');" class="pip-pic"></div>
             <div class="h64 tp16 bp16">
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="pip-error-details" ng-if="media('xs')">
+    <div class="pip-error-details" ng-if="$ctrl.media('xs')">
         <div class="layout-row layout-align-center-center">
             <div class="pip-error-details-item layout-column layout-align-center-center">
                 <div style="background-image: url('images/ie.svg');" class="pip-pic"></div>

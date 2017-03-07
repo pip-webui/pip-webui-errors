@@ -183,6 +183,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     params: {
                         error: null
                     },
+                    controllerAs: '$ctrl',
                     controller: 'pipErrorUnsupportedController',
                     templateUrl: 'unsupported/unsupported.html'
                 })
