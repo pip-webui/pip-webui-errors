@@ -92,22 +92,49 @@ class ErrorsPageRun {
     }
 }
 
+interface IAuthHttpResponseInterceptor {
+    responseError(rejection);
+}
+
+class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
+    constructor(
+        private $q: ng.IQService, 
+        private $location: ng.ILocationService, 
+        private $rootScope: ng.IRootScopeService) {}
+    public responseError(rejection) {
+        let toState: string = this.$rootScope['$state'] && this.$rootScope['$state'].name ? this.$rootScope['$state'].name : null,
+            toParams = this.$rootScope['$state'] && this.$rootScope['$state'].params ? this.$rootScope['$state'].params : null;
+
+        switch (rejection.status) {
+            case 503:
+                //available (maintenance)
+                this.$rootScope.$emit('pipMaintenanceError', { error: rejection });
+                break;
+            case -1:
+                this.$rootScope.$emit('pipNoConnectionError', { error: rejection });
+                break;
+            default:
+                console.error("errors_unknown", rejection);
+                break;
+        }
+
+        return this.$q.reject(rejection);
+    }
+
+}
+
 (() => {
     'use strict';
 
-    var thisModule = angular.module('pipErrors.Pages', [
-        'ngMaterial',
-        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
-        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
-    ]);
-
-    thisModule.config(
-        function ($stateProvider, $httpProvider) {
-            // Attach interceptor to react on unauthorized errors
-            $httpProvider.interceptors.push('pipAuthHttpResponseInterceptor');
+    function ErrorsPageConfig(
+        $stateProvider: ng.ui.IStateProvider, 
+        $httpProvider: ng.IHttpProvider
+    ) {
+        // Attach interceptor to react on unauthorized errors
+        $httpProvider.interceptors.push('pipAuthHttpResponseInterceptor');
 
             // Configure module routes
-            $stateProvider
+        $stateProvider
                 .state('errors_no_connection', {
                     url: '/errors/no_connection',
                     params: {
@@ -149,40 +176,22 @@ class ErrorsPageRun {
                     controller: 'pipErrorUnknownController',
                     templateUrl: 'unknown/unknown.html'
                 });
-        });
+    }
 
-
-    thisModule.run(ErrorsPageRun);
-
-    thisModule.factory('pipAuthHttpResponseInterceptor',
-        function ($q, $location, $rootScope) {
-            return {
-                responseError: function (rejection) {
-                    var toState = $rootScope.$state && $rootScope.$state.name ? $rootScope.$state.name : null,
-                        toParams = $rootScope.$state && $rootScope.$state.params ? $rootScope.$state.params : null;
-
-                    switch (rejection.status) {
-                        case 503:
-                            //available (maintenance)
-                            $rootScope.$emit('pipMaintenanceError', {
-                                error: rejection
-                            });
-                            break;
-                        case -1:
-                            $rootScope.$emit('pipNoConnectionError', {
-                                error: rejection
-                            });
-                            break;
-                        default:
-                            console.error("errors_unknown", rejection);
-                            break;
-                    }
-
-                    return $q.reject(rejection);
-                }
-            }
-        }
-    );
+    angular.module('pipErrors.Pages', [
+        'ngMaterial',
+        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
+        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
+    ])
+    .config(ErrorsPageConfig)
+    .run((
+        $rootScope: ng.IRootScopeService, 
+        $state: ng.ui.IStateService, 
+        $injector: angular.auto.IInjectorService, 
+        pipErrorsService: IErrorsService) => {
+        let run = new ErrorsPageRun($rootScope, $state, $injector, pipErrorsService);
+    })
+    .service('pipAuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 
 })();
 

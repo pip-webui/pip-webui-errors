@@ -103,14 +103,104 @@ require("./errors_service");
 },{"./errors_service":6}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var ErrorsPageRun = (function () {
+    function ErrorsPageRun($rootScope, $state, $injector, pipErrorsService) {
+        var _this = this;
+        this.$state = $state;
+        this.$injector = $injector;
+        var errorConfig = pipErrorsService.config;
+        if (errorConfig.Unsupported.Active) {
+            this.checkSupported();
+        }
+        if (errorConfig.MissingRoute.Active) {
+            $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+                event.preventDefault();
+                $state.go('errors_missing_route', {
+                    unfoundState: unfoundState,
+                    fromState: {
+                        to: fromState ? fromState.name : '',
+                        fromParams: fromParams
+                    }
+                });
+                $rootScope['$routing'] = false;
+            });
+        }
+        if (errorConfig.NoConnection.Active) {
+            $rootScope.$on('pipNoConnectionError', function (event, params) { _this.noConnectionError(event, params); });
+        }
+        if (errorConfig.Unknown.Active) {
+            $rootScope.$on('pipUnknownError', function (event, params) { _this.unknownError(event, params); });
+        }
+        if (errorConfig.Maintenance.Active) {
+            $rootScope.$on('pipMaintenanceError', function (event, params) { _this.maintenanceError(event, params); });
+        }
+    }
+    ErrorsPageRun.prototype.goToErrors = function (toState, params) {
+        if (toState == null)
+            throw new Error('Error state was not defined');
+        this.$state.go(toState, params);
+    };
+    ErrorsPageRun.prototype.maintenanceError = function (event, params) {
+        this.goToErrors('errors_maintenance', params);
+    };
+    ErrorsPageRun.prototype.noConnectionError = function (event, params) {
+        this.goToErrors('errors_no_connection', params);
+    };
+    ErrorsPageRun.prototype.unknownError = function (event, params) {
+        this.goToErrors('errors_unknown', params);
+    };
+    ErrorsPageRun.prototype.checkSupported = function (supported) {
+        var pipSystemInfo = this.$injector.has('pipSystemInfo') ? this.$injector.get('pipSystemInfo') : null;
+        if (!pipSystemInfo) {
+            return;
+        }
+        if (!supported) {
+            supported = {
+                edge: 11,
+                ie: 11,
+                firefox: 43,
+                opera: 35,
+                chrome: 47
+            };
+        }
+        var browser = pipSystemInfo.browserName;
+        var version = pipSystemInfo.browserVersion;
+        version = version.split(".")[0];
+        if (browser && supported[browser] && version >= supported[browser]) {
+            return;
+        }
+        this.$state.go('errors_unsupported');
+    };
+    return ErrorsPageRun;
+}());
+var AuthHttpResponseInterceptor = (function () {
+    AuthHttpResponseInterceptor.$inject = ['$q', '$location', '$rootScope'];
+    function AuthHttpResponseInterceptor($q, $location, $rootScope) {
+        this.$q = $q;
+        this.$location = $location;
+        this.$rootScope = $rootScope;
+    }
+    AuthHttpResponseInterceptor.prototype.responseError = function (rejection) {
+        var toState = this.$rootScope['$state'] && this.$rootScope['$state'].name ? this.$rootScope['$state'].name : null, toParams = this.$rootScope['$state'] && this.$rootScope['$state'].params ? this.$rootScope['$state'].params : null;
+        switch (rejection.status) {
+            case 503:
+                this.$rootScope.$emit('pipMaintenanceError', { error: rejection });
+                break;
+            case -1:
+                this.$rootScope.$emit('pipNoConnectionError', { error: rejection });
+                break;
+            default:
+                console.error("errors_unknown", rejection);
+                break;
+        }
+        return this.$q.reject(rejection);
+    };
+    return AuthHttpResponseInterceptor;
+}());
 (function () {
     'use strict';
-    var thisModule = angular.module('pipErrors.Pages', [
-        'ngMaterial',
-        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
-        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
-    ]);
-    thisModule.config(['$stateProvider', '$httpProvider', function ($stateProvider, $httpProvider) {
+    ErrorsPageConfig.$inject = ['$stateProvider', '$httpProvider'];
+    function ErrorsPageConfig($stateProvider, $httpProvider) {
         $httpProvider.interceptors.push('pipAuthHttpResponseInterceptor');
         $stateProvider
             .state('errors_no_connection', {
@@ -154,95 +244,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
             controller: 'pipErrorUnknownController',
             templateUrl: 'unknown/unknown.html'
         });
-    }]);
-    thisModule.run(['$rootScope', '$state', '$injector', 'pipErrorsService', function ($rootScope, $state, $injector, pipErrorsService) {
-        var errorConfig = pipErrorsService.config;
-        if (errorConfig.Unsupported.Active) {
-            checkSupported();
-        }
-        if (errorConfig.MissingRoute.Active) {
-            $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
-                event.preventDefault();
-                $state.go('errors_missing_route', {
-                    unfoundState: unfoundState,
-                    fromState: {
-                        to: fromState ? fromState.name : '',
-                        fromParams: fromParams
-                    }
-                });
-                $rootScope.$routing = false;
-            });
-        }
-        if (errorConfig.NoConnection.Active) {
-            $rootScope.$on('pipNoConnectionError', noConnectionError);
-        }
-        if (errorConfig.Unknown.Active) {
-            $rootScope.$on('pipUnknownError', unknownError);
-        }
-        if (errorConfig.Maintenance.Active) {
-            $rootScope.$on('pipMaintenanceError', maintenanceError);
-        }
-        function goToErrors(toState, params) {
-            if (toState == null)
-                throw new Error('Error state was not defined');
-            $state.go(toState, params);
-        }
-        ;
-        function maintenanceError(event, params) {
-            goToErrors('errors_maintenance', params);
-        }
-        function noConnectionError(event, params) {
-            goToErrors('errors_no_connection', params);
-        }
-        function unknownError(event, params) {
-            goToErrors('errors_unknown', params);
-        }
-        function checkSupported(supported) {
-            var pipSystemInfo = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
-            if (!pipSystemInfo) {
-                return;
-            }
-            if (!supported) {
-                supported = {
-                    edge: 11,
-                    ie: 11,
-                    firefox: 43,
-                    opera: 35,
-                    chrome: 47
-                };
-            }
-            var browser = pipSystemInfo.browserName;
-            var version = pipSystemInfo.browserVersion;
-            version = version.split(".")[0];
-            if (browser && supported[browser] && version >= supported[browser]) {
-                return;
-            }
-            $state.go('errors_unsupported');
-        }
-    }]);
-    thisModule.factory('pipAuthHttpResponseInterceptor', ['$q', '$location', '$rootScope', function ($q, $location, $rootScope) {
-        return {
-            responseError: function (rejection) {
-                var toState = $rootScope.$state && $rootScope.$state.name ? $rootScope.$state.name : null, toParams = $rootScope.$state && $rootScope.$state.params ? $rootScope.$state.params : null;
-                switch (rejection.status) {
-                    case 503:
-                        $rootScope.$emit('pipMaintenanceError', {
-                            error: rejection
-                        });
-                        break;
-                    case -1:
-                        $rootScope.$emit('pipNoConnectionError', {
-                            error: rejection
-                        });
-                        break;
-                    default:
-                        console.error("errors_unknown", rejection);
-                        break;
-                }
-                return $q.reject(rejection);
-            }
-        };
-    }]);
+    }
+    angular.module('pipErrors.Pages', [
+        'ngMaterial',
+        'pipErrors.Strings', 'pipErrors.NoConnection', 'pipErrors.MissingRoute', 'pipErrors.Unsupported',
+        'pipErrors.Unknown', 'pipErrors.Maintenance', 'pipErrors.Translate', 'pipErrors.Templates'
+    ])
+        .config(ErrorsPageConfig)
+        .run(['$rootScope', '$state', '$injector', 'pipErrorsService', function ($rootScope, $state, $injector, pipErrorsService) {
+        var run = new ErrorsPageRun($rootScope, $state, $injector, pipErrorsService);
+    }])
+        .service('pipAuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 })();
 },{}],6:[function(require,module,exports){
 'use strict';
