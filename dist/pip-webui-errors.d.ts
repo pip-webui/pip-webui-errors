@@ -88,6 +88,11 @@ export class ErrorNoConnectionController {
     onRetry(): void;
 }
 
+class NoConnectionPanelController {
+    private _retry;
+    constructor($scope: ng.IScope);
+    onRetry(): void;
+}
 
 
 

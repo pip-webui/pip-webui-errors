@@ -4,14 +4,24 @@
  */
 
 /* global _, angular */
+class NoConnectionPanelController {
+    private _retry: Function;
+    constructor($scope: ng.IScope){
+        this._retry = $scope['retry'];
+    }
 
-(function () {
+    public onRetry() {
+        if (this._retry && angular.isFunction(this._retry)) this._retry();
+    }
+}
+
+(() => {
     'use strict';
 
     var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
 
     thisModule.directive('pipNoConnectionPanel',
-        function () {
+        () => {
             return {
                 restrict: 'E',
                 scope: {
@@ -19,24 +29,13 @@
                     retry: '=pipRetry'
                 },
                 templateUrl: 'no_connection_panel/no_connection_panel.html',
-                controller: 'pipNoConnectionPanelController'
+                controller: 'pipNoConnectionPanelController',
+                controllerAs: '$ctrl'
             };
         }
     );
 
-    thisModule.controller('pipNoConnectionPanelController',
-        function ($scope, $element, $attrs, pipTranslate) {
-
-            $scope.onRetry = onRetry;
-
-            return;
-
-            function onRetry() {
-                if ($scope.retry && angular.isFunction($scope.retry)) $scope.retry();
-            };
-
-        }
-    );
+    thisModule.controller('pipNoConnectionPanelController', NoConnectionPanelController);
 
 })();
 

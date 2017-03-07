@@ -660,6 +660,17 @@ exports.ErrorNoConnectionController = ErrorNoConnectionController;
     thisModule.controller('pipErrorNoConnectionController', ErrorNoConnectionController);
 })();
 },{}],12:[function(require,module,exports){
+var NoConnectionPanelController = (function () {
+    NoConnectionPanelController.$inject = ['$scope'];
+    function NoConnectionPanelController($scope) {
+        this._retry = $scope['retry'];
+    }
+    NoConnectionPanelController.prototype.onRetry = function () {
+        if (this._retry && angular.isFunction(this._retry))
+            this._retry();
+    };
+    return NoConnectionPanelController;
+}());
 (function () {
     'use strict';
     var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
@@ -671,18 +682,11 @@ exports.ErrorNoConnectionController = ErrorNoConnectionController;
                 retry: '=pipRetry'
             },
             templateUrl: 'no_connection_panel/no_connection_panel.html',
-            controller: 'pipNoConnectionPanelController'
+            controller: 'pipNoConnectionPanelController',
+            controllerAs: '$ctrl'
         };
     });
-    thisModule.controller('pipNoConnectionPanelController', ['$scope', '$element', '$attrs', 'pipTranslate', function ($scope, $element, $attrs, pipTranslate) {
-        $scope.onRetry = onRetry;
-        return;
-        function onRetry() {
-            if ($scope.retry && angular.isFunction($scope.retry))
-                $scope.retry();
-        }
-        ;
-    }]);
+    thisModule.controller('pipNoConnectionPanelController', NoConnectionPanelController);
 })();
 },{}],13:[function(require,module,exports){
 (function () {
@@ -847,11 +851,11 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection_panel/no_connection_panel.html',
     '<div class="pip-error-page pip-error layout-column layout-align-center-center flex">\n' +
-    '    <img src="{{errorConfig.Image}}" class="pip-pic block">\n' +
-    '    <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>\n' +
-    '    <div class="pip-error-subtext">{{::errorConfig.SubTitle | translate}}</div>\n' +
+    '    <img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block">\n' +
+    '    <div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div>\n' +
+    '    <div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div>\n' +
     '    <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
-    '        <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">\n' +
+    '        <md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">\n' +
     '            {{::\'ERROR_RESPONDING_RETRY\' | translate}}\n' +
     '        </md-button>\n' +
     '    </div>\n' +
