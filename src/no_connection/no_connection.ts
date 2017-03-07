@@ -5,44 +5,63 @@
 
 /* global angular */
 
+import {IErrorsService, ErrorsConfig, ErrorStateItem} from '../errors_pages/errors_service';
+
+export class PipNoConnectionError {
+    config?: any;
+}
+
+export class ErrorNoConnectionController {
+    private _errorKey: string = 'NoConnection';
+    private pipNavService;
+
+    public errorConfig: ErrorStateItem;
+    public isCordova: boolean = false;
+    public media;
+    public error: PipNoConnectionError;
+
+    constructor(
+        private $window: ng.IWindowService,
+        $scope: ng.IScope,
+        $state: ng.ui.IStateService, 
+        $rootScope: ng.IRootScopeService,
+        $mdMedia: angular.material.IMedia, 
+        $injector: angular.auto.IInjectorService, 
+        pipErrorsService: IErrorsService) {
+
+        let pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+
+        this.media = pipMedia ? pipMedia : $mdMedia;
+
+        $rootScope['$routing'] = false;
+        this.appHeader();
+
+        this.error = $state && $state.params && $state.params['error'] ?  $state.params['error'] : {};
+
+    }
+
+    private appHeader(): void {
+        if (!this.pipNavService) return;
+
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    }
+
+    public onRetry() {
+        this.$window.history.back();
+    }
+}
+
 (function () {
     'use strict';
 
     var thisModule = angular.module('pipErrors.NoConnection', []);
 
-    thisModule.controller('pipErrorNoConnectionController', function ($scope, $state, $rootScope, $window, $mdMedia, $injector, pipErrorsService) {
-
-        var errorKey = 'NoConnection';
-        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
-
-        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-
-        $scope.media = pipMedia ? pipMedia : $mdMedia;
-
-        $rootScope.$routing = false;
-        appHeader();
-
-        $scope.error = $state && $state.params && $state.params.error ?  $state.params.error : {};
-
-        $scope.onRetry = onRetry;
-
-        return;
-
-        function onRetry() {
-            $window.history.back();
-        };
-
-        function appHeader() {
-            if (!pipNavService) return;
-
-            pipNavService.appbar.addShadow();
-            pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
-            pipNavService.actions.hide();
-        };
-
-    });
+    thisModule.controller('pipErrorNoConnectionController',  ErrorNoConnectionController);
 
 
 })();

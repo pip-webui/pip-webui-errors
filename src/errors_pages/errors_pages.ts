@@ -156,6 +156,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                         error: null
                     },
                     controller: 'pipErrorNoConnectionController',
+                     controllerAs: '$ctrl',
                     templateUrl: 'no_connection/no_connection.html'
                 })
                 .state('errors_maintenance', {

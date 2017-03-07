@@ -218,6 +218,7 @@ var maintenance_1 = require("../maintenance/maintenance");
                 error: null
             },
             controller: 'pipErrorNoConnectionController',
+            controllerAs: '$ctrl',
             templateUrl: 'no_connection/no_connection.html'
         })
             .state('errors_maintenance', {
@@ -613,38 +614,50 @@ var ErrorMissingRouteController = (function () {
 }());
 (function () {
     'use strict';
-    var thisModule = angular.module('pipErrors.MissingRoute', []);
-    thisModule.controller('pipErrorMissingRouteController', ErrorMissingRouteController);
+    angular.module('pipErrors.MissingRoute', [])
+        .controller('pipErrorMissingRouteController', ErrorMissingRouteController);
 })();
 },{}],11:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PipNoConnectionError = (function () {
+    function PipNoConnectionError() {
+    }
+    return PipNoConnectionError;
+}());
+exports.PipNoConnectionError = PipNoConnectionError;
+var ErrorNoConnectionController = (function () {
+    ErrorNoConnectionController.$inject = ['$window', '$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService'];
+    function ErrorNoConnectionController($window, $scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
+        this.$window = $window;
+        this._errorKey = 'NoConnection';
+        this.isCordova = false;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        this.media = pipMedia ? pipMedia : $mdMedia;
+        $rootScope['$routing'] = false;
+        this.appHeader();
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
+    }
+    ErrorNoConnectionController.prototype.appHeader = function () {
+        if (!this.pipNavService)
+            return;
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    };
+    ErrorNoConnectionController.prototype.onRetry = function () {
+        this.$window.history.back();
+    };
+    return ErrorNoConnectionController;
+}());
+exports.ErrorNoConnectionController = ErrorNoConnectionController;
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrors.NoConnection', []);
-    thisModule.controller('pipErrorNoConnectionController', ['$scope', '$state', '$rootScope', '$window', '$mdMedia', '$injector', 'pipErrorsService', function ($scope, $state, $rootScope, $window, $mdMedia, $injector, pipErrorsService) {
-        var errorKey = 'NoConnection';
-        $scope.errorConfig = pipErrorsService.getErrorItemByKey(errorKey);
-        var pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-        $scope.media = pipMedia ? pipMedia : $mdMedia;
-        $rootScope.$routing = false;
-        appHeader();
-        $scope.error = $state && $state.params && $state.params.error ? $state.params.error : {};
-        $scope.onRetry = onRetry;
-        return;
-        function onRetry() {
-            $window.history.back();
-        }
-        ;
-        function appHeader() {
-            if (!pipNavService)
-                return;
-            pipNavService.appbar.addShadow();
-            pipNavService.icon.showMenu();
-            pipNavService.breadcrumb.text = $scope.errorConfig.Breadcrumb;
-            pipNavService.actions.hide();
-        }
-        ;
-    }]);
+    thisModule.controller('pipErrorNoConnectionController', ErrorNoConnectionController);
 })();
 },{}],12:[function(require,module,exports){
 (function () {
@@ -812,11 +825,11 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection/no_connection.html',
     '<div class="pip-error-scroll-body pip-scroll">\n' +
     '    <div class="pip-error pip-error-page layout-column flex layout-align-center-center">\n' +
-    '        <img src="{{errorConfig.Image}}" class="pip-pic block" >\n' +
-    '        <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>\n' +
-    '        <div class="pip-error-subtext">{{::errorConfig.SubTitle | translate}}</div>\n' +
+    '        <img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block" >\n' +
+    '        <div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div>\n' +
+    '        <div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div>\n' +
     '        <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
-    '            <md-button aria-label="RETRY" class="md-accent" ng-click="onRetry($event)">\n' +
+    '            <md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">\n' +
     '                {{::\'ERROR_RESPONDING_RETRY\' | translate}}\n' +
     '            </md-button>\n' +
     '        </div>\n' +

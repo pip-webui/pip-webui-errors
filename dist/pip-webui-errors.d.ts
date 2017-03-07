@@ -72,6 +72,21 @@ export class ErrorMaintenanceController {
 }
 
 
+export class PipNoConnectionError {
+    config?: any;
+}
+export class ErrorNoConnectionController {
+    private $window;
+    private _errorKey;
+    private pipNavService;
+    errorConfig: ErrorStateItem;
+    isCordova: boolean;
+    media: any;
+    error: PipNoConnectionError;
+    constructor($window: ng.IWindowService, $scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    private appHeader();
+    onRetry(): void;
+}
 
 
 

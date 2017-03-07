@@ -68,8 +68,7 @@ class ErrorMissingRouteController {
 (() => {
     'use strict';
 
-    var thisModule = angular.module('pipErrors.MissingRoute', []);
-
-    thisModule.controller('pipErrorMissingRouteController', ErrorMissingRouteController);
+    angular.module('pipErrors.MissingRoute', [])
+        .controller('pipErrorMissingRouteController', ErrorMissingRouteController);
 
 })();
