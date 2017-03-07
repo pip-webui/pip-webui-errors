@@ -136,6 +136,8 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
 
 }
 
+    import {ErrorMaintenanceController} from '../maintenance/maintenance';
+
 (() => {
     'use strict';
 
@@ -161,7 +163,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     params: {
                         error: null
                     },
-                    controller: 'pipErrorMaintenanceController',
+                    controller: ErrorMaintenanceController,
                     controllerAs: '$ctrl',
                     templateUrl: 'maintenance/maintenance.html'
                 })

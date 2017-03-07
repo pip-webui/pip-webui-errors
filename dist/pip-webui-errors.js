@@ -205,6 +205,7 @@ var AuthHttpResponseInterceptor = (function () {
     };
     return AuthHttpResponseInterceptor;
 }());
+var maintenance_1 = require("../maintenance/maintenance");
 (function () {
     'use strict';
     ErrorsPageConfig.$inject = ['$stateProvider', '$httpProvider'];
@@ -224,7 +225,7 @@ var AuthHttpResponseInterceptor = (function () {
             params: {
                 error: null
             },
-            controller: 'pipErrorMaintenanceController',
+            controller: maintenance_1.ErrorMaintenanceController,
             controllerAs: '$ctrl',
             templateUrl: 'maintenance/maintenance.html'
         })
@@ -265,7 +266,7 @@ var AuthHttpResponseInterceptor = (function () {
     }])
         .service('pipAuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 })();
-},{}],6:[function(require,module,exports){
+},{"../maintenance/maintenance":9}],6:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorStateItem = (function () {
@@ -523,30 +524,33 @@ var FormErrors = (function () {
 },{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PipError = (function () {
-    function PipError() {
+var PipMaintenanceError = (function () {
+    function PipMaintenanceError() {
     }
-    return PipError;
+    return PipMaintenanceError;
 }());
-var PipErrorConfig = (function () {
-    function PipErrorConfig() {
+exports.PipMaintenanceError = PipMaintenanceError;
+var PipMaintenanceErrorConfig = (function () {
+    function PipMaintenanceErrorConfig() {
     }
-    return PipErrorConfig;
+    return PipMaintenanceErrorConfig;
 }());
-var PipErrorParams = (function () {
-    function PipErrorParams() {
+exports.PipMaintenanceErrorConfig = PipMaintenanceErrorConfig;
+var PipMaintenanceErrorParams = (function () {
+    function PipMaintenanceErrorParams() {
         this.interval = 0;
     }
-    return PipErrorParams;
+    return PipMaintenanceErrorParams;
 }());
+exports.PipMaintenanceErrorParams = PipMaintenanceErrorParams;
 var ErrorMaintenanceController = (function () {
     ErrorMaintenanceController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService'];
     function ErrorMaintenanceController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
         this._errorKey = 'Maintenance';
         this.isCordova = false;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
         this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
         this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
-        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
         this.media = pipMedia ? pipMedia : $mdMedia;
         $rootScope['$routing'] = false;
         this.appHeader();
@@ -564,12 +568,47 @@ var ErrorMaintenanceController = (function () {
     };
     return ErrorMaintenanceController;
 }());
+exports.ErrorMaintenanceController = ErrorMaintenanceController;
 (function () {
     'use strict';
-    var thisModule = angular.module('pipErrors.Maintenance', []);
-    thisModule.controller('pipErrorMaintenanceController', ErrorMaintenanceController);
+    angular.module('pipErrors.Maintenance', []).controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 })();
 },{}],10:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PipMissingRouteErrorState = (function () {
+    function PipMissingRouteErrorState() {
+    }
+    return PipMissingRouteErrorState;
+}());
+var ErrorMissingRouteController = (function () {
+    function ErrorMissingRouteController($scope, $state, $rootScope, $mdMedia, $injector, PipErrorsService) {
+        this._errorKey = 'MissingRoute';
+        this.isCordova = false;
+        var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
+        this.errorConfig = PipErrorsService.getErrorItemByKey(this._errorKey);
+        this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
+        this.media = pipMedia ? pipMedia : $mdMedia;
+        $rootScope['$routing'] = false;
+        this.appHeader();
+        this.fromState = $state && $state.params && $state.params['fromState'] ? $state.params['fromState'] : {};
+        this.unfoundState = $state && $state.params ? $state.params['unfoundState'] : {};
+        this.url = this.unfoundState && this.unfoundState.to ? $state.href(this.unfoundState.to, this.unfoundState.toParams, { absolute: true }) : '';
+        this.urlBack = this.fromState && this.fromState.to ? $state.href(this.fromState.to, this.fromState.fromParams, { absolute: true }) : '';
+    }
+    ErrorMissingRouteController.prototype.appHeader = function () {
+        if (!this.pipNavService)
+            return;
+        this.pipNavService.appbar.addShadow();
+        this.pipNavService.icon.showMenu();
+        this.pipNavService.breadcrumb.text = this.errorConfig.Breadcrumb;
+        this.pipNavService.actions.hide();
+    };
+    ErrorMissingRouteController.prototype.onContinue = function () {
+    };
+    ;
+    return ErrorMissingRouteController;
+}());
 (function () {
     'use strict';
     var thisModule = angular.module('pipErrors.MissingRoute', []);
@@ -768,19 +807,19 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('missing_route/missing_route.html',
     '<div class="pip-error-scroll-body pip-scroll">\n' +
     '    <div class="pip-error pip-error-page layout-column flex layout-align-center-center">\n' +
-    '        <img src="{{errorConfig.Image}}" class="pip-pic block" >\n' +
-    '        <div class="pip-error-text">{{::errorConfig.Title | translate}}</div>\n' +
-    '        <div class="pip-error-subtext">{{::errorConfig.SubTitle | translate}}</div>\n' +
+    '        <img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block" >\n' +
+    '        <div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div>\n' +
+    '        <div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div>\n' +
     '        <div class="pip-error-actions h48 layout-column layout-align-center-center">\n' +
-    '            <md-button aria-label="CONTINUE" class="md-accent" ng-click="onContinue($event)">\n' +
+    '            <md-button aria-label="CONTINUE" class="md-accent" ng-click="$ctrl.onContinue($event)">\n' +
     '                {{::\'ERROR_ROUTE_CONTINUE\' | translate}}\n' +
     '            </md-button>\n' +
     '        </div>\n' +
-    '        <div class="h48" ng-if="url"><a ng-href="{{url}}">\n' +
-    '            {{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{url}}\n' +
+    '        <div class="h48" ng-if="url"><a ng-href="{{$ctrl.url}}">\n' +
+    '            {{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{$ctrl.url}}\n' +
     '        </a></div>\n' +
-    '        <div class="h48" ng-if="urlBack"><a ng-href="{{urlBack}}">\n' +
-    '            {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{urlBack}}\n' +
+    '        <div class="h48" ng-if="urlBack"><a ng-href="{{$ctrl.urlBack}}">\n' +
+    '            {{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{$ctrl.urlBack}}\n' +
     '        </a></div>\n' +
     '    </div>\n' +
     '</div>');

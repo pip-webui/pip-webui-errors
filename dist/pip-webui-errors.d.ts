@@ -50,6 +50,26 @@ class FormErrors {
     private goToUnhandledErrorPage(error);
 }
 
+export class PipMaintenanceError {
+    config?: PipMaintenanceErrorConfig;
+}
+export class PipMaintenanceErrorConfig {
+    params?: PipMaintenanceErrorParams;
+}
+export class PipMaintenanceErrorParams {
+    interval?: number;
+}
+export class ErrorMaintenanceController {
+    private _errorKey;
+    private pipNavService;
+    errorConfig: ErrorStateItem;
+    isCordova: boolean;
+    media: any;
+    error: PipMaintenanceError;
+    timeoutInterval: number;
+    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    private appHeader();
+}
 
 
 

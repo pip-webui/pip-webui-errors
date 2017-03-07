@@ -6,17 +6,17 @@
 /* global angular */
 import {IErrorsService, ErrorsConfig, ErrorStateItem} from '../errors_pages/errors_service';
 
-class PipMaintenanceError {
+export class PipMaintenanceError {
     config?: PipMaintenanceErrorConfig;
 }
-class PipMaintenanceErrorConfig {
+export class PipMaintenanceErrorConfig {
     params?: PipMaintenanceErrorParams;
 }
-class PipMaintenanceErrorParams {
+export class PipMaintenanceErrorParams {
     interval?: number = 0;
 }
 
-class ErrorMaintenanceController {
+export class ErrorMaintenanceController {
     private _errorKey: string = 'Maintenance';
     private pipNavService;
 
@@ -32,10 +32,10 @@ class ErrorMaintenanceController {
         $rootScope: ng.IRootScopeService,
         $mdMedia: angular.material.IMedia, 
         $injector: angular.auto.IInjectorService, 
-        PipMaintenanceErrorsService: IErrorsService) {
+        pipErrorsService: IErrorsService) {
 
         let pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-        this.errorConfig = PipMaintenanceErrorsService.getErrorItemByKey(this._errorKey);
+        this.errorConfig = pipErrorsService.getErrorItemByKey(this._errorKey);
         this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
 
         this.media = pipMedia ? pipMedia : $mdMedia;
@@ -63,8 +63,6 @@ class ErrorMaintenanceController {
 (() => {
     'use strict';
 
-    var thisModule = angular.module('PipMaintenanceErrors.Maintenance', []);
-
-    thisModule.controller('PipMaintenanceErrorMaintenanceController', ErrorMaintenanceController);
+    angular.module('pipErrors.Maintenance', []).controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 
 })();
