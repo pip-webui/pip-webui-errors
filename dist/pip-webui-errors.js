@@ -72,7 +72,6 @@
         });
     }]);
 })();
-
 },{}],2:[function(require,module,exports){
 (function () {
     'use strict';
@@ -87,7 +86,6 @@
     var thisModule = angular.module('pipErrors.Translate', []);
     thisModule.filter('translate', filterTranslate);
 })();
-
 },{}],3:[function(require,module,exports){
 (function () {
     'use strict';
@@ -99,13 +97,11 @@
         'pipFormErrors'
     ]);
 })();
-
 },{}],4:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 angular.module('pipErrorsService', []);
 require("./errors_service");
-
 },{"./errors_service":6}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -274,7 +270,6 @@ var maintenance_1 = require("../maintenance/maintenance");
     }])
         .service('pipAuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 })();
-
 },{"../maintenance/maintenance":9}],6:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -396,7 +391,6 @@ var ErrorsProvider = (function () {
         .module('pipErrorsService')
         .provider('pipErrorsService', ErrorsProvider);
 })();
-
 },{}],7:[function(require,module,exports){
 var ClearErrorsLink = (function () {
     function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
@@ -433,7 +427,6 @@ var ClearErrorsLink = (function () {
     var thisModule = angular.module('pipClearErrors', []);
     thisModule.directive('pipClearErrors', clearErrors);
 })();
-
 },{}],8:[function(require,module,exports){
 var FormErrors = (function () {
     FormErrors.$inject = ['$rootScope'];
@@ -532,7 +525,6 @@ var FormErrors = (function () {
     angular.module('pipFormErrors', [])
         .service('pipFormErrors', FormErrors);
 })();
-
 },{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -585,7 +577,6 @@ exports.ErrorMaintenanceController = ErrorMaintenanceController;
     'use strict';
     angular.module('pipErrors.Maintenance', []).controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 })();
-
 },{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -628,7 +619,6 @@ var ErrorMissingRouteController = (function () {
     angular.module('pipErrors.MissingRoute', [])
         .controller('pipErrorMissingRouteController', ErrorMissingRouteController);
 })();
-
 },{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -671,7 +661,6 @@ exports.ErrorNoConnectionController = ErrorNoConnectionController;
     var thisModule = angular.module('pipErrors.NoConnection', []);
     thisModule.controller('pipErrorNoConnectionController', ErrorNoConnectionController);
 })();
-
 },{}],12:[function(require,module,exports){
 var NoConnectionPanelController = (function () {
     NoConnectionPanelController.$inject = ['$scope'];
@@ -701,7 +690,6 @@ var NoConnectionPanelController = (function () {
     });
     thisModule.controller('pipNoConnectionPanelController', NoConnectionPanelController);
 })();
-
 },{}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -753,7 +741,6 @@ exports.ErrorUnknownController = ErrorUnknownController;
     var thisModule = angular.module('pipErrors.Unknown', []);
     thisModule.controller('pipErrorUnknownController', ErrorUnknownController);
 })();
-
 },{}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -792,7 +779,6 @@ exports.ErrorUnsupportedController = ErrorUnsupportedController;
     var thisModule = angular.module('pipErrors.Unsupported', []);
     thisModule.controller('pipErrorUnsupportedController', ErrorUnsupportedController);
 })();
-
 },{}],15:[function(require,module,exports){
 (function(module) {
 try {
@@ -825,8 +811,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('missing_route/missing_route.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="CONTINUE" class="md-accent" ng-click="$ctrl.onContinue($event)">{{::\'ERROR_ROUTE_CONTINUE\' | translate}}</md-button></div><div class="h48" ng-if="url"><a ng-href="{{$ctrl.url}}">{{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{$ctrl.url}}</a></div><div class="h48" ng-if="urlBack"><a ng-href="{{$ctrl.urlBack}}">{{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{$ctrl.urlBack}}</a></div></div></div>');
+  $templateCache.put('no_connection_panel/no_connection_panel.html',
+    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
 }]);
 })();
 
@@ -837,8 +823,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection_panel/no_connection_panel.html',
-    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
+  $templateCache.put('missing_route/missing_route.html',
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="CONTINUE" class="md-accent" ng-click="$ctrl.onContinue($event)">{{::\'ERROR_ROUTE_CONTINUE\' | translate}}</md-button></div><div class="h48" ng-if="url"><a ng-href="{{$ctrl.url}}">{{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{$ctrl.url}}</a></div><div class="h48" ng-if="urlBack"><a ng-href="{{$ctrl.urlBack}}">{{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{$ctrl.urlBack}}</a></div></div></div>');
 }]);
 })();
 
