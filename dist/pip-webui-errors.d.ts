@@ -71,6 +71,7 @@ export class ErrorMaintenanceController {
     private appHeader();
 }
 
+
 export class PipNoConnectionError {
     config?: any;
 }
@@ -86,7 +87,6 @@ export class ErrorNoConnectionController {
     private appHeader();
     onRetry(): void;
 }
-
 
 class NoConnectionPanelController {
     private _retry;
