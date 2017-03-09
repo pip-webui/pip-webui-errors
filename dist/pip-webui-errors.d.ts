@@ -3,7 +3,6 @@ declare module pip.errors {
 
 
 
-
 export class ErrorStateItem {
     Active: boolean;
     Name: string;
@@ -30,6 +29,7 @@ export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrors(value: ErrorsConfig): void;
     config: ErrorsConfig;
 }
+
 
 class ClearErrorsLink {
     private _fieldController;
@@ -71,7 +71,6 @@ export class ErrorMaintenanceController {
     private appHeader();
 }
 
-
 export class PipNoConnectionError {
     config?: any;
 }
@@ -87,6 +86,7 @@ export class ErrorNoConnectionController {
     private appHeader();
     onRetry(): void;
 }
+
 
 class NoConnectionPanelController {
     private _retry;
