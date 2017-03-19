@@ -1,10 +1,6 @@
-/**
- * @file Maintenance error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
 
-/* global angular */
-import {IErrorsService, ErrorsConfig, ErrorStateItem} from '../errors_pages/errors_service';
+import { IErrorsService } from '../errors_pages/IErrorsService';
+import { ErrorsConfig, ErrorStateItem } from '../errors_pages/ErrorPagesConfig';
 
 export class PipMaintenanceError {
     config?: PipMaintenanceErrorConfig;
@@ -28,10 +24,10 @@ export class ErrorMaintenanceController {
 
     constructor(
         $scope: ng.IScope,
-        $state: ng.ui.IStateService, 
+        $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
-        $mdMedia: angular.material.IMedia, 
-        $injector: angular.auto.IInjectorService, 
+        $mdMedia: angular.material.IMedia,
+        $injector: angular.auto.IInjectorService,
         pipErrorsService: IErrorsService) {
 
         let pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
@@ -43,7 +39,7 @@ export class ErrorMaintenanceController {
         $rootScope['$routing'] = false;
         this.appHeader();
 
-        this.error = $state && $state.params && $state.params['error'] ?  $state.params['error'] : {};
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
         this.timeoutInterval = this.error && this.error.config &&
             this.error.config.params && this.error.config.params.interval ? this.error.config.params.interval : 0;
 

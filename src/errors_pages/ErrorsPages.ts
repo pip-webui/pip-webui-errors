@@ -1,6 +1,6 @@
-/* global angular */
 
-import {IErrorsService, ErrorsConfig} from './errors_service';
+import {IErrorsService} from './IErrorsService';
+import {ErrorsConfig} from './ErrorPagesConfig';
 
 class ErrorsPageRun {
     constructor(

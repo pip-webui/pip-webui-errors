@@ -1,8 +1,7 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}(g.pip || (g.pip = {})).errors = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function () {
-    'use strict';
-    var thisModule = angular.module('pipErrors.Strings', ['pipTranslate']);
-    thisModule.run(['$injector', function ($injector) {
+    angular.module('pipErrors.Strings', ['pipTranslate'])
+        .run(['$injector', function ($injector) {
         var pipTranslate = $injector.has('pipTranslate') ? $injector.get('pipTranslate') : null;
         if (pipTranslate == null)
             return;
@@ -72,10 +71,8 @@
         });
     }]);
 })();
-
 },{}],2:[function(require,module,exports){
 (function () {
-    'use strict';
     filterTranslate.$inject = ['$injector'];
     function filterTranslate($injector) {
         var pipTranslate = $injector.has('pipTranslate')
@@ -84,10 +81,9 @@
             return pipTranslate ? pipTranslate.translate(key) || key : key;
         };
     }
-    var thisModule = angular.module('pipErrors.Translate', []);
-    thisModule.filter('translate', filterTranslate);
+    angular.module('pipErrors.Translate', [])
+        .filter('translate', filterTranslate);
 })();
-
 },{}],3:[function(require,module,exports){
 (function () {
     'use strict';
@@ -99,14 +95,76 @@
         'pipFormErrors'
     ]);
 })();
-
 },{}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-angular.module('pipErrorsService', []);
-require("./errors_service");
-
-},{"./errors_service":6}],5:[function(require,module,exports){
+var ErrorStateItem = (function () {
+    function ErrorStateItem() {
+    }
+    return ErrorStateItem;
+}());
+exports.ErrorStateItem = ErrorStateItem;
+var ErrorsConfig = (function () {
+    function ErrorsConfig() {
+        this.Maintenance = {
+            Active: true,
+            Name: 'errors_maintenance',
+            Event: 'pipMaintenanceError',
+            Title: 'ERROR_AVAILABLE_TITLE',
+            SubTitle: 'ERROR_AVAILABLE_SUBTITLE',
+            Breadcrumb: 'ERROR_AVAILABLE_TITLE',
+            Image: 'images/maintenance.svg'
+        };
+        this.MissingRoute = {
+            Active: true,
+            Name: 'errors_missing_route',
+            Event: '$stateNotFound',
+            Title: 'ERROR_ROUTE_TITLE',
+            SubTitle: 'ERROR_ROUTE_SUBTITLE',
+            Breadcrumb: 'ERROR_ROUTE_PAGE_TITLE',
+            Image: 'images/invalid_route.svg'
+        };
+        this.NoConnection = {
+            Active: true,
+            Name: 'errors_no_connection',
+            Event: 'pipNoConnectionError',
+            Title: 'ERROR_RESPONDING_TITLE',
+            SubTitle: 'ERROR_RESPONDING_SUBTITLE',
+            Breadcrumb: 'ERROR_RESPONDING_TITLE',
+            Image: 'images/no_response.svg'
+        };
+        this.Unknown = {
+            Active: true,
+            Name: 'errors_unknown',
+            Event: 'pipUnknownError',
+            Title: 'ERROR_UNKNOWN_TITLE',
+            SubTitle: 'ERROR_UNKNOWN_SUBTITLE',
+            Breadcrumb: 'ERROR_UNKNOWN_TITLE',
+            Image: 'images/unknown_error.svg'
+        };
+        this.Unsupported = {
+            Active: true,
+            Name: 'errors_unsupported',
+            Event: '',
+            Title: 'ERROR_UNSUPPORTED_TITLE',
+            SubTitle: 'ERROR_UNSUPPORTED_SUBTITLE',
+            Breadcrumb: 'ERROR_UNSUPPORTED_TITLE',
+            Image: '',
+            Params: {
+                supported: {
+                    edge: 11,
+                    ie: 11,
+                    firefox: 43,
+                    opera: 35,
+                    chrome: 47
+                }
+            }
+        };
+    }
+    return ErrorsConfig;
+}());
+exports.ErrorsConfig = ErrorsConfig;
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorsPageRun = (function () {
@@ -274,81 +332,15 @@ var maintenance_1 = require("../maintenance/maintenance");
     }])
         .service('pipAuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 })();
-
-},{"../maintenance/maintenance":9}],6:[function(require,module,exports){
-'use strict';
+},{"../maintenance/maintenance":11}],6:[function(require,module,exports){
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ErrorStateItem = (function () {
-    function ErrorStateItem() {
-    }
-    return ErrorStateItem;
-}());
-exports.ErrorStateItem = ErrorStateItem;
-var ErrorsConfig = (function () {
-    function ErrorsConfig() {
-        this.Maintenance = {
-            Active: true,
-            Name: 'errors_maintenance',
-            Event: 'pipMaintenanceError',
-            Title: 'ERROR_AVAILABLE_TITLE',
-            SubTitle: 'ERROR_AVAILABLE_SUBTITLE',
-            Breadcrumb: 'ERROR_AVAILABLE_TITLE',
-            Image: 'images/maintenance.svg'
-        };
-        this.MissingRoute = {
-            Active: true,
-            Name: 'errors_missing_route',
-            Event: '$stateNotFound',
-            Title: 'ERROR_ROUTE_TITLE',
-            SubTitle: 'ERROR_ROUTE_SUBTITLE',
-            Breadcrumb: 'ERROR_ROUTE_PAGE_TITLE',
-            Image: 'images/invalid_route.svg'
-        };
-        this.NoConnection = {
-            Active: true,
-            Name: 'errors_no_connection',
-            Event: 'pipNoConnectionError',
-            Title: 'ERROR_RESPONDING_TITLE',
-            SubTitle: 'ERROR_RESPONDING_SUBTITLE',
-            Breadcrumb: 'ERROR_RESPONDING_TITLE',
-            Image: 'images/no_response.svg'
-        };
-        this.Unknown = {
-            Active: true,
-            Name: 'errors_unknown',
-            Event: 'pipUnknownError',
-            Title: 'ERROR_UNKNOWN_TITLE',
-            SubTitle: 'ERROR_UNKNOWN_SUBTITLE',
-            Breadcrumb: 'ERROR_UNKNOWN_TITLE',
-            Image: 'images/unknown_error.svg'
-        };
-        this.Unsupported = {
-            Active: true,
-            Name: 'errors_unsupported',
-            Event: '',
-            Title: 'ERROR_UNSUPPORTED_TITLE',
-            SubTitle: 'ERROR_UNSUPPORTED_SUBTITLE',
-            Breadcrumb: 'ERROR_UNSUPPORTED_TITLE',
-            Image: '',
-            Params: {
-                supported: {
-                    edge: 11,
-                    ie: 11,
-                    firefox: 43,
-                    opera: 35,
-                    chrome: 47
-                }
-            }
-        };
-    }
-    return ErrorsConfig;
-}());
-exports.ErrorsConfig = ErrorsConfig;
+var ErrorPagesConfig_1 = require("./ErrorPagesConfig");
 var ErrorsService = (function () {
     ErrorsService.$inject = ['config'];
     function ErrorsService(config) {
         "ngInject";
-        this._config = config || new ErrorsConfig();
+        this._config = config || new ErrorPagesConfig_1.ErrorsConfig();
     }
     Object.defineProperty(ErrorsService.prototype, "config", {
         get: function () {
@@ -368,7 +360,7 @@ var ErrorsService = (function () {
 }());
 var ErrorsProvider = (function () {
     function ErrorsProvider() {
-        this.config = new ErrorsConfig();
+        this.config = new ErrorPagesConfig_1.ErrorsConfig();
     }
     ErrorsProvider.prototype.configureErrorByKey = function (errorName, errorParams) {
         if (!errorName || !errorParams)
@@ -396,8 +388,15 @@ var ErrorsProvider = (function () {
         .module('pipErrorsService')
         .provider('pipErrorsService', ErrorsProvider);
 })();
-
-},{}],7:[function(require,module,exports){
+},{"./ErrorPagesConfig":4}],7:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+},{}],8:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
+angular.module('pipErrorsService', []);
+require("./ErrorsService");
+},{"./ErrorsService":6}],9:[function(require,module,exports){
 var ClearErrorsLink = (function () {
     function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
         var _this = this;
@@ -433,8 +432,7 @@ var ClearErrorsLink = (function () {
     var thisModule = angular.module('pipClearErrors', []);
     thisModule.directive('pipClearErrors', clearErrors);
 })();
-
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var FormErrors = (function () {
     FormErrors.$inject = ['$rootScope'];
     function FormErrors($rootScope) {
@@ -532,8 +530,7 @@ var FormErrors = (function () {
     angular.module('pipFormErrors', [])
         .service('pipFormErrors', FormErrors);
 })();
-
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipMaintenanceError = (function () {
@@ -585,8 +582,7 @@ exports.ErrorMaintenanceController = ErrorMaintenanceController;
     'use strict';
     angular.module('pipErrors.Maintenance', []).controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 })();
-
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipMissingRouteErrorState = (function () {
@@ -628,8 +624,7 @@ var ErrorMissingRouteController = (function () {
     angular.module('pipErrors.MissingRoute', [])
         .controller('pipErrorMissingRouteController', ErrorMissingRouteController);
 })();
-
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipNoConnectionError = (function () {
@@ -671,8 +666,7 @@ exports.ErrorNoConnectionController = ErrorNoConnectionController;
     var thisModule = angular.module('pipErrors.NoConnection', []);
     thisModule.controller('pipErrorNoConnectionController', ErrorNoConnectionController);
 })();
-
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var NoConnectionPanelController = (function () {
     NoConnectionPanelController.$inject = ['$scope'];
     function NoConnectionPanelController($scope) {
@@ -701,8 +695,7 @@ var NoConnectionPanelController = (function () {
     });
     thisModule.controller('pipNoConnectionPanelController', NoConnectionPanelController);
 })();
-
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipUnknownErrorDetails = (function () {
@@ -753,8 +746,7 @@ exports.ErrorUnknownController = ErrorUnknownController;
     var thisModule = angular.module('pipErrors.Unknown', []);
     thisModule.controller('pipErrorUnknownController', ErrorUnknownController);
 })();
-
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipUnsupportedError = (function () {
@@ -792,8 +784,7 @@ exports.ErrorUnsupportedController = ErrorUnsupportedController;
     var thisModule = angular.module('pipErrors.Unsupported', []);
     thisModule.controller('pipErrorUnsupportedController', ErrorUnsupportedController);
 })();
-
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -837,8 +828,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('unsupported/unsupported.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-details layout-row layout-align-center-center" ng-if="$ctrl.media(\'gt-xs\')"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div><div class="pip-error-details" ng-if="$ctrl.media(\'xs\')"><div class="layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div></div><div class="tm16 layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div></div></div></div>');
+  $templateCache.put('no_connection_panel/no_connection_panel.html',
+    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
 }]);
 })();
 
@@ -861,14 +852,14 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection_panel/no_connection_panel.html',
-    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
+  $templateCache.put('unsupported/unsupported.html',
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-details layout-row layout-align-center-center" ng-if="$ctrl.media(\'gt-xs\')"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div><div class="pip-error-details" ng-if="$ctrl.media(\'xs\')"><div class="layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div></div><div class="tm16 layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div></div></div></div>');
 }]);
 })();
 
 
 
-},{}]},{},[15,1,2,4,5,6,3,7,8,9,10,12,11,13,14])(15)
+},{}]},{},[17,1,2,4,5,6,7,8,3,9,10,11,12,14,13,15,16])(17)
 });
 
 //# sourceMappingURL=pip-webui-errors.js.map

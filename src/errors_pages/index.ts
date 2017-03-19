@@ -2,4 +2,4 @@
 
 angular.module('pipErrorsService', []);
 
-import './errors_service';
+import './ErrorsService';

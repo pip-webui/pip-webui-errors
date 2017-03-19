@@ -2,8 +2,6 @@ declare module pip.errors {
 
 
 
-
-
 export class ErrorStateItem {
     Active: boolean;
     Name: string;
@@ -21,6 +19,9 @@ export class ErrorsConfig {
     Unknown: ErrorStateItem;
     Unsupported: ErrorStateItem;
 }
+
+
+
 export interface IErrorsService {
     getErrorItemByKey(errorName: string): ErrorStateItem;
     config: ErrorsConfig;
@@ -30,6 +31,7 @@ export interface IErrorsProvider extends ng.IServiceProvider {
     configureErrors(value: ErrorsConfig): void;
     config: ErrorsConfig;
 }
+
 
 class ClearErrorsLink {
     private _fieldController;
@@ -88,18 +90,10 @@ export class ErrorNoConnectionController {
     onRetry(): void;
 }
 
-export class PipUnsupportedError {
-    config?: any;
-}
-export class ErrorUnsupportedController {
-    private _errorKey;
-    private pipNavService;
-    errorConfig: ErrorStateItem;
-    isCordova: boolean;
-    media: any;
-    error: PipUnsupportedError;
-    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
-    private appHeader();
+class NoConnectionPanelController {
+    private _retry;
+    constructor($scope: ng.IScope);
+    onRetry(): void;
 }
 
 export class PipUnknownErrorDetails {
@@ -124,10 +118,18 @@ export class ErrorUnknownController {
     onDetails(): void;
 }
 
-class NoConnectionPanelController {
-    private _retry;
-    constructor($scope: ng.IScope);
-    onRetry(): void;
+export class PipUnsupportedError {
+    config?: any;
+}
+export class ErrorUnsupportedController {
+    private _errorKey;
+    private pipNavService;
+    errorConfig: ErrorStateItem;
+    isCordova: boolean;
+    media: any;
+    error: PipUnsupportedError;
+    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    private appHeader();
 }
 
 }

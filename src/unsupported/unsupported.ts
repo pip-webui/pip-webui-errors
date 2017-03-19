@@ -1,12 +1,6 @@
-/**
- * @file Unsupported error controller
- * @copyright Digital Living Software Corp. 2014-2016
- */
 
-/* global angular */
-
-
-import {IErrorsService, ErrorsConfig, ErrorStateItem} from '../errors_pages/errors_service';
+import { IErrorsService } from '../errors_pages/IErrorsService';
+import { ErrorsConfig, ErrorStateItem } from '../errors_pages/ErrorPagesConfig';
 
 export class PipUnsupportedError {
     config?: any;
