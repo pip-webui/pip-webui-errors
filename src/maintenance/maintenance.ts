@@ -1,18 +1,9 @@
 
 import { IErrorsService } from '../errors_pages/IErrorsService';
 import { ErrorsConfig, ErrorStateItem } from '../errors_pages/ErrorPagesConfig';
+import { PipMaintenanceError } from './MaintenanceConfig';
 
-export class PipMaintenanceError {
-    config?: PipMaintenanceErrorConfig;
-}
-export class PipMaintenanceErrorConfig {
-    params?: PipMaintenanceErrorParams;
-}
-export class PipMaintenanceErrorParams {
-    interval?: number = 0;
-}
-
-export class ErrorMaintenanceController {
+class ErrorMaintenanceController {
     private _errorKey: string = 'Maintenance';
     private pipNavService;
 
@@ -57,7 +48,7 @@ export class ErrorMaintenanceController {
 
 
 (() => {
-    
+
     angular.module('pipErrors.Maintenance', [])
     .controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 

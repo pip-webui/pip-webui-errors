@@ -256,7 +256,6 @@ var AuthHttpResponseInterceptor = (function () {
     };
     return AuthHttpResponseInterceptor;
 }());
-var Maintenance_1 = require("../maintenance/Maintenance");
 (function () {
     'use strict';
     ErrorsPageConfig.$inject = ['$stateProvider', '$httpProvider'];
@@ -277,7 +276,7 @@ var Maintenance_1 = require("../maintenance/Maintenance");
             params: {
                 error: null
             },
-            controller: Maintenance_1.ErrorMaintenanceController,
+            controller: 'pipErrorMaintenanceController',
             controllerAs: '$ctrl',
             templateUrl: 'maintenance/Maintenance.html'
         })
@@ -321,7 +320,7 @@ var Maintenance_1 = require("../maintenance/Maintenance");
     }])
         .service('pipAuthHttpResponseInterceptor', AuthHttpResponseInterceptor);
 })();
-},{"../maintenance/Maintenance":10}],5:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorPagesConfig_1 = require("./ErrorPagesConfig");
@@ -526,25 +525,6 @@ var FormErrors = (function () {
 },{}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PipMaintenanceError = (function () {
-    function PipMaintenanceError() {
-    }
-    return PipMaintenanceError;
-}());
-exports.PipMaintenanceError = PipMaintenanceError;
-var PipMaintenanceErrorConfig = (function () {
-    function PipMaintenanceErrorConfig() {
-    }
-    return PipMaintenanceErrorConfig;
-}());
-exports.PipMaintenanceErrorConfig = PipMaintenanceErrorConfig;
-var PipMaintenanceErrorParams = (function () {
-    function PipMaintenanceErrorParams() {
-        this.interval = 0;
-    }
-    return PipMaintenanceErrorParams;
-}());
-exports.PipMaintenanceErrorParams = PipMaintenanceErrorParams;
 var ErrorMaintenanceController = (function () {
     ErrorMaintenanceController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorsService'];
     function ErrorMaintenanceController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorsService) {
@@ -570,12 +550,33 @@ var ErrorMaintenanceController = (function () {
     };
     return ErrorMaintenanceController;
 }());
-exports.ErrorMaintenanceController = ErrorMaintenanceController;
 (function () {
     angular.module('pipErrors.Maintenance', [])
         .controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 })();
 },{}],11:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PipMaintenanceError = (function () {
+    function PipMaintenanceError() {
+    }
+    return PipMaintenanceError;
+}());
+exports.PipMaintenanceError = PipMaintenanceError;
+var PipMaintenanceErrorConfig = (function () {
+    function PipMaintenanceErrorConfig() {
+    }
+    return PipMaintenanceErrorConfig;
+}());
+exports.PipMaintenanceErrorConfig = PipMaintenanceErrorConfig;
+var PipMaintenanceErrorParams = (function () {
+    function PipMaintenanceErrorParams() {
+        this.interval = 0;
+    }
+    return PipMaintenanceErrorParams;
+}());
+exports.PipMaintenanceErrorParams = PipMaintenanceErrorParams;
+},{}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipMissingRouteErrorState = (function () {
@@ -617,7 +618,7 @@ var ErrorMissingRouteController = (function () {
     angular.module('pipErrors.MissingRoute', [])
         .controller('pipErrorMissingRouteController', ErrorMissingRouteController);
 })();
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipNoConnectionError = (function () {
@@ -658,7 +659,7 @@ exports.ErrorNoConnectionController = ErrorNoConnectionController;
     angular.module('pipErrors.NoConnection', [])
         .controller('pipErrorNoConnectionController', ErrorNoConnectionController);
 })();
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var NoConnectionPanelController = (function () {
     NoConnectionPanelController.$inject = ['$scope'];
     function NoConnectionPanelController($scope) {
@@ -685,7 +686,7 @@ var NoConnectionPanelController = (function () {
         };
     }).controller('pipNoConnectionPanelController', NoConnectionPanelController);
 })();
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipUnknownErrorDetails = (function () {
@@ -736,7 +737,7 @@ exports.ErrorUnknownController = ErrorUnknownController;
     var thisModule = angular.module('pipErrors.Unknown', []);
     thisModule.controller('pipErrorUnknownController', ErrorUnknownController);
 })();
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PipUnsupportedError = (function () {
@@ -774,7 +775,7 @@ exports.ErrorUnsupportedController = ErrorUnsupportedController;
     var thisModule = angular.module('pipErrors.Unsupported', []);
     thisModule.controller('pipErrorUnsupportedController', ErrorUnsupportedController);
 })();
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -849,7 +850,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[16,1,2,3,4,5,6,7,8,9,10,11,13,12,14,15])(16)
+},{}]},{},[17,1,2,3,4,5,6,7,8,9,10,11,12,14,13,15,16])(17)
 });
 
 //# sourceMappingURL=pip-webui-errors.js.map
