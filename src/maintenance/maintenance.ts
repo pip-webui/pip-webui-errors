@@ -57,8 +57,8 @@ export class ErrorMaintenanceController {
 
 
 (() => {
-    'use strict';
-
-    angular.module('pipErrors.Maintenance', []).controller('PipErrorMaintenanceController', ErrorMaintenanceController);
+    
+    angular.module('pipErrors.Maintenance', [])
+    .controller('PipErrorMaintenanceController', ErrorMaintenanceController);
 
 })();

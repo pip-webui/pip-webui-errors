@@ -51,12 +51,10 @@ export class ErrorNoConnectionController {
     }
 }
 
-(function () {
-    'use strict';
+(() => {
 
-    var thisModule = angular.module('pipErrors.NoConnection', []);
-
-    thisModule.controller('pipErrorNoConnectionController',  ErrorNoConnectionController);
+    angular.module('pipErrors.NoConnection', [])
+        .controller('pipErrorNoConnectionController',  ErrorNoConnectionController);
 
 
 })();

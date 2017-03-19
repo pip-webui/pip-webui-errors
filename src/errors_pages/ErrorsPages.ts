@@ -136,7 +136,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
 
 }
 
-    import {ErrorMaintenanceController} from '../maintenance/maintenance';
+    import {ErrorMaintenanceController} from '../maintenance/Maintenance';
 
 (() => {
     'use strict';
@@ -157,7 +157,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     },
                     controller: 'pipErrorNoConnectionController',
                      controllerAs: '$ctrl',
-                    templateUrl: 'no_connection/no_connection.html'
+                    templateUrl: 'no_connection/NoConnection.html'
                 })
                 .state('errors_maintenance', {
                     url: '/errors/maintenance',
@@ -166,7 +166,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     },
                     controller: ErrorMaintenanceController,
                     controllerAs: '$ctrl',
-                    templateUrl: 'maintenance/maintenance.html'
+                    templateUrl: 'maintenance/Maintenance.html'
                 })
                 .state('errors_missing_route', {
                     url: '/errors/missing_route',
@@ -176,7 +176,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     },
                     controller: 'pipErrorMissingRouteController',
                     controllerAs: '$ctrl',
-                    templateUrl: 'missing_route/missing_route.html'
+                    templateUrl: 'missing_route/MissingRoute.html'
                 })
                 .state('errors_unsupported', {
                     url: '/errors/unsupported',
@@ -185,7 +185,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     },
                     controllerAs: '$ctrl',
                     controller: 'pipErrorUnsupportedController',
-                    templateUrl: 'unsupported/unsupported.html'
+                    templateUrl: 'unsupported/Unsupported.html'
                 })
                 .state('errors_unknown', {
                     url: '/errors/unknown',
@@ -194,7 +194,7 @@ class AuthHttpResponseInterceptor implements IAuthHttpResponseInterceptor{
                     }, 
                     controllerAs: '$ctrl',
                     controller: 'pipErrorUnknownController',
-                    templateUrl: 'unknown/unknown.html'
+                    templateUrl: 'unknown/Unknown.html'
                 });
     }
 

@@ -104,8 +104,7 @@ class FormErrors {
 }
 
 (() => {
-    'use strict';
-
+    
     angular.module('pipFormErrors', [])
         .service('pipFormErrors', FormErrors);
 

@@ -32,7 +32,6 @@ export interface IErrorsProvider extends ng.IServiceProvider {
     config: ErrorsConfig;
 }
 
-
 class ClearErrorsLink {
     private _fieldController;
     private _formController;

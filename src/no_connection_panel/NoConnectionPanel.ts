@@ -1,12 +1,7 @@
-/**
- * @file No Connection Error panel
- * @copyright Digital Living Software Corp. 2014-2016
- */
 
-/* global _, angular */
 class NoConnectionPanelController {
     private _retry: Function;
-    constructor($scope: ng.IScope){
+    constructor($scope: ng.IScope) {
         this._retry = $scope['retry'];
     }
 
@@ -16,11 +11,8 @@ class NoConnectionPanelController {
 }
 
 (() => {
-    'use strict';
-
-    var thisModule = angular.module("pipNoConnectionPanel", ['pipErrors.Translate']);
-
-    thisModule.directive('pipNoConnectionPanel',
+    angular.module("pipNoConnectionPanel", ['pipErrors.Translate'])
+        .directive('pipNoConnectionPanel',
         () => {
             return {
                 restrict: 'E',
@@ -28,14 +20,12 @@ class NoConnectionPanelController {
                     error: '=pipError',
                     retry: '=pipRetry'
                 },
-                templateUrl: 'no_connection_panel/no_connection_panel.html',
+                templateUrl: 'no_connection_panel/NoConnectionPanel.html',
                 controller: 'pipNoConnectionPanelController',
                 controllerAs: '$ctrl'
             };
         }
-    );
-
-    thisModule.controller('pipNoConnectionPanelController', NoConnectionPanelController);
+        ).controller('pipNoConnectionPanelController', NoConnectionPanelController);
 
 })();
 

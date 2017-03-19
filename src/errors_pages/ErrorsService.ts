@@ -61,7 +61,7 @@ class ErrorsProvider implements IErrorsProvider {
 
 (() => {
     angular
-        .module('pipErrorsService')
+        .module('pipErrorsService', [])
         .provider('pipErrorsService', ErrorsProvider);
 
 })();
