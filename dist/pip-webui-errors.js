@@ -400,8 +400,8 @@ require("./ErrorsService");
 var ClearErrorsLink = (function () {
     function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
         var _this = this;
-        this._fieldController = $ctrls[0],
-            this._formController = $ctrls[1];
+        this._fieldController = $ctrls[0];
+        this._formController = $ctrls[1];
         $scope.$watch($attrs['ngModel'], function (newValue) {
             _this.clearFieldErrors();
             _this.clearFormErrors();
