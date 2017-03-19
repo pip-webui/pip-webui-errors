@@ -1,7 +1,7 @@
 module.exports = {
     module: {
         name: 'pipErrors',
-        styles: 'errors',
+        styles: 'index',
         export: 'pip.errors',
         standalone: 'pip.errors'
     },
