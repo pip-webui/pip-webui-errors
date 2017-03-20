@@ -19,5 +19,5 @@ angular
         'pipFormErrors'
     ]);
 
-export * from './configure/ErrorPageConfig';
-export * from './configure/IErrorPageConfigService';
+export * from './error_pages/ErrorPageConfig';
+export * from './error_pages/IErrorPageConfigService';

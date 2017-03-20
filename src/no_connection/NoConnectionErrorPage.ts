@@ -1,6 +1,6 @@
 
-import { IErrorPageConfigService } from '../configure/IErrorPageConfigService';
-import { ErrorPageConfigs, ErrorPageConfig } from '../configure/ErrorPageConfig';
+import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
+import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
 export class NoConnectionError {
     config?: any;
