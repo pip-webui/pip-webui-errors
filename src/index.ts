@@ -1,12 +1,23 @@
-﻿(() => {
+﻿angular
+    .module('pipErrors.Pages', [
+        'ngMaterial',
+    ]);
 
-    angular.module('pipErrors', [
+import './maintenance/MaintenanceErrorPage';
+import './missing_route/MissingRouteErrorPage';
+import './no_connection/NoConnectionErrorPage';
+import './unknown/UnknownErrorPage';
+import './unsupported/UnsupportedErrorPage';
+
+angular
+    .module('pipErrors', [
+        'pipErrors.Templates',
         'pipErrors.Pages',
         'pipErrorsService',
         'pipNoConnectionPanel',
         'pipClearErrors',
-	    'pipFormErrors'
-
+        'pipFormErrors'
     ]);
-    
-})();
+
+export * from './configure/ErrorPageConfig';
+export * from './configure/IErrorPageConfigService';

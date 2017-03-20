@@ -1,4 +1,6 @@
-class FormErrors {
+
+// Todo: Define service interface
+class FormErrorsService {
 
     constructor(private $rootScope: ng.IRootScopeService) { }
 
@@ -100,12 +102,13 @@ class FormErrors {
         this.$rootScope.$emit('pipUnhandledInternalError', {
             error: error
         });
-    };
+    }
 }
 
 (() => {
     
-    angular.module('pipFormErrors', [])
-        .service('pipFormErrors', FormErrors);
+    angular
+        .module('pipFormErrors', [])
+        .service('pipFormErrors', FormErrorsService);
 
 })();

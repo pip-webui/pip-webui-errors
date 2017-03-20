@@ -1,5 +1,5 @@
 
-export class ErrorStateItem {
+export class ErrorPageConfig {
     Active: boolean;
     Name: string;
     Event: string;
@@ -10,36 +10,40 @@ export class ErrorStateItem {
     Params?: any;
 }
 
-export class ErrorsConfig {
-    Maintenance: ErrorStateItem = {
+export class ErrorPageConfigs {
+
+    Maintenance: ErrorPageConfig = {
         Active: true,
         Name: 'errors_maintenance',
         Event: 'pipMaintenanceError',
-        Title: 'ERROR_AVAILABLE_TITLE',
-        SubTitle: 'ERROR_AVAILABLE_SUBTITLE',
-        Breadcrumb: 'ERROR_AVAILABLE_TITLE',
+        Title: 'ERROR_MAINTENANCE_TITLE',
+        SubTitle: 'ERROR_MAINTENANCE_SUBTITLE',
+        Breadcrumb: 'ERROR_MAINTENANCE_TITLE',
         Image: 'images/maintenance.svg'
         
     };
-    MissingRoute: ErrorStateItem = {
+
+    MissingRoute: ErrorPageConfig = {
         Active: true,
         Name: 'errors_missing_route',
         Event: '$stateNotFound',
-        Title: 'ERROR_ROUTE_TITLE',
-        SubTitle: 'ERROR_ROUTE_SUBTITLE',
-        Breadcrumb: 'ERROR_ROUTE_PAGE_TITLE',
+        Title: 'ERROR_MISSING_ROUTE_TITLE',
+        SubTitle: 'ERROR_MISSING_ROUTE_SUBTITLE',
+        Breadcrumb: 'ERROR_MISSING_ROUTE_PAGE_TITLE',
         Image: 'images/invalid_route.svg'
     };
-    NoConnection: ErrorStateItem = {
+
+    NoConnection: ErrorPageConfig = {
         Active: true,
         Name: 'errors_no_connection',
         Event: 'pipNoConnectionError',
-        Title: 'ERROR_RESPONDING_TITLE',
-        SubTitle: 'ERROR_RESPONDING_SUBTITLE',
-        Breadcrumb: 'ERROR_RESPONDING_TITLE',
+        Title: 'ERROR_NO_CONNECTION_TITLE',
+        SubTitle: 'ERROR_NO_CONNECTION_SUBTITLE',
+        Breadcrumb: 'ERROR_NO_CONNECTION_TITLE',
         Image: 'images/no_response.svg'
     };
-    Unknown: ErrorStateItem = {
+
+    Unknown: ErrorPageConfig = {
         Active: true,
         Name: 'errors_unknown',
         Event: 'pipUnknownError',
@@ -48,7 +52,8 @@ export class ErrorsConfig {
         Breadcrumb: 'ERROR_UNKNOWN_TITLE',
         Image: 'images/unknown_error.svg'
     };
-    Unsupported: ErrorStateItem = {
+
+    Unsupported: ErrorPageConfig = {
         Active: true,
         Name: 'errors_unsupported',
         Event: '',

@@ -6,24 +6,24 @@
         if (pipTranslate == null)
             return;
         pipTranslate.translations('en', {
-            'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
-            'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
-            'ERROR_ROUTE_CONTINUE': 'Continue',
-            'ERROR_ROUTE_TRY_AGAIN': 'Try again',
-            'ERROR_ROUTE_GO_BACK': 'Go Back',
-            'ERROR_ROUTE_PAGE_TITLE': 'Wrong page',
+            'ERROR_MISSING_ROUTE_TITLE': 'Sorry, the page isn\'t available',
+            'ERROR_MISSING_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
+            'ERROR_MISSING_ROUTE_CONTINUE': 'Continue',
+            'ERROR_MISSING_ROUTE_TRY_AGAIN': 'Try again',
+            'ERROR_MISSING_ROUTE_GO_BACK': 'Go Back',
+            'ERROR_MISSING_ROUTE_PAGE_TITLE': 'Wrong page',
             'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
             'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
             'ERROR_UNKNOWN_CLOSE': 'Close',
             'ERROR_UNKNOWN_DETAILS': 'Details',
-            'ERROR_AVAILABLE_TITLE': 'The server is on maintenance',
-            'ERROR_AVAILABLE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
+            'ERROR_MAINTENANCE_TITLE': 'The server is on maintenance',
+            'ERROR_MAINTENANCE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
                 'a short period. We\'ll be back soon. Thank for your patience.',
-            'ERROR_AVAILABLE_CLOSE': 'Close',
-            'ERROR_AVAILABLE_TRY_AGAIN': 'Try after',
-            'ERROR_RESPONDING_TITLE': 'No connection to the server',
-            'ERROR_RESPONDING_SUBTITLE': 'Unable to connect to the server. Check your Internet connection and try again.',
-            'ERROR_RESPONDING_RETRY': 'Retry',
+            'ERROR_MAINTENANCE_CLOSE': 'Close',
+            'ERROR_MAINTENANCE_TRY_AGAIN': 'Try after',
+            'ERROR_NO_CONNECTION_TITLE': 'No connection to the server',
+            'ERROR_NO_CONNECTION_SUBTITLE': 'Unable to connect to the server. Check your Internet connection and try again.',
+            'ERROR_NO_CONNECTION_RETRY': 'Retry',
             'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
             'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
                 'and easier to use. Unfortunately, your browser doesn\'t support those ' +
@@ -38,24 +38,24 @@
             'ERROR_UNSUPPORTED_FM_VER': 'Version 45+'
         });
         pipTranslate.translations('ru', {
-            'ERROR_ROUTE_TITLE': 'Sorry, the page isn\'t available',
-            'ERROR_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
-            'ERROR_ROUTE_CONTINUE': 'Continue',
-            'ERROR_ROUTE_TRY_AGAIN': 'Try again',
-            'ERROR_ROUTE_GO_BACK': 'Go Back',
-            'ERROR_ROUTE_PAGE_TITLE': 'Wrong page',
+            'ERROR_MISSING_ROUTE_TITLE': 'Sorry, the page isn\'t available',
+            'ERROR_MISSING_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
+            'ERROR_MISSING_ROUTE_CONTINUE': 'Continue',
+            'ERROR_MISSING_ROUTE_TRY_AGAIN': 'Try again',
+            'ERROR_MISSING_ROUTE_GO_BACK': 'Go Back',
+            'ERROR_MISSING_ROUTE_PAGE_TITLE': 'Wrong page',
             'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
             'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
             'ERROR_UNKNOWN_CLOSE': 'Close',
             'ERROR_UNKNOWN_DETAILS': 'Details',
-            'ERROR_AVAILABLE_TITLE': 'The server is on maintenance',
-            'ERROR_AVAILABLE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
+            'ERROR_MAINTENANCE_TITLE': 'The server is on maintenance',
+            'ERROR_MAINTENANCE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
                 'a short period. We\'ll be back soon. Thank for your patience.',
-            'ERROR_AVAILABLE_CLOSE': 'Close',
-            'ERROR_AVAILABLE_TRY_AGAIN': 'Try after',
-            'ERROR_RESPONDING_TITLE': 'No connection to the server',
-            'ERROR_RESPONDING_SUBTITLE': 'Unable to connect to server. Check your Internet connection and try again.',
-            'ERROR_RESPONDING_RETRY': 'Retry',
+            'ERROR_MAINTENANCE_CLOSE': 'Close',
+            'ERROR_MAINTENANCE_TRY_AGAIN': 'Try after',
+            'ERROR_NO_CONNECTION_TITLE': 'No connection to the server',
+            'ERROR_NO_CONNECTION_SUBTITLE': 'Unable to connect to server. Check your Internet connection and try again.',
+            'ERROR_NO_CONNECTION_RETRY': 'Retry',
             'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
             'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
                 'and easier to use. Unfortunately, your browser doesn\'t support those ' +
@@ -99,27 +99,27 @@ var ErrorsConfig = (function () {
             Active: true,
             Name: 'errors_maintenance',
             Event: 'pipMaintenanceError',
-            Title: 'ERROR_AVAILABLE_TITLE',
-            SubTitle: 'ERROR_AVAILABLE_SUBTITLE',
-            Breadcrumb: 'ERROR_AVAILABLE_TITLE',
+            Title: 'ERROR_MAINTENANCE_TITLE',
+            SubTitle: 'ERROR_MAINTENANCE_SUBTITLE',
+            Breadcrumb: 'ERROR_MAINTENANCE_TITLE',
             Image: 'images/maintenance.svg'
         };
         this.MissingRoute = {
             Active: true,
             Name: 'errors_missing_route',
             Event: '$stateNotFound',
-            Title: 'ERROR_ROUTE_TITLE',
-            SubTitle: 'ERROR_ROUTE_SUBTITLE',
-            Breadcrumb: 'ERROR_ROUTE_PAGE_TITLE',
+            Title: 'ERROR_MISSING_ROUTE_TITLE',
+            SubTitle: 'ERROR_MISSING_ROUTE_SUBTITLE',
+            Breadcrumb: 'ERROR_MISSING_ROUTE_PAGE_TITLE',
             Image: 'images/invalid_route.svg'
         };
         this.NoConnection = {
             Active: true,
             Name: 'errors_no_connection',
             Event: 'pipNoConnectionError',
-            Title: 'ERROR_RESPONDING_TITLE',
-            SubTitle: 'ERROR_RESPONDING_SUBTITLE',
-            Breadcrumb: 'ERROR_RESPONDING_TITLE',
+            Title: 'ERROR_NO_CONNECTION_TITLE',
+            SubTitle: 'ERROR_NO_CONNECTION_SUBTITLE',
+            Breadcrumb: 'ERROR_NO_CONNECTION_TITLE',
             Image: 'images/no_response.svg'
         };
         this.Unknown = {
@@ -784,7 +784,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('maintenance/Maintenance.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::\'ERROR_AVAILABLE_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_AVAILABLE_SUBTITLE\' | translate}}</div><div class="pip-error-subtext" ng-if="$ctrl.timeoutInterval">{{::\'ERROR_AVAILABLE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.</div><div class="pip-error-actions h48 layout-column layout-align-center-center" ng-if="$ctrl.isCordova"><md-button class="md-accent" ng-click="$ctrl.onClose($event)" aria-label="CLOSE">{{::\'ERROR_AVAILABLE_CLOSE\' | translate}}</md-button></div></div></div>');
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::\'ERROR_MAINTENANCE_TITLE\' | translate}}</div><div class="pip-error-subtext">{{::\'ERROR_MAINTENANCE_SUBTITLE\' | translate}}</div><div class="pip-error-subtext" ng-if="$ctrl.timeoutInterval">{{::\'ERROR_MAINTENANCE_TRY_AGAIN\' | translate}} {{timeoutInterval}} sec.</div><div class="pip-error-actions h48 layout-column layout-align-center-center" ng-if="$ctrl.isCordova"><md-button class="md-accent" ng-click="$ctrl.onClose($event)" aria-label="CLOSE">{{::\'ERROR_MAINTENANCE_CLOSE\' | translate}}</md-button></div></div></div>');
 }]);
 })();
 
@@ -796,7 +796,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('missing_route/MissingRoute.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="CONTINUE" class="md-accent" ng-click="$ctrl.onContinue($event)">{{::\'ERROR_ROUTE_CONTINUE\' | translate}}</md-button></div><div class="h48" ng-if="url"><a ng-href="{{$ctrl.url}}">{{::\'ERROR_ROUTE_TRY_AGAIN\' | translate }}: {{$ctrl.url}}</a></div><div class="h48" ng-if="urlBack"><a ng-href="{{$ctrl.urlBack}}">{{::\'ERROR_ROUTE_GO_BACK\' | translate }}: {{$ctrl.urlBack}}</a></div></div></div>');
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="CONTINUE" class="md-accent" ng-click="$ctrl.onContinue($event)">{{::\'ERROR_MISSING_ROUTE_CONTINUE\' | translate}}</md-button></div><div class="h48" ng-if="url"><a ng-href="{{$ctrl.url}}">{{::\'ERROR_MISSING_ROUTE_TRY_AGAIN\' | translate }}: {{$ctrl.url}}</a></div><div class="h48" ng-if="urlBack"><a ng-href="{{$ctrl.urlBack}}">{{::\'ERROR_MISSING_ROUTE_GO_BACK\' | translate }}: {{$ctrl.urlBack}}</a></div></div></div>');
 }]);
 })();
 
@@ -808,7 +808,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection/NoConnection.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div></div>');
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_NO_CONNECTION_RETRY\' | translate}}</md-button></div></div></div>');
 }]);
 })();
 
@@ -820,7 +820,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection_panel/NoConnectionPanel.html',
-    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_RESPONDING_RETRY\' | translate}}</md-button></div></div>');
+    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_NO_CONNECTION_RETRY\' | translate}}</md-button></div></div>');
 }]);
 })();
 

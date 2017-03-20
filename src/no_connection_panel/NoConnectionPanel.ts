@@ -11,7 +11,8 @@ class NoConnectionPanelController {
 }
 
 (() => {
-    angular.module("pipNoConnectionPanel", ['pipErrors.Translate'])
+    angular
+        .module("pipNoConnectionPanel", ['pipErrors.Translate'])
         .directive('pipNoConnectionPanel',
         () => {
             return {

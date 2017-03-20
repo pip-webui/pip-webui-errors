@@ -33,9 +33,7 @@ class ClearErrorsLink {
 }
 
 (() => {
-    'use strict';
-
-    function clearErrors() {
+    function clearErrorsDirective() {
         return {
             restrict: 'A',
             require: ['ngModel', '^?form'],
@@ -43,8 +41,7 @@ class ClearErrorsLink {
         };
     }
 
-    var thisModule = angular.module('pipClearErrors', []);
-
-    thisModule.directive('pipClearErrors', clearErrors);
-
+    angular
+        .module('pipClearErrors', [])
+        .directive('pipClearErrors', clearErrorsDirective);
 })();
