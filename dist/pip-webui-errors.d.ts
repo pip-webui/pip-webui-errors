@@ -38,15 +38,14 @@ class ClearErrorsLink {
     private clearFormErrors();
 }
 
-class FormErrorsService {
-    private $rootScope;
-    constructor($rootScope: ng.IRootScopeService);
+
+export interface IFormErrorsService {
     errorsWithHint(field: any): any;
     touchedErrorsWithHint(form: ng.IFormController, field: any): any;
     resetFormErrors(form: ng.IFormController, errors?: boolean): void;
     resetFieldsErrors(form: ng.IFormController, field: any): void;
     setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
-    private goToUnhandledErrorPage(error);
+    goToUnhandledErrorPage(error: any): any;
 }
 
 interface IHttpResponseInterceptor {
@@ -80,6 +79,7 @@ export class NoConnectionErrorPageController {
 
 class NoConnectionPanelController {
     private _retry;
+    error: any;
     constructor($scope: ng.IScope);
     onRetry(): void;
 }
@@ -108,16 +108,6 @@ export class UnknownErrorPageController {
 
 export class UnsupportedError {
     config?: any;
-}
-export class UnsupportedErrorPageController {
-    private _pageName;
-    private pipNavService;
-    errorConfig: ErrorPageConfig;
-    isCordova: boolean;
-    media: any;
-    error: UnsupportedError;
-    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorPageConfigService);
-    private appHeader();
 }
 
 }
