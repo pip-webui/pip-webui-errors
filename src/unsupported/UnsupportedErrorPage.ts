@@ -6,7 +6,7 @@ export class UnsupportedError {
     config?: any;
 }
 
-export class UnsupportedErrorPageController {
+class UnsupportedErrorPageController {
     private _pageName: string = 'Unsupported';
     private pipNavService;
 
@@ -21,12 +21,12 @@ export class UnsupportedErrorPageController {
         $rootScope: ng.IRootScopeService,
         $mdMedia: angular.material.IMedia, 
         $injector: angular.auto.IInjectorService, 
-        pipErrorsService: IErrorPageConfigService
+        pipErrorPageConfigService: IErrorPageConfigService
     ) {
         "ngInject";
 
         let pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
-        this.errorConfig = pipErrorsService.getErrorPageConfig(this._pageName);
+        this.errorConfig = pipErrorPageConfigService.getErrorPageConfig(this._pageName);
         this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
 
         this.media = pipMedia ? pipMedia : $mdMedia;
@@ -76,7 +76,7 @@ function initUnsupportedErrorPage(
 
     if (!config.Unsupported.Active) return;
 
-    let pipSystemInfo: any = this.$injector.has('pipSystemInfo') ? this.$injector.get('pipSystemInfo') : null;
+    let pipSystemInfo: any = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
     if (!pipSystemInfo) { return; }
 
     // Todo: Make it configurable
@@ -141,7 +141,7 @@ function setUnsupportedErrorPageResources($injector: angular.auto.IInjectorServi
 
 (() => {
     angular
-        .module('pipErrors.Unsupported', [])
+        .module('pipErrors.Pages')
         .config(configureUnsupportedErrorPageRoute)
         .run(initUnsupportedErrorPage)
         .run(setUnsupportedErrorPageResources);
