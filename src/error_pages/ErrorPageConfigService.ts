@@ -1,5 +1,5 @@
 import { IErrorPageConfigService, IErrorPageConfigProvider } from './IErrorPageConfigService';
-import { ErrorPageConfigs, ErrorPageConfig } from './ErrorPageConfig';
+import { ErrorPageConfigs, ErrorPageConfig, SupportedBrowsers } from './ErrorPageConfig';
 
 class ErrorPageConfigService implements IErrorPageConfigService {
     private _config: ErrorPageConfigs;
@@ -33,6 +33,7 @@ class ErrorPageConfigProvider implements IErrorPageConfigProvider {
 
     constructor() {
         this.configs = new ErrorPageConfigs();
+        this.configs.Unsupported.Params.supported = new SupportedBrowsers();
     }
 
     public setErrorPageConfig(pageName: string, config: ErrorPageConfig): void {
@@ -46,6 +47,10 @@ class ErrorPageConfigProvider implements IErrorPageConfigProvider {
         if (!configs) return;
 
         this.configs = <ErrorPageConfigs>_.defaultsDeep(configs, this.configs);
+    }
+
+    public setSupportedBrowsers(browsers: SupportedBrowsers): void {
+        this.configs.Unsupported.Params.supported = browsers;
     }
 
     public $get(): ErrorPageConfigService {

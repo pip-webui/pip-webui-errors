@@ -79,14 +79,7 @@ function initUnsupportedErrorPage(
     let pipSystemInfo: any = $injector.has('pipSystemInfo') ? $injector.get('pipSystemInfo') : null;
     if (!pipSystemInfo) { return; }
 
-    // Todo: Make it configurable
-    let supportedVersions = {
-        edge: 11,
-        ie: 11,
-        firefox: 43, //4, for testing
-        opera: 35,
-        chrome: 47
-    };
+    let supportedVersions = config.Unsupported.Params.supported;
 
     let browser: string = pipSystemInfo.browserName;
     let version: string = pipSystemInfo.browserVersion;

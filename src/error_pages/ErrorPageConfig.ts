@@ -20,7 +20,7 @@ export class ErrorPageConfigs {
         SubTitle: 'ERROR_MAINTENANCE_SUBTITLE',
         Breadcrumb: 'ERROR_MAINTENANCE_TITLE',
         Image: 'images/maintenance.svg'
-        
+
     };
 
     MissingRoute: ErrorPageConfig = {
@@ -61,14 +61,14 @@ export class ErrorPageConfigs {
         SubTitle: 'ERROR_UNSUPPORTED_SUBTITLE',
         Breadcrumb: 'ERROR_UNSUPPORTED_TITLE',
         Image: '',
-        Params: {
-            supported: {
-                edge: 11,
-                ie: 11,
-                firefox: 43, 
-                opera: 35,
-                chrome: 47
-            }
-        }
+        Params: {}
     }
+}
+
+export class SupportedBrowsers {
+    edge: number = 11;
+    ie: number = 11;
+    firefox: number = 43;
+    opera: number = 35;
+    chrome: number = 47;
 }
