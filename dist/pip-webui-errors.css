@@ -92,54 +92,136 @@
 input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:focus, md-autocomplete:focus, span:focus, button:focus {
   outline-width: 0 !important; }
 
-.pip-error .pip-error-text, .pip-error .pip-error-subtext, .pip-error .pip-error-actions, .pip-error .pip-error-details {
+.pip-error-page .pip-local-error, .pip-error-page .pip-error-text, .pip-error-page .pip-error-subtext, .pip-error-page .pip-error-details {
   max-width: 440px !important;
   padding-right: 24px;
   padding-left: 24px; }
 
-.pip-error .pip-error-text {
+.pip-error-page .pip-error-text {
   margin-top: 32px;
   font: normal 500 20px Roboto, "Helvetica Neue", sans-serif;
   opacity: 0.87;
   text-align: center; }
 
-.pip-error .pip-error-subtext {
+.pip-error-page .pip-error-subtext {
   margin-top: 16px;
   font: normal 400 14px Roboto, "Helvetica Neue", sans-serif;
   margin-bottom: 16px;
   opacity: 0.54;
   text-align: center; }
 
-.pip-error .pip-error-details {
+.pip-error-page .pip-error-details {
   padding-top: 8px; }
-  .pip-error .pip-error-details .pip-error-details-item .text-body2 {
+  .pip-error-page .pip-error-details .pip-error-details-item .text-body2 {
     color: #0288D1;
     text-align: center; }
-  .pip-error .pip-error-details .pip-error-details-item .text-body1 {
+  .pip-error-page .pip-error-details .pip-error-details-item .text-body1 {
     opacity: 0.54;
     text-align: center; }
-  .pip-error .pip-error-details .pip-error-details-item div.pip-pic {
+  .pip-error-page .pip-error-details .pip-error-details-item div.pip-pic {
     height: 88px !important;
     width: 88px !important;
     min-height: 0px !important;
     margin: 0px 24px; }
 
 @media (min-width: 768px) and (max-width: 1200px) {
-  .pip-error div.pip-pic {
+  .pip-error-page div.pip-pic {
     margin: 0px 16px; } }
 
 @media (max-width: 768px) {
-  .pip-error .pip-error-text, .pip-error .pip-error-subtext, .pip-error .pip-error-actions, .pip-error .pip-error-details {
+  .pip-error-page .pip-error-text, .pip-error-page .pip-error-subtext, .pip-error-page .pip-error-actions, .pip-error-page .pip-error-details {
     padding-right: 16px;
     padding-left: 16px;
-    min-height: 0px !important; }
-  .pip-error .pip-error-text {
-    margin-top: 0px; }
-  .pip-error div.pip-pic {
+    min-height: 0 !important; }
+  .pip-error-page .pip-error-text {
+    margin-top: 0; }
+  .pip-error-page div.pip-pic {
     height: 64px !important;
     width: 64px !important;
-    min-height: 0px !important;
+    min-height: 0 !important;
     margin: 0px 8px; } }
+
+.pip-error-scroll-body {
+  overflow: auto;
+  width: 100%; }
+
+.pip-error-page {
+  margin: 0 auto;
+  height: calc(100vh - 64px);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-direction: column;
+  -moz-box-flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  @media (max-width: 1200px) {
+    .pip-error-page {
+      height: calc(100vh - 48px); } }
+  @media (max-width: 768px) {
+    .pip-error-page {
+      height: calc(100vh - 56px); } }
+  .pip-error-page .pip-pic {
+    width: 350px !important;
+    height: 250px !important;
+    min-height: 250px !important;
+    margin: 25px 25px 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat; }
+  .pip-error-page .pip-text {
+    width: 400px;
+    margin-top: 25px;
+    text-align: center;
+    font: normal 400 14px Roboto, "Helvetica Neue", sans-serif;
+    color: rgba(0, 0, 0, 0.38); }
+  .pip-error-page .pip-actions {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    width: 400px;
+    -webkit-box-flex-direction: "column";
+    -moz-box-flex-direction: "column";
+    -webkit-flex-direction: "column";
+    -ms-flex-direction: "column";
+    flex-direction: "column"; }
+    .pip-error-page .pip-actions .md-button {
+      width: 384px !important;
+      max-height: 72px !important;
+      margin-bottom: 0;
+      margin-top: 0; }
+      .pip-error-page .pip-actions .md-button span {
+        display: block;
+        white-space: normal;
+        line-height: 20px;
+        margin-top: 12px;
+        margin-bottom: 12px; }
+
+@media (max-width: 768px) {
+  .pip-error-page .pip-pic, .pip-error-page .pip-text, .pip-error-page .pip-actions {
+    margin: 0 auto; }
+  .pip-error-page .pip-pic {
+    width: 80% !important;
+    min-height: 80%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin-bottom: 16px; }
+    .pip-error-page .pip-pic .pip-no-image-sm {
+      width: 0px;
+      height: 0px;
+      display: none; }
+  .pip-error-page .pip-text {
+    width: 80%;
+    padding-left: 16px;
+    padding-right: 16px;
+    font: normal 400 14px Roboto, "Helvetica Neue", sans-serif; }
+  .pip-error-page .pip-actions {
+    width: 80%;
+    padding-left: 16px;
+    padding-right: 16px; }
+    .pip-error-page .pip-actions .md-button {
+      width: calc(100% - $pip-error-page-padding) !important; } }
 
 .pip-page-errors {
   background-color: rgba(0, 0, 0, 0.08);
@@ -230,94 +312,5 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
 
 .black .pip-page-errors .pip-error-details, .black .pip-page-errors .pip-error-text, .black .pip-page-errors .pip-error-details md-icon {
   color: #ff5252; }
-
-.pip-error-scroll-body {
-  overflow: auto;
-  width: 100%; }
-
-.pip-error-page {
-  margin: 0 auto;
-  height: calc(100vh - 64px);
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex-direction: column;
-  -moz-box-flex-direction: column;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-  @media (max-width: 1200px) {
-    .pip-error-page {
-      height: calc(100vh - 48px); } }
-  @media (max-width: 768px) {
-    .pip-error-page {
-      height: calc(100vh - 56px); } }
-
-.pip-error-page .pip-pic {
-  width: 350px !important;
-  height: 250px !important;
-  min-height: 250px !important;
-  margin: 25px 25px 0;
-  background-position: 50% 50%;
-  background-repeat: no-repeat; }
-
-.pip-error-page .pip-text {
-  width: 400px;
-  margin-top: 25px;
-  text-align: center;
-  font: normal 400 14px Roboto, 'Helvetica Neue', sans-serif;
-  color: rgba(0, 0, 0, 0.38); }
-
-.pip-error-page .pip-actions {
-  margin-top: 16px;
-  margin-bottom: 16px;
-  width: 400px;
-  -webkit-box-flex-direction: column;
-  -moz-box-flex-direction: column;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-
-.pip-error-page .pip-actions .md-button {
-  width: 384px !important;
-  max-height: 72px !important;
-  margin-bottom: 0;
-  margin-top: 0; }
-
-.pip-error-page .pip-actions .md-button span {
-  display: block;
-  white-space: normal;
-  line-height: 20px;
-  margin-top: 12px;
-  margin-bottom: 12px; }
-
-@media (max-width: 768px) {
-  .pip-error-page .pip-pic,
-  .pip-error-page .pip-text,
-  .pip-error-page .pip-actions {
-    margin: 0 auto; }
-  .pip-error-page .pip-pic {
-    width: 80% !important;
-    min-height: 80%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    margin-bottom: 16px; }
-  .pip-error-page .pip-pic.pip-no-image-sm {
-    width: 0px;
-    height: 0px;
-    display: none; }
-  .pip-error-page .pip-text {
-    width: 80%;
-    padding-left: 16px;
-    padding-right: 16px;
-    font: normal 400 14px Roboto, 'Helvetica Neue', sans-serif; }
-  .pip-error-page .pip-actions {
-    width: 80%;
-    padding-left: 16px;
-    padding-right: 16px; }
-  .pip-error-page .pip-actions .md-button {
-    width: calc(100% - 16px) !important; } }
 
 /*# sourceMappingURL=pip-webui-errors.css.map */
