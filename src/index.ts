@@ -1,13 +1,18 @@
-﻿/*angular
+﻿angular
     .module('pipErrors.Pages', [
         'ngMaterial'
     ]);
-*/
+
 import './maintenance/MaintenanceErrorPage';
 import './missing_route/MissingRouteErrorPage';
 import './no_connection/NoConnectionErrorPage';
 import './unknown/UnknownErrorPage';
 import './unsupported/UnsupportedErrorPage';
+
+import './error_pages/ErrorPageConfigService';
+import './no_connection_panel/NoConnectionPanel';
+import './form_errors/ClearErrorsDirective';
+import './form_errors/FormErrorsService';
 
 angular
     .module('pipErrors', [

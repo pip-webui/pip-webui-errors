@@ -1,17 +1,4 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}(g.pip || (g.pip = {})).errors = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function () {
-    filterTranslate.$inject = ['$injector'];
-    function filterTranslate($injector) {
-        var pipTranslate = $injector.has('pipTranslate')
-            ? $injector.get('pipTranslate') : null;
-        return function (key) {
-            return pipTranslate ? pipTranslate.translate(key) || key : key;
-        };
-    }
-    angular.module('pipErrors.Translate', [])
-        .filter('translate', filterTranslate);
-})();
-},{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorPageConfig = (function () {
@@ -80,7 +67,7 @@ var ErrorPageConfigs = (function () {
     return ErrorPageConfigs;
 }());
 exports.ErrorPageConfigs = ErrorPageConfigs;
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ErrorPageConfig_1 = require("./ErrorPageConfig");
@@ -135,10 +122,7 @@ var ErrorPageConfigProvider = (function () {
         .module('pipErrorPageConfigService', [])
         .provider('pipErrorPageConfigService', ErrorPageConfigProvider);
 })();
-},{"./ErrorPageConfig":2}],4:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-},{}],5:[function(require,module,exports){
+},{"./ErrorPageConfig":1}],3:[function(require,module,exports){
 var ClearErrorsLink = (function () {
     function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
         var _this = this;
@@ -174,7 +158,7 @@ var ClearErrorsLink = (function () {
         .module('pipClearErrors', [])
         .directive('pipClearErrors', clearErrorsDirective);
 })();
-},{}],6:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var FormErrorsService = (function () {
     FormErrorsService.$inject = ['$rootScope'];
     function FormErrorsService($rootScope) {
@@ -271,52 +255,25 @@ var FormErrorsService = (function () {
         .module('pipFormErrors', [])
         .service('pipFormErrors', FormErrorsService);
 })();
-},{}],7:[function(require,module,exports){
-var HttpResponseInterceptor = (function () {
-    HttpResponseInterceptor.$inject = ['$q', '$location', '$rootScope'];
-    function HttpResponseInterceptor($q, $location, $rootScope) {
-        this.$q = $q;
-        this.$location = $location;
-        this.$rootScope = $rootScope;
-    }
-    HttpResponseInterceptor.prototype.responseError = function (rejection) {
-        var toState = this.$rootScope['$state'] && this.$rootScope['$state'].name ? this.$rootScope['$state'].name : null, toParams = this.$rootScope['$state'] && this.$rootScope['$state'].params ? this.$rootScope['$state'].params : null;
-        switch (rejection.status) {
-            case 503:
-                this.$rootScope.$emit('pipMaintenanceError', { error: rejection });
-                break;
-            case -1:
-                this.$rootScope.$emit('pipNoConnectionError', { error: rejection });
-                break;
-            default:
-                console.error("errors_unknown", rejection);
-                break;
-        }
-        return this.$q.reject(rejection);
-    };
-    return HttpResponseInterceptor;
-}());
-(function () {
-    configureHttpInterceptor.$inject = ['$stateProvider', '$httpProvider'];
-    function configureHttpInterceptor($stateProvider, $httpProvider) {
-        $httpProvider.interceptors.push('pipHttpResponseInterceptor');
-    }
-    angular
-        .module('pipErrors.Pages', [])
-        .config(configureHttpInterceptor)
-        .service('pipHttpResponseInterceptor', HttpResponseInterceptor);
-})();
-},{}],8:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+angular
+    .module('pipErrors.Pages', [
+    'ngMaterial'
+]);
 require("./maintenance/MaintenanceErrorPage");
 require("./missing_route/MissingRouteErrorPage");
 require("./no_connection/NoConnectionErrorPage");
 require("./unknown/UnknownErrorPage");
 require("./unsupported/UnsupportedErrorPage");
+require("./error_pages/ErrorPageConfigService");
+require("./no_connection_panel/NoConnectionPanel");
+require("./form_errors/ClearErrorsDirective");
+require("./form_errors/FormErrorsService");
 angular
     .module('pipErrors', [
     'pipErrors.Templates',
@@ -327,7 +284,7 @@ angular
     'pipFormErrors'
 ]);
 __export(require("./error_pages/ErrorPageConfig"));
-},{"./error_pages/ErrorPageConfig":2,"./maintenance/MaintenanceErrorPage":9,"./missing_route/MissingRouteErrorPage":10,"./no_connection/NoConnectionErrorPage":11,"./unknown/UnknownErrorPage":13,"./unsupported/UnsupportedErrorPage":14}],9:[function(require,module,exports){
+},{"./error_pages/ErrorPageConfig":1,"./error_pages/ErrorPageConfigService":2,"./form_errors/ClearErrorsDirective":3,"./form_errors/FormErrorsService":4,"./maintenance/MaintenanceErrorPage":6,"./missing_route/MissingRouteErrorPage":7,"./no_connection/NoConnectionErrorPage":8,"./no_connection_panel/NoConnectionPanel":9,"./unknown/UnknownErrorPage":10,"./unsupported/UnsupportedErrorPage":11}],6:[function(require,module,exports){
 "use strict";
 configureMaintenanceErrorPageRoute.$inject = ['$stateProvider'];
 initMaintenanceErrorPage.$inject = ['$rootScope', '$state', 'pipErrorPageConfigService'];
@@ -424,7 +381,7 @@ function setMaintenanceErrorPageResources($injector) {
         .run(initMaintenanceErrorPage)
         .run(setMaintenanceErrorPageResources);
 })();
-},{}],10:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 configureMissingRouteErrorPageRoute.$inject = ['$stateProvider'];
 initMissingRouteErrorPage.$inject = ['$rootScope', '$state', '$injector', 'pipErrorPageConfigService'];
@@ -523,7 +480,7 @@ function setMissingRouteErrorPageResources($injector) {
         .run(initMissingRouteErrorPage)
         .run(setMissingRouteErrorPageResources);
 })();
-},{}],11:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 configureNoConnectionErrorPageRoute.$inject = ['$injector', '$stateProvider'];
 initNoConnectionErrorPage.$inject = ['$rootScope', '$state', 'pipErrorPageConfigService'];
@@ -609,7 +566,7 @@ function setNoConnectionErrorPageResources($injector) {
         .run(initNoConnectionErrorPage)
         .run(setNoConnectionErrorPageResources);
 })();
-},{}],12:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var NoConnectionPanelController = (function () {
     NoConnectionPanelController.$inject = ['$scope'];
     function NoConnectionPanelController($scope) {
@@ -623,7 +580,7 @@ var NoConnectionPanelController = (function () {
 }());
 (function () {
     angular
-        .module("pipNoConnectionPanel", ['pipErrors.Translate'])
+        .module("pipNoConnectionPanel", [])
         .directive('pipNoConnectionPanel', function () {
         return {
             restrict: 'E',
@@ -637,7 +594,7 @@ var NoConnectionPanelController = (function () {
         };
     }).controller('pipNoConnectionPanelController', NoConnectionPanelController);
 })();
-},{}],13:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 configureUnknownErrorPageRoute.$inject = ['$injector', '$stateProvider'];
 initUnknownErrorPage.$inject = ['$rootScope', '$state', 'pipErrorPageConfigService'];
@@ -734,7 +691,7 @@ function setUnknownErrorPageResources($injector) {
         .run(initUnknownErrorPage)
         .run(setUnknownErrorPageResources);
 })();
-},{}],14:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 configureUnsupportedErrorPageRoute.$inject = ['$stateProvider'];
 initUnsupportedErrorPage.$inject = ['$rootScope', '$state', '$injector', 'pipErrorPageConfigService'];
@@ -850,7 +807,7 @@ function setUnsupportedErrorPageResources($injector) {
         .run(initUnsupportedErrorPage)
         .run(setUnsupportedErrorPageResources);
 })();
-},{}],15:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function(module) {
 try {
   module = angular.module('pipErrors.Templates');
@@ -925,7 +882,7 @@ module.run(['$templateCache', function($templateCache) {
 
 
 
-},{}]},{},[15,1,2,3,4,5,6,7,8,9,10,12,11,13,14])(15)
+},{}]},{},[12,5])(12)
 });
 
 //# sourceMappingURL=pip-webui-errors.js.map
