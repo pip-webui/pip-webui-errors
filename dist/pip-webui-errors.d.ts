@@ -56,16 +56,7 @@ export interface IFormErrorsService {
     goToUnhandledErrorPage(error: any): any;
 }
 
-interface IHttpResponseInterceptor {
-    responseError(rejection: any): any;
-}
-class HttpResponseInterceptor implements IHttpResponseInterceptor {
-    private $q;
-    private $location;
-    private $rootScope;
-    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
-    responseError(rejection: any): ng.IPromise<any>;
-}
+export const StateVar = "$state";
 
 
 

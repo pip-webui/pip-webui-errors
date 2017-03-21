@@ -1,3 +1,4 @@
+export const StateVar = "$state";
 
 interface IHttpResponseInterceptor {
     responseError(rejection);
@@ -9,9 +10,8 @@ class HttpResponseInterceptor implements IHttpResponseInterceptor{
         private $location: ng.ILocationService, 
         private $rootScope: ng.IRootScopeService) {}
     public responseError(rejection) {
-        // Todo: Check pip-webui-services - we have a different way to define prev and current states now
-        let toState: string = this.$rootScope['$state'] && this.$rootScope['$state'].name ? this.$rootScope['$state'].name : null,
-            toParams = this.$rootScope['$state'] && this.$rootScope['$state'].params ? this.$rootScope['$state'].params : null;
+        let toState: string = this.$rootScope[StateVar] && this.$rootScope[StateVar].name ? this.$rootScope[StateVar].name : null,
+            toParams = this.$rootScope[StateVar] && this.$rootScope[StateVar].params ? this.$rootScope[StateVar].params : null;
 
         switch (rejection.status) {
             case 503:
