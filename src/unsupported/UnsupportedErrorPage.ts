@@ -17,10 +17,10 @@ class UnsupportedErrorPageController {
 
     constructor(
         $scope: ng.IScope,
-        $state: ng.ui.IStateService, 
+        $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
-        $mdMedia: angular.material.IMedia, 
-        $injector: angular.auto.IInjectorService, 
+        $mdMedia: angular.material.IMedia,
+        $injector: angular.auto.IInjectorService,
         pipErrorPageConfigService: IErrorPageConfigService
     ) {
         "ngInject";
@@ -34,7 +34,7 @@ class UnsupportedErrorPageController {
         $rootScope['$routing'] = false;
         this.appHeader();
 
-        this.error = $state && $state.params && $state.params['error'] ?  $state.params['error'] : {};
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
 
     }
 
@@ -54,21 +54,21 @@ function configureUnsupportedErrorPageRoute(
     "ngInject";
 
     $stateProvider
-            .state('errors_unsupported', {
-                url: '/errors/unsupported',
-                params: {
-                    error: null
-                },
-                controllerAs: '$ctrl',
-                controller: UnsupportedErrorPageController,
-                templateUrl: 'unsupported/UnsupportedErrorPage.html'
-            });
+        .state('errors_unsupported', {
+            url: '/errors/unsupported',
+            params: {
+                error: null
+            },
+            controllerAs: '$ctrl',
+            controller: UnsupportedErrorPageController,
+            templateUrl: 'unsupported/UnsupportedErrorPage.html'
+        });
 }
 
 function initUnsupportedErrorPage(
-    $rootScope: ng.IRootScopeService, 
-    $state: ng.ui.IStateService, 
-    $injector: angular.auto.IInjectorService, 
+    $rootScope: ng.IRootScopeService,
+    $state: ng.ui.IStateService,
+    $injector: angular.auto.IInjectorService,
     pipErrorPageConfigService: IErrorPageConfigService) {
     "ngInject";
 
@@ -85,12 +85,12 @@ function initUnsupportedErrorPage(
     let version: string = pipSystemInfo.browserVersion;
     version = version.split(".")[0]
 
-    if (browser 
-        && supportedVersions[browser] 
+    if (browser
+        && supportedVersions[browser]
         && version >= supportedVersions[browser]) {
         return;
     }
-            // if not supported
+    // if not supported
     this.$state.go('errors_unsupported');
 }
 

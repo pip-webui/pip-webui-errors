@@ -53,20 +53,23 @@ var ErrorPageConfigs = (function () {
             SubTitle: 'ERROR_UNSUPPORTED_SUBTITLE',
             Breadcrumb: 'ERROR_UNSUPPORTED_TITLE',
             Image: '',
-            Params: {
-                supported: {
-                    edge: 11,
-                    ie: 11,
-                    firefox: 43,
-                    opera: 35,
-                    chrome: 47
-                }
-            }
+            Params: {}
         };
     }
     return ErrorPageConfigs;
 }());
 exports.ErrorPageConfigs = ErrorPageConfigs;
+var SupportedBrowsers = (function () {
+    function SupportedBrowsers() {
+        this.edge = 11;
+        this.ie = 11;
+        this.firefox = 43;
+        this.opera = 35;
+        this.chrome = 47;
+    }
+    return SupportedBrowsers;
+}());
+exports.SupportedBrowsers = SupportedBrowsers;
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -96,6 +99,7 @@ var ErrorPageConfigService = (function () {
 var ErrorPageConfigProvider = (function () {
     function ErrorPageConfigProvider() {
         this.configs = new ErrorPageConfig_1.ErrorPageConfigs();
+        this.configs.Unsupported.Params.supported = new ErrorPageConfig_1.SupportedBrowsers();
     }
     ErrorPageConfigProvider.prototype.setErrorPageConfig = function (pageName, config) {
         if (!pageName || !config)
@@ -108,6 +112,9 @@ var ErrorPageConfigProvider = (function () {
         if (!configs)
             return;
         this.configs = _.defaultsDeep(configs, this.configs);
+    };
+    ErrorPageConfigProvider.prototype.setSupportedBrowsers = function (browsers) {
+        this.configs.Unsupported.Params.supported = browsers;
     };
     ErrorPageConfigProvider.prototype.$get = function () {
         "ngInject";
@@ -753,13 +760,7 @@ function initUnsupportedErrorPage($rootScope, $state, $injector, pipErrorPageCon
     if (!pipSystemInfo) {
         return;
     }
-    var supportedVersions = {
-        edge: 11,
-        ie: 11,
-        firefox: 43,
-        opera: 35,
-        chrome: 47
-    };
+    var supportedVersions = config.Unsupported.Params.supported;
     var browser = pipSystemInfo.browserName;
     var version = pipSystemInfo.browserVersion;
     version = version.split(".")[0];

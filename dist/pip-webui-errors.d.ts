@@ -18,6 +18,13 @@ export class ErrorPageConfigs {
     Unknown: ErrorPageConfig;
     Unsupported: ErrorPageConfig;
 }
+export class SupportedBrowsers {
+    edge: number;
+    ie: number;
+    firefox: number;
+    opera: number;
+    chrome: number;
+}
 
 
 export interface IErrorPageConfigService {
@@ -27,6 +34,7 @@ export interface IErrorPageConfigService {
 export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     setErrorPageConfig(pageName: string, config: ErrorPageConfig): void;
     setAllErrorPageConfigs(configs: ErrorPageConfigs): void;
+    setSupportedBrowsers(browsers: SupportedBrowsers): void;
     configs: ErrorPageConfigs;
 }
 
