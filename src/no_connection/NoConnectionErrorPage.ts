@@ -2,11 +2,11 @@
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
-export class NoConnectionError {
+class NoConnectionError {
     config?: any;
 }
 
-export class NoConnectionErrorPageController {
+class NoConnectionErrorPageController {
     private _pageName: string = 'NoConnection';
     private pipNavService;
 

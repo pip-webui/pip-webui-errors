@@ -2,7 +2,7 @@
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
-export class UnknownErrorDetails {
+class UnknownErrorDetails {
     code: number;
     message: string;
     status: string;
@@ -10,7 +10,7 @@ export class UnknownErrorDetails {
     client_stacktrace: Function;
 }
 
-export class UnknownErrorPageController {
+class UnknownErrorPageController {
     private _pageName: string = 'Unknown';
     private pipNavService;
 

@@ -133,30 +133,30 @@ var ErrorPageConfigProvider = (function () {
 })();
 
 },{"./ErrorPageConfig":1}],3:[function(require,module,exports){
-var ClearErrorsLink = (function () {
-    function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
-        var _this = this;
-        this._fieldController = $ctrls[0];
-        this._formController = $ctrls[1];
-        $scope.$watch($attrs['ngModel'], function (newValue) {
-            _this.clearFieldErrors();
-            _this.clearFormErrors();
-        });
-    }
-    ClearErrorsLink.prototype.clearFieldErrors = function () {
-        var errors = this._fieldController.$error;
-        for (var prop in errors) {
-            if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
-                this._fieldController.$setValidity(prop, true);
-            }
-        }
-    };
-    ClearErrorsLink.prototype.clearFormErrors = function () {
-        this._formController.$serverError = {};
-    };
-    return ClearErrorsLink;
-}());
 (function () {
+    var ClearErrorsLink = (function () {
+        function ClearErrorsLink($scope, $element, $attrs, $ctrls) {
+            var _this = this;
+            this._fieldController = $ctrls[0];
+            this._formController = $ctrls[1];
+            $scope.$watch($attrs['ngModel'], function (newValue) {
+                _this.clearFieldErrors();
+                _this.clearFormErrors();
+            });
+        }
+        ClearErrorsLink.prototype.clearFieldErrors = function () {
+            var errors = this._fieldController.$error;
+            for (var prop in errors) {
+                if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
+                    this._fieldController.$setValidity(prop, true);
+                }
+            }
+        };
+        ClearErrorsLink.prototype.clearFormErrors = function () {
+            this._formController.$serverError = {};
+        };
+        return ClearErrorsLink;
+    }());
     function clearErrorsDirective() {
         return {
             restrict: 'A',
@@ -510,7 +510,6 @@ var NoConnectionError = (function () {
     }
     return NoConnectionError;
 }());
-exports.NoConnectionError = NoConnectionError;
 var NoConnectionErrorPageController = (function () {
     NoConnectionErrorPageController.$inject = ['$window', '$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorPageConfigService'];
     function NoConnectionErrorPageController($window, $scope, $state, $rootScope, $mdMedia, $injector, pipErrorPageConfigService) {
@@ -539,7 +538,6 @@ var NoConnectionErrorPageController = (function () {
     };
     return NoConnectionErrorPageController;
 }());
-exports.NoConnectionErrorPageController = NoConnectionErrorPageController;
 function configureNoConnectionErrorPageRoute($injector, $stateProvider) {
     "ngInject";
     $stateProvider
@@ -587,19 +585,19 @@ function setNoConnectionErrorPageResources($injector) {
 })();
 
 },{}],9:[function(require,module,exports){
-var NoConnectionPanelController = (function () {
-    NoConnectionPanelController.$inject = ['$scope'];
-    function NoConnectionPanelController($scope) {
-        this._retry = $scope['retry'];
-        this.error = $scope['error'];
-    }
-    NoConnectionPanelController.prototype.onRetry = function () {
-        if (this._retry && angular.isFunction(this._retry))
-            this._retry();
-    };
-    return NoConnectionPanelController;
-}());
 (function () {
+    var NoConnectionPanelController = (function () {
+        NoConnectionPanelController.$inject = ['$scope'];
+        function NoConnectionPanelController($scope) {
+            this._retry = $scope['retry'];
+            this.error = $scope['error'];
+        }
+        NoConnectionPanelController.prototype.onRetry = function () {
+            if (this._retry && angular.isFunction(this._retry))
+                this._retry();
+        };
+        return NoConnectionPanelController;
+    }());
     angular
         .module("pipNoConnectionPanel", [])
         .directive('pipNoConnectionPanel', function () {
@@ -627,7 +625,6 @@ var UnknownErrorDetails = (function () {
     }
     return UnknownErrorDetails;
 }());
-exports.UnknownErrorDetails = UnknownErrorDetails;
 var UnknownErrorPageController = (function () {
     UnknownErrorPageController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorPageConfigService'];
     function UnknownErrorPageController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorPageConfigService) {
@@ -665,7 +662,6 @@ var UnknownErrorPageController = (function () {
     };
     return UnknownErrorPageController;
 }());
-exports.UnknownErrorPageController = UnknownErrorPageController;
 function configureUnknownErrorPageRoute($injector, $stateProvider) {
     "ngInject";
     $stateProvider
@@ -725,7 +721,6 @@ var UnsupportedError = (function () {
     }
     return UnsupportedError;
 }());
-exports.UnsupportedError = UnsupportedError;
 var UnsupportedErrorPageController = (function () {
     UnsupportedErrorPageController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorPageConfigService'];
     function UnsupportedErrorPageController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorPageConfigService) {

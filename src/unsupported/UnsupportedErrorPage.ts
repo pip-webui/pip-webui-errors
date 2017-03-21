@@ -2,7 +2,7 @@
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
-export class UnsupportedError {
+class UnsupportedError {
     config?: any;
 }
 
