@@ -17,6 +17,7 @@ class ErrorPageConfigService implements IErrorPageConfigService {
     }
 
     public getErrorPageConfig(pageName: string): ErrorPageConfig {
+        console.log(pageName, this._config);
         if (!pageName || !this._config[pageName]) {
             return null;
         }
