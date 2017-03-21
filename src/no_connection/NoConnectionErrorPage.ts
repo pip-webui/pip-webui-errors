@@ -18,14 +18,14 @@ export class NoConnectionErrorPageController {
     constructor(
         private $window: ng.IWindowService,
         $scope: ng.IScope,
-        $state: ng.ui.IStateService, 
+        $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
-        $mdMedia: angular.material.IMedia, 
-        $injector: angular.auto.IInjectorService, 
+        $mdMedia: angular.material.IMedia,
+        $injector: angular.auto.IInjectorService,
         pipErrorPageConfigService: IErrorPageConfigService
     ) {
         "ngInject";
-        
+
         let pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
         this.errorConfig = pipErrorPageConfigService.getErrorPageConfig(this._pageName);
         this.pipNavService = $injector.has('pipNavService') ? $injector.get('pipNavService') : null;
@@ -35,7 +35,7 @@ export class NoConnectionErrorPageController {
         $rootScope['$routing'] = false;
         this.appHeader();
 
-        this.error = $state && $state.params && $state.params['error'] ?  $state.params['error'] : {};
+        this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
 
     }
 
@@ -54,26 +54,26 @@ export class NoConnectionErrorPageController {
 }
 
 function configureNoConnectionErrorPageRoute(
-    $injector: angular.auto.IInjectorService, 
+    $injector: angular.auto.IInjectorService,
     $stateProvider: ng.ui.IStateProvider
 ) {
     "ngInject";
 
     $stateProvider
-            .state('errors_no_connection', {
-                url: '/errors/no_connection',
-                params: {
-                    error: null
-                },
-                controller: NoConnectionErrorPageController,
-                    controllerAs: '$ctrl',
-                templateUrl: 'no_connection/NoConnectionErrorPage.html'
-            });
+        .state('errors_no_connection', {
+            url: '/errors/no_connection',
+            params: {
+                error: null
+            },
+            controller: NoConnectionErrorPageController,
+            controllerAs: '$ctrl',
+            templateUrl: 'no_connection/NoConnectionErrorPage.html'
+        });
 }
 
 function initNoConnectionErrorPage(
-    $rootScope: ng.IRootScopeService, 
-    $state: ng.ui.IStateService, 
+    $rootScope: ng.IRootScopeService,
+    $state: ng.ui.IStateService,
     pipErrorPageConfigService: IErrorPageConfigService
 ) {
     "ngInject";
@@ -83,10 +83,10 @@ function initNoConnectionErrorPage(
     if (!config.NoConnection.Active) return;
 
 
-    $rootScope.$on('pipNoConnectionError', 
-    (event: angular.IAngularEvent, params) => { 
-        this.$state.go('errors_no_connection', params);
-    });
+    $rootScope.$on('pipNoConnectionError',
+        (event: angular.IAngularEvent, params) => {
+            this.$state.go('errors_no_connection', params);
+        });
 }
 
 function setNoConnectionErrorPageResources($injector: angular.auto.IInjectorService) {
@@ -110,7 +110,7 @@ function setNoConnectionErrorPageResources($injector: angular.auto.IInjectorServ
 (() => {
 
     angular
-        .module('pipErrors.NoConnection', [])
+        .module('pipErrors.Pages')
         .config(configureNoConnectionErrorPageRoute)
         .run(initNoConnectionErrorPage)
         .run(setNoConnectionErrorPageResources);
