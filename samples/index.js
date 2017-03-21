@@ -23,7 +23,7 @@
 
     thisModule.config(
         function ($stateProvider, $urlRouterProvider, $mdIconProvider,
-                  $compileProvider, $httpProvider, $mdDateLocaleProvider, pipErrorsServiceProvider) { 
+                  $compileProvider, $httpProvider, $mdDateLocaleProvider) {  // pipErrorsServiceProvider
 
             $compileProvider.debugInfoEnabled(false);
             $httpProvider.useApplyAsync(true);

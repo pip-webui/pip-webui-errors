@@ -1,8 +1,8 @@
-﻿angular
+﻿/*angular
     .module('pipErrors.Pages', [
-        'ngMaterial',
+        'ngMaterial'
     ]);
-
+*/
 import './maintenance/MaintenanceErrorPage';
 import './missing_route/MissingRouteErrorPage';
 import './no_connection/NoConnectionErrorPage';
@@ -13,7 +13,7 @@ angular
     .module('pipErrors', [
         'pipErrors.Templates',
         'pipErrors.Pages',
-        'pipErrorsService',
+        'pipErrorPageConfigService',
         'pipNoConnectionPanel',
         'pipClearErrors',
         'pipFormErrors'

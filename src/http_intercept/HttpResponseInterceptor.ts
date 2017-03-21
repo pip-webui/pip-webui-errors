@@ -42,7 +42,7 @@ class HttpResponseInterceptor implements IHttpResponseInterceptor{
     }
 
     angular
-        .module('pipErrors.Pages')
+        .module('pipErrors.Pages', [])
         .config(configureHttpInterceptor)
         .service('pipHttpResponseInterceptor', HttpResponseInterceptor);
 

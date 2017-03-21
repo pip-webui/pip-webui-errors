@@ -1,8 +1,7 @@
 declare module pip.errors {
 
 
-
-export class ErrorStateItem {
+export class ErrorPageConfig {
     Active: boolean;
     Name: string;
     Event: string;
@@ -12,24 +11,23 @@ export class ErrorStateItem {
     Image: string;
     Params?: any;
 }
-export class ErrorsConfig {
-    Maintenance: ErrorStateItem;
-    MissingRoute: ErrorStateItem;
-    NoConnection: ErrorStateItem;
-    Unknown: ErrorStateItem;
-    Unsupported: ErrorStateItem;
+export class ErrorPageConfigs {
+    Maintenance: ErrorPageConfig;
+    MissingRoute: ErrorPageConfig;
+    NoConnection: ErrorPageConfig;
+    Unknown: ErrorPageConfig;
+    Unsupported: ErrorPageConfig;
 }
 
 
-
-export interface IErrorsService {
-    getErrorItemByKey(errorName: string): ErrorStateItem;
-    config: ErrorsConfig;
+export interface IErrorPageConfigService {
+    getErrorPageConfig(pageName: string): ErrorPageConfig;
+    configs: ErrorPageConfigs;
 }
-export interface IErrorsProvider extends ng.IServiceProvider {
-    configureErrorByKey(errorName: string, errorParams: ErrorStateItem): void;
-    configureErrors(value: ErrorsConfig): void;
-    config: ErrorsConfig;
+export interface IErrorPageConfigProvider extends ng.IServiceProvider {
+    setErrorPageConfig(pageName: string, config: ErrorPageConfig): void;
+    setAllErrorPageConfigs(configs: ErrorPageConfigs): void;
+    configs: ErrorPageConfigs;
 }
 
 class ClearErrorsLink {
@@ -40,7 +38,7 @@ class ClearErrorsLink {
     private clearFormErrors();
 }
 
-class FormErrors {
+class FormErrorsService {
     private $rootScope;
     constructor($rootScope: ng.IRootScopeService);
     errorsWithHint(field: any): any;
@@ -51,30 +49,31 @@ class FormErrors {
     private goToUnhandledErrorPage(error);
 }
 
-
-export class PipMaintenanceError {
-    config?: PipMaintenanceErrorConfig;
+interface IHttpResponseInterceptor {
+    responseError(rejection: any): any;
 }
-export class PipMaintenanceErrorConfig {
-    params?: PipMaintenanceErrorParams;
-}
-export class PipMaintenanceErrorParams {
-    interval?: number;
+class HttpResponseInterceptor implements IHttpResponseInterceptor {
+    private $q;
+    private $location;
+    private $rootScope;
+    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
+    responseError(rejection: any): ng.IPromise<any>;
 }
 
 
-export class PipNoConnectionError {
+
+export class NoConnectionError {
     config?: any;
 }
-export class ErrorNoConnectionController {
+export class NoConnectionErrorPageController {
     private $window;
-    private _errorKey;
+    private _pageName;
     private pipNavService;
-    errorConfig: ErrorStateItem;
+    errorConfig: ErrorPageConfig;
     isCordova: boolean;
     media: any;
-    error: PipNoConnectionError;
-    constructor($window: ng.IWindowService, $scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    error: NoConnectionError;
+    constructor($window: ng.IWindowService, $scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorPageConfigService: IErrorPageConfigService);
     private appHeader();
     onRetry(): void;
 }
@@ -85,39 +84,39 @@ class NoConnectionPanelController {
     onRetry(): void;
 }
 
-export class PipUnknownErrorDetails {
+export class UnknownErrorDetails {
     code: number;
     message: string;
     status: string;
     server_stacktrace: Function;
     client_stacktrace: Function;
 }
-export class ErrorUnknownController {
-    private _errorKey;
+export class UnknownErrorPageController {
+    private _pageName;
     private pipNavService;
-    errorConfig: ErrorStateItem;
+    config: ErrorPageConfig;
     isCordova: boolean;
     media: any;
-    error: PipUnknownErrorDetails;
-    error_details: PipUnknownErrorDetails;
+    error: UnknownErrorDetails;
+    error_details: UnknownErrorDetails;
     showError: boolean;
-    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorPageConfigService: IErrorPageConfigService);
     private appHeader();
     private parseError();
     onDetails(): void;
 }
 
-export class PipUnsupportedError {
+export class UnsupportedError {
     config?: any;
 }
-export class ErrorUnsupportedController {
-    private _errorKey;
+export class UnsupportedErrorPageController {
+    private _pageName;
     private pipNavService;
-    errorConfig: ErrorStateItem;
+    errorConfig: ErrorPageConfig;
     isCordova: boolean;
     media: any;
-    error: PipUnsupportedError;
-    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorsService);
+    error: UnsupportedError;
+    constructor($scope: ng.IScope, $state: ng.ui.IStateService, $rootScope: ng.IRootScopeService, $mdMedia: angular.material.IMedia, $injector: angular.auto.IInjectorService, pipErrorsService: IErrorPageConfigService);
     private appHeader();
 }
 
