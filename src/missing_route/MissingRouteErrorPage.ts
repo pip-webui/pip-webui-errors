@@ -2,9 +2,9 @@ import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService'
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
 class MissingRouteErrorState {
-   to: string;
-   toParams: any;
-   fromParams: any;
+    to: string;
+    toParams: any;
+    fromParams: any;
 }
 
 class MissingRouteErrorPageController {
@@ -21,10 +21,10 @@ class MissingRouteErrorPageController {
 
     constructor(
         $scope: ng.IScope,
-        $state: ng.ui.IStateService, 
+        $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
-        $mdMedia: angular.material.IMedia, 
-        $injector: angular.auto.IInjectorService, 
+        $mdMedia: angular.material.IMedia,
+        $injector: angular.auto.IInjectorService,
         pipErrorPageConfigService: IErrorPageConfigService
     ) {
         "ngInject";
@@ -38,10 +38,10 @@ class MissingRouteErrorPageController {
         $rootScope['$routing'] = false;
         this.appHeader();
 
-        this.fromState = $state && $state.params && $state.params['fromState'] ?  $state.params['fromState'] : {};
-        this.unfoundState = $state && $state.params ?  $state.params['unfoundState'] : {};
-        this.url = this.unfoundState && this.unfoundState.to ? $state.href(this.unfoundState.to, this.unfoundState.toParams, {absolute: true}) : '';
-        this.urlBack = this.fromState && this.fromState.to ? $state.href(this.fromState.to, this.fromState.fromParams, {absolute: true}) : '';
+        this.fromState = $state && $state.params && $state.params['fromState'] ? $state.params['fromState'] : {};
+        this.unfoundState = $state && $state.params ? $state.params['unfoundState'] : {};
+        this.url = this.unfoundState && this.unfoundState.to ? $state.href(this.unfoundState.to, this.unfoundState.toParams, { absolute: true }) : '';
+        this.urlBack = this.fromState && this.fromState.to ? $state.href(this.fromState.to, this.fromState.fromParams, { absolute: true }) : '';
 
     }
 
@@ -55,8 +55,8 @@ class MissingRouteErrorPageController {
     }
 
     public onContinue() {
-            // Todo: Go to default state '/'
-            //pipAuthState.goToAuthorized();
+        // Todo: Go to default state '/'
+        //pipAuthState.goToAuthorized();
     }
 }
 
@@ -65,23 +65,23 @@ function configureMissingRouteErrorPageRoute(
 ) {
     "ngInject";
     $stateProvider
-            .state('errors_missing_route', {
-                url: '/errors/missing_route',
-                params: {
-                    unfoundState: null,
-                    fromState: null
-                },
-                controller: MissingRouteErrorPageController,
-                controllerAs: '$ctrl',
-                templateUrl: 'missing_route/MissingRouteErrorPage.html'
-            });
+        .state('errors_missing_route', {
+            url: '/errors/missing_route',
+            params: {
+                unfoundState: null,
+                fromState: null
+            },
+            controller: MissingRouteErrorPageController,
+            controllerAs: '$ctrl',
+            templateUrl: 'missing_route/MissingRouteErrorPage.html'
+        });
 }
 
 
 function initMissingRouteErrorPage(
-    $rootScope: ng.IRootScopeService, 
-    $state: ng.ui.IStateService, 
-    $injector: angular.auto.IInjectorService, 
+    $rootScope: ng.IRootScopeService,
+    $state: ng.ui.IStateService,
+    $injector: angular.auto.IInjectorService,
     pipErrorPageConfigService: IErrorPageConfigService
 ) {
     "ngInject";
@@ -92,9 +92,9 @@ function initMissingRouteErrorPage(
 
     $rootScope.$on('$stateNotFound',
         (
-            event: angular.IAngularEvent, 
-            unfoundState: ng.ui.IState, 
-            fromState: ng.ui.IState, 
+            event: angular.IAngularEvent,
+            unfoundState: ng.ui.IState,
+            fromState: ng.ui.IState,
             fromParams: any) => {
             event.preventDefault();
 
@@ -138,7 +138,7 @@ function setMissingRouteErrorPageResources($injector: angular.auto.IInjectorServ
 (() => {
 
     angular
-        .module('pipErrors.MissingRoute', [])
+        .module('pipErrors.Pages')
         .config(configureMissingRouteErrorPageRoute)
         .run(initMissingRouteErrorPage)
         .run(setMissingRouteErrorPageResources);
