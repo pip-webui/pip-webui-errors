@@ -26,7 +26,7 @@ export class UnknownErrorPageController {
         $state: ng.ui.IStateService, 
         $rootScope: ng.IRootScopeService,
         $mdMedia: angular.material.IMedia, 
-        $injector: angular.auto.IInjectorService, 
+        $injector: angular.auto.IInjectorService,  
         pipErrorPageConfigService: IErrorPageConfigService
     ) {
         "ngInject";
@@ -131,7 +131,7 @@ function setUnknownErrorPageResources($injector: angular.auto.IInjectorService) 
 (() => {
 
     angular
-        .module('pipErrors.Unknown', [])
+        .module('pipErrors.Pages')
         .config(configureUnknownErrorPageRoute)
         .run(initUnknownErrorPage)
         .run(setUnknownErrorPageResources);
