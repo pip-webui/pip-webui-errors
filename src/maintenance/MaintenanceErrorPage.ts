@@ -118,7 +118,7 @@ function setMaintenanceErrorPageResources($injector: angular.auto.IInjectorServi
 (() => {
 
     angular
-        .module('pipErrors.Maintenance', [])
+        .module('pipErrors.Pages')
         .config(configureMaintenanceErrorPageRoute)
         .run(initMaintenanceErrorPage)
         .run(setMaintenanceErrorPageResources);
