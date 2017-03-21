@@ -3,7 +3,12 @@
 (function () {
     'use strict';
     var content = [
-        { title: 'Error example', state: 'error_example', url: '/error_example', controller: 'SampleErrorsController', templateUrl: 'errors.html' } 
+        { title: 'Error pages examples with code', state: 'error_example', url: '/error_example', controller: 'SampleErrorsController', templateUrl: 'errors.html' },
+        { title: 'No connection', state: 'errors_no_connection'}, 
+        { title: 'Maintenance', state: 'errors_maintenance'}, 
+        { title: 'Missing Route', state: 'errors_missing_route'}, 
+        { title: 'Unknown', state: 'errors_unknown'}, 
+        { title: 'Unsuppported', state: 'errors_unsupported'}, 
     ];
 
     var thisModule = angular.module('appErrorSample', 
@@ -34,7 +39,9 @@
 
             for (i = 0; i < content.length; i++) {
                 contentItem = content[i];
-                $stateProvider.state(contentItem.state, contentItem);
+                if (contentItem.controller) {
+                    $stateProvider.state(contentItem.state, contentItem);
+                }
             }
 
             $urlRouterProvider.otherwise('/error_example');
