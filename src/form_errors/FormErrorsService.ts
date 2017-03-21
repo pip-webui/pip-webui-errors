@@ -1,16 +1,16 @@
+import { IFormErrorsService } from './IFormErrorsService';
 
-// Todo: Define service interface
 class FormErrorsService {
 
     constructor(private $rootScope: ng.IRootScopeService) { }
 
-    public errorsWithHint(field) {
+    public errorsWithHint(field: any) {
         if (field == null) return;
 
         return _.isEmpty(field.$error) ? { hint: true } : field.$error;
     };
 
-    public touchedErrorsWithHint(form: ng.IFormController, field) {
+    public touchedErrorsWithHint(form: ng.IFormController, field: any) {
         if (form == null) return;
         if (field == null) return;
 
@@ -33,7 +33,7 @@ class FormErrorsService {
         form['$serverError'] = {};
     }
 
-    public resetFieldsErrors(form: ng.IFormController, field) {
+    public resetFieldsErrors(form: ng.IFormController, field: any): void {
         if (!form) return;
         if (field && form[field] && form[field].$error) {
             form[field].$error = {};
@@ -106,7 +106,7 @@ class FormErrorsService {
 }
 
 (() => {
-    
+
     angular
         .module('pipFormErrors', [])
         .service('pipFormErrors', FormErrorsService);
