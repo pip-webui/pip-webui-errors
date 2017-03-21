@@ -223,7 +223,7 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
     .pip-error-page .pip-actions .md-button {
       width: calc(100% - $pip-error-page-padding) !important; } }
 
-.pip-page-errors {
+.pip-page-errors, .pip-form-errors {
   background-color: rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   z-index: 30;
@@ -238,12 +238,12 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
   -ms-flex-direction: row;
   flex-direction: row;
   padding: 16px 24px !important; }
-  .pip-page-errors.no-transparent-background {
+  .pip-page-errors.no-transparent-background, .pip-form-errors.no-transparent-background {
     background-color: #eeeeee !important; }
-  .pip-page-errors .pip-error-text {
+  .pip-page-errors .pip-error-text, .pip-form-errors .pip-error-text {
     font: normal 400 14px Roboto, "Helvetica Neue", sans-serif;
     line-height: 17px; }
-  .pip-page-errors .pip-error-details {
+  .pip-page-errors .pip-error-details, .pip-form-errors .pip-error-details {
     font: normal 500 14px Roboto, "Helvetica Neue", sans-serif;
     display: -webkit-box;
     display: -moz-box;
@@ -266,13 +266,13 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
     -ms-flex-pack: start;
     justify-content: flex-start;
     margin-left: 24px; }
-    .pip-page-errors .pip-error-details md-icon {
+    .pip-page-errors .pip-error-details md-icon, .pip-form-errors .pip-error-details md-icon {
       height: 20px;
       width: 20px;
       margin-right: 8px !important; }
 
 @media (max-width: 768px) {
-  .pip-page-errors {
+  .pip-page-errors, .pip-form-errors {
     padding-left: 16px !important;
     padding-right: 16px !important;
     padding-bottom: 0px !important;
@@ -281,7 +281,7 @@ input:focus, p:focus, div:focus, li:focus, md-list-item:focus, md-list:focus, a:
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .pip-page-errors .pip-error-details {
+    .pip-page-errors .pip-error-details, .pip-form-errors .pip-error-details {
       height: 48px;
       width: 100%;
       margin-left: 0px !important; } }

@@ -1,6 +1,5 @@
 declare module pip.errors {
 
-
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -38,6 +37,7 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     configs: ErrorPageConfigs;
 }
 
+
 class ClearErrorsLink {
     private _fieldController;
     private _formController;
@@ -56,7 +56,16 @@ export interface IFormErrorsService {
     goToUnhandledErrorPage(error: any): any;
 }
 
-export const StateVar = "$state";
+interface IHttpResponseInterceptor {
+    responseError(rejection: any): any;
+}
+class HttpResponseInterceptor implements IHttpResponseInterceptor {
+    private $q;
+    private $location;
+    private $rootScope;
+    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
+    responseError(rejection: any): ng.IPromise<any>;
+}
 
 
 

@@ -67,14 +67,14 @@
 
             if (pipTranslate) {
                 pipTranslate.setTranslations('en', {
-                    DATE_TIME: 'Date and time Controls and filters',
+                    TITLE: 'Error pages and controls',
                 });
                 pipTranslate.setTranslations('ru', {
-                    DATE_TIME: 'Элементы и фильтры для работы с датой и временем',
+                    TITLE: 'Элементы и страницы для обработки ошибок',
                 });
-                $scope.dateTimeLabel = pipTranslate.translate('DATE_TIME');
+                $scope.title = pipTranslate.translate('TITLE');
             } else {
-                $scope.dateTimeLabel = 'Date and time Controls and filters';
+                $scope.title = 'Error pages and controls';
             }
 
             $scope.isTranslated = !!pipTranslate;

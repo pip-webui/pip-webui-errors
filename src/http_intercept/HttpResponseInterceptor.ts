@@ -1,5 +1,3 @@
-export const StateVar = "$state";
-
 interface IHttpResponseInterceptor {
     responseError(rejection);
 }
@@ -10,9 +8,6 @@ class HttpResponseInterceptor implements IHttpResponseInterceptor{
         private $location: ng.ILocationService, 
         private $rootScope: ng.IRootScopeService) {}
     public responseError(rejection) {
-        let toState: string = this.$rootScope[StateVar] && this.$rootScope[StateVar].name ? this.$rootScope[StateVar].name : null,
-            toParams = this.$rootScope[StateVar] && this.$rootScope[StateVar].params ? this.$rootScope[StateVar].params : null;
-
         switch (rejection.status) {
             case 503:
                 //available (maintenance)

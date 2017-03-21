@@ -8,7 +8,7 @@
   }
 }
 
-.pip-page-errors {
+.pip-page-errors, .pip-form-errors {
   background-color: rgba(0, 0, 0, 0.08);
   border-bottom: $divider-border;
   z-index: 30;
@@ -41,7 +41,7 @@
 }
 
 @media (max-width: 768px) {
-  .pip-page-errors {
+  .pip-page-errors, .pip-form-errors  {
     padding-left: 16px!important;
     padding-right: 16px!important;
     padding-bottom: 0px!important;
