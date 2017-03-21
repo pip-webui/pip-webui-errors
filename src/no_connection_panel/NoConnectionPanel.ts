@@ -1,8 +1,10 @@
 
 class NoConnectionPanelController {
     private _retry: Function;
+    public error: any;
     constructor($scope: ng.IScope) {
         this._retry = $scope['retry'];
+        this.error = $scope['error'];
     }
 
     public onRetry() {
@@ -22,11 +24,11 @@ class NoConnectionPanelController {
                     retry: '=pipRetry'
                 },
                 templateUrl: 'no_connection_panel/NoConnectionPanel.html',
-                controller: 'pipNoConnectionPanelController',
+                controller: NoConnectionPanelController,
                 controllerAs: '$ctrl'
             };
         }
-        ).controller('pipNoConnectionPanelController', NoConnectionPanelController);
+        )
 
 })();
 
