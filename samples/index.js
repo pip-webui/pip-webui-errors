@@ -3,7 +3,7 @@
 (function () {
     'use strict';
     var content = [
-        { title: 'Error pages examples with code', state: 'error_example', url: '/error_example', controller: 'SampleErrorsController', templateUrl: 'errors.html' },
+        { title: 'Error pages examples with code', state: 'error_example', url: '/', controller: 'SampleErrorsController', templateUrl: 'errors.html' },
         { title: 'No connection', state: 'errors_no_connection'}, 
         { title: 'Maintenance', state: 'errors_maintenance'}, 
         { title: 'Missing Route', state: 'errors_missing_route'}, 

@@ -403,9 +403,11 @@ var MissingRouteErrorState = (function () {
     return MissingRouteErrorState;
 }());
 var MissingRouteErrorPageController = (function () {
-    MissingRouteErrorPageController.$inject = ['$scope', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorPageConfigService'];
-    function MissingRouteErrorPageController($scope, $state, $rootScope, $mdMedia, $injector, pipErrorPageConfigService) {
+    MissingRouteErrorPageController.$inject = ['$scope', '$location', '$state', '$rootScope', '$mdMedia', '$injector', 'pipErrorPageConfigService'];
+    function MissingRouteErrorPageController($scope, $location, $state, $rootScope, $mdMedia, $injector, pipErrorPageConfigService) {
         "ngInject";
+        this.$location = $location;
+        this.$state = $state;
         this._pageName = 'MissingRoute';
         this.isCordova = false;
         var pipMedia = $injector.has('pipMedia') ? $injector.get('pipMedia') : null;
@@ -428,6 +430,7 @@ var MissingRouteErrorPageController = (function () {
         this.pipNavService.actions.hide();
     };
     MissingRouteErrorPageController.prototype.onContinue = function () {
+        this.$location.url('/');
     };
     return MissingRouteErrorPageController;
 }());

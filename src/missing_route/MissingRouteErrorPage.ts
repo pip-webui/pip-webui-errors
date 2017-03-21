@@ -21,6 +21,7 @@ class MissingRouteErrorPageController {
 
     constructor(
         $scope: ng.IScope,
+        private $location: ng.ILocationService,
         $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
         $mdMedia: angular.material.IMedia,
@@ -55,8 +56,7 @@ class MissingRouteErrorPageController {
     }
 
     public onContinue() {
-        // Todo: Go to default state '/'
-        //pipAuthState.goToAuthorized();
+        this.$location.url('/');
     }
 }
 
