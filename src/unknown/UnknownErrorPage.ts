@@ -39,7 +39,7 @@ class UnknownErrorPageController {
 
         this.media = pipMedia ? pipMedia : $mdMedia;
 
-        $rootScope['$routing'] = false;
+        $rootScope[pip.services.RoutingVar] = false;
         this.showError = $scope['showError'];
         this.appHeader();
 

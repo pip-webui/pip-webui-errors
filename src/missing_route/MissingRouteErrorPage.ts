@@ -1,5 +1,5 @@
 export let ErrorsMissingRouteState = 'errors_missing_route';
-export let StateNotFoundEvent = '$stateNotFound';
+export let StateNotFoundEvent = '$stateNotFound';  
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
@@ -38,7 +38,7 @@ class MissingRouteErrorPageController {
 
         this.media = pipMedia ? pipMedia : $mdMedia;
 
-        $rootScope['$routing'] = false;
+        $rootScope[pip.services.RoutingVar] = false;
         this.appHeader();
 
         this.fromState = $state && $state.params && $state.params['fromState'] ? $state.params['fromState'] : {};
@@ -106,9 +106,9 @@ function initMissingRouteErrorPage(
                     to: fromState ? fromState.name : '',
                     fromParams: fromParams
                 }
-            }
-            );
-            $rootScope['$routing'] = false;
+            });
+
+            $rootScope[pip.services.RoutingVar] = false;
         }
     );
 }

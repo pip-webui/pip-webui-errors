@@ -42,7 +42,7 @@ class MaintenanceErrorPageController {
 
         this.media = pipMedia ? pipMedia : $mdMedia;
 
-        $rootScope['$routing'] = false;
+        $rootScope[pip.services.RoutingVar] = false;
         this.appHeader();
 
         this.error = $state && $state.params && $state.params['error'] ? $state.params['error'] : {};
