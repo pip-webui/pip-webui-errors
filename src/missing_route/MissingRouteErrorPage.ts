@@ -1,3 +1,5 @@
+export let ErrorsMissingRouteState = 'errors_missing_route';
+export let StateNotFoundEvent = '$stateNotFound';
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
 
@@ -65,7 +67,7 @@ function configureMissingRouteErrorPageRoute(
 ) {
     "ngInject";
     $stateProvider
-        .state('errors_missing_route', {
+        .state(ErrorsMissingRouteState, {
             url: '/errors/missing_route',
             params: {
                 unfoundState: null,
@@ -90,7 +92,7 @@ function initMissingRouteErrorPage(
 
     if (!config.MissingRoute.Active) return;
 
-    $rootScope.$on('$stateNotFound',
+    $rootScope.$on(StateNotFoundEvent,
         (
             event: angular.IAngularEvent,
             unfoundState: ng.ui.IState,
@@ -98,7 +100,7 @@ function initMissingRouteErrorPage(
             fromParams: any) => {
             event.preventDefault();
 
-            $state.go('errors_missing_route', {
+            $state.go(ErrorsMissingRouteState, {
                 unfoundState: unfoundState,
                 fromState: {
                     to: fromState ? fromState.name : '',

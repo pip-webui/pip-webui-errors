@@ -1,3 +1,5 @@
+export let ErrorsMaintenanceState = 'errors_maintenance';
+export let MaintenanceErrorEvent = 'pipMaintenanceError';
 
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
@@ -65,7 +67,7 @@ function configureMaintenanceErrorPageRoute(
     "ngInject";
 
     $stateProvider
-            .state('errors_maintenance', {
+            .state(ErrorsMaintenanceState, {
                 url: '/errors/maintenance',
                 params: {
                     error: null
@@ -87,9 +89,9 @@ function initMaintenanceErrorPage(
 
     if (!config.Maintenance.Active) return;
 
-    $rootScope.$on('pipMaintenanceError',
+    $rootScope.$on(MaintenanceErrorEvent,
     (event: angular.IAngularEvent, params) => { 
-        this.$state.go('errors_maintenance', params);
+        this.$state.go(ErrorsMaintenanceState, params);
     });
 }
 

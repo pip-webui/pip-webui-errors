@@ -1,3 +1,5 @@
+export let ErrorsConnectionState = 'errors_no_connection';
+export let ErrorsConnectionEvent = 'pipNoConnectionError';
 
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
@@ -60,7 +62,7 @@ function configureNoConnectionErrorPageRoute(
     "ngInject";
 
     $stateProvider
-        .state('errors_no_connection', {
+        .state(ErrorsConnectionState, {
             url: '/errors/no_connection',
             params: {
                 error: null
@@ -83,9 +85,9 @@ function initNoConnectionErrorPage(
     if (!config.NoConnection.Active) return;
 
 
-    $rootScope.$on('pipNoConnectionError',
+    $rootScope.$on(ErrorsConnectionEvent,
         (event: angular.IAngularEvent, params) => {
-            this.$state.go('errors_no_connection', params);
+            this.$state.go(ErrorsConnectionState, params);
         });
 }
 

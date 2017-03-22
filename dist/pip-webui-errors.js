@@ -70,7 +70,6 @@ var SupportedBrowsers = (function () {
     return SupportedBrowsers;
 }());
 exports.SupportedBrowsers = SupportedBrowsers;
-
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -131,7 +130,6 @@ var ErrorPageConfigProvider = (function () {
         .module('pipErrorPageConfigService', [])
         .provider('pipErrorPageConfigService', ErrorPageConfigProvider);
 })();
-
 },{"./ErrorPageConfig":1}],3:[function(require,module,exports){
 (function () {
     var ClearErrorsLink = (function () {
@@ -168,7 +166,6 @@ var ErrorPageConfigProvider = (function () {
         .module('pipClearErrors', [])
         .directive('pipClearErrors', clearErrorsDirective);
 })();
-
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -268,7 +265,6 @@ var FormErrorsService = (function () {
         .module('pipFormErrors', [])
         .service('pipFormErrors', FormErrorsService);
 })();
-
 },{}],5:[function(require,module,exports){
 "use strict";
 function __export(m) {
@@ -298,13 +294,14 @@ angular
     'pipFormErrors'
 ]);
 __export(require("./error_pages/ErrorPageConfig"));
-
 },{"./error_pages/ErrorPageConfig":1,"./error_pages/ErrorPageConfigService":2,"./form_errors/ClearErrorsDirective":3,"./form_errors/FormErrorsService":4,"./maintenance/MaintenanceErrorPage":6,"./missing_route/MissingRouteErrorPage":7,"./no_connection/NoConnectionErrorPage":8,"./no_connection_panel/NoConnectionPanel":9,"./unknown/UnknownErrorPage":10,"./unsupported/UnsupportedErrorPage":11}],6:[function(require,module,exports){
 "use strict";
 configureMaintenanceErrorPageRoute.$inject = ['$stateProvider'];
 initMaintenanceErrorPage.$inject = ['$rootScope', '$state', 'pipErrorPageConfigService'];
 setMaintenanceErrorPageResources.$inject = ['$injector'];
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ErrorsMaintenanceState = 'errors_maintenance';
+exports.MaintenanceErrorEvent = 'pipMaintenanceError';
 var MaintenanceError = (function () {
     function MaintenanceError() {
     }
@@ -350,7 +347,7 @@ var MaintenanceErrorPageController = (function () {
 function configureMaintenanceErrorPageRoute($stateProvider) {
     "ngInject";
     $stateProvider
-        .state('errors_maintenance', {
+        .state(exports.ErrorsMaintenanceState, {
         url: '/errors/maintenance',
         params: {
             error: null
@@ -366,8 +363,8 @@ function initMaintenanceErrorPage($rootScope, $state, pipErrorPageConfigService)
     var config = pipErrorPageConfigService.configs;
     if (!config.Maintenance.Active)
         return;
-    $rootScope.$on('pipMaintenanceError', function (event, params) {
-        _this.$state.go('errors_maintenance', params);
+    $rootScope.$on(exports.MaintenanceErrorEvent, function (event, params) {
+        _this.$state.go(exports.ErrorsMaintenanceState, params);
     });
 }
 function setMaintenanceErrorPageResources($injector) {
@@ -396,13 +393,14 @@ function setMaintenanceErrorPageResources($injector) {
         .run(initMaintenanceErrorPage)
         .run(setMaintenanceErrorPageResources);
 })();
-
 },{}],7:[function(require,module,exports){
 "use strict";
 configureMissingRouteErrorPageRoute.$inject = ['$stateProvider'];
 initMissingRouteErrorPage.$inject = ['$rootScope', '$state', '$injector', 'pipErrorPageConfigService'];
 setMissingRouteErrorPageResources.$inject = ['$injector'];
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ErrorsMissingRouteState = 'errors_missing_route';
+exports.StateNotFoundEvent = '$stateNotFound';
 var MissingRouteErrorState = (function () {
     function MissingRouteErrorState() {
     }
@@ -442,7 +440,7 @@ var MissingRouteErrorPageController = (function () {
 function configureMissingRouteErrorPageRoute($stateProvider) {
     "ngInject";
     $stateProvider
-        .state('errors_missing_route', {
+        .state(exports.ErrorsMissingRouteState, {
         url: '/errors/missing_route',
         params: {
             unfoundState: null,
@@ -458,9 +456,9 @@ function initMissingRouteErrorPage($rootScope, $state, $injector, pipErrorPageCo
     var config = pipErrorPageConfigService.configs;
     if (!config.MissingRoute.Active)
         return;
-    $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+    $rootScope.$on(exports.StateNotFoundEvent, function (event, unfoundState, fromState, fromParams) {
         event.preventDefault();
-        $state.go('errors_missing_route', {
+        $state.go(exports.ErrorsMissingRouteState, {
             unfoundState: unfoundState,
             fromState: {
                 to: fromState ? fromState.name : '',
@@ -498,13 +496,14 @@ function setMissingRouteErrorPageResources($injector) {
         .run(initMissingRouteErrorPage)
         .run(setMissingRouteErrorPageResources);
 })();
-
 },{}],8:[function(require,module,exports){
 "use strict";
 configureNoConnectionErrorPageRoute.$inject = ['$injector', '$stateProvider'];
 initNoConnectionErrorPage.$inject = ['$rootScope', '$state', 'pipErrorPageConfigService'];
 setNoConnectionErrorPageResources.$inject = ['$injector'];
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ErrorsConnectionState = 'errors_no_connection';
+exports.ErrorsConnectionEvent = 'pipNoConnectionError';
 var NoConnectionError = (function () {
     function NoConnectionError() {
     }
@@ -541,7 +540,7 @@ var NoConnectionErrorPageController = (function () {
 function configureNoConnectionErrorPageRoute($injector, $stateProvider) {
     "ngInject";
     $stateProvider
-        .state('errors_no_connection', {
+        .state(exports.ErrorsConnectionState, {
         url: '/errors/no_connection',
         params: {
             error: null
@@ -557,8 +556,8 @@ function initNoConnectionErrorPage($rootScope, $state, pipErrorPageConfigService
     var config = pipErrorPageConfigService.configs;
     if (!config.NoConnection.Active)
         return;
-    $rootScope.$on('pipNoConnectionError', function (event, params) {
-        _this.$state.go('errors_no_connection', params);
+    $rootScope.$on(exports.ErrorsConnectionEvent, function (event, params) {
+        _this.$state.go(exports.ErrorsConnectionState, params);
     });
 }
 function setNoConnectionErrorPageResources($injector) {
@@ -583,7 +582,6 @@ function setNoConnectionErrorPageResources($injector) {
         .run(initNoConnectionErrorPage)
         .run(setNoConnectionErrorPageResources);
 })();
-
 },{}],9:[function(require,module,exports){
 (function () {
     var NoConnectionPanelController = (function () {
@@ -613,13 +611,14 @@ function setNoConnectionErrorPageResources($injector) {
         };
     });
 })();
-
 },{}],10:[function(require,module,exports){
 "use strict";
 configureUnknownErrorPageRoute.$inject = ['$injector', '$stateProvider'];
 initUnknownErrorPage.$inject = ['$rootScope', '$state', 'pipErrorPageConfigService'];
 setUnknownErrorPageResources.$inject = ['$injector'];
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ErrorsUnknownState = 'errors_unknown';
+exports.ErrorsUnknownEvent = 'pipUnknownError';
 var UnknownErrorDetails = (function () {
     function UnknownErrorDetails() {
     }
@@ -665,7 +664,7 @@ var UnknownErrorPageController = (function () {
 function configureUnknownErrorPageRoute($injector, $stateProvider) {
     "ngInject";
     $stateProvider
-        .state('errors_unknown', {
+        .state(exports.ErrorsUnknownState, {
         url: '/errors/unknown',
         params: {
             error: null
@@ -681,8 +680,8 @@ function initUnknownErrorPage($rootScope, $state, pipErrorPageConfigService) {
     var config = pipErrorPageConfigService.configs;
     if (!config.Unknown.Active)
         return;
-    $rootScope.$on('pipUnknownError', function (event, params) {
-        _this.$state.go('errors_unknown', params);
+    $rootScope.$on(exports.ErrorsUnknownEvent, function (event, params) {
+        _this.$state.go(exports.ErrorsUnknownState, params);
     });
 }
 function setUnknownErrorPageResources($injector) {
@@ -709,7 +708,6 @@ function setUnknownErrorPageResources($injector) {
         .run(initUnknownErrorPage)
         .run(setUnknownErrorPageResources);
 })();
-
 },{}],11:[function(require,module,exports){
 "use strict";
 configureUnsupportedErrorPageRoute.$inject = ['$stateProvider'];
@@ -818,7 +816,6 @@ function setUnsupportedErrorPageResources($injector) {
         .run(initUnsupportedErrorPage)
         .run(setUnsupportedErrorPageResources);
 })();
-
 },{}],12:[function(require,module,exports){
 (function(module) {
 try {
@@ -851,6 +848,18 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('unknown/UnknownErrorPage.html',
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.config.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.config.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.config.SubTitle | translate}}</div><div class="pip-error-subtext" ng-if="$ctrl.showError && $ctrl.error_details && $ctrl.error_details.message"><div ng-if="$ctrl.error_details.code">Code: {{$ctrl.error_details.code}}</div><div ng-if="$ctrl.error_details.message">Description: {{$ctrl.error_details.message}}</div><div ng-if="$ctrl.error_details.status">HTTP status: {{$ctrl.error_details.status}}</div><div ng-if="$ctrl.error_details.server_stacktrace">Server stacktrace: {{$ctrl.error_details.server_stacktrace}}</div><div ng-if="$ctrl.error_details.client_stacktrace">Client stacktrace stacktrace: {{$ctrl.error_details.client_stacktrace}}</div></div><div class="pip-error-actions layout-column layout-align-center-center"><div class="h48" ng-if="$ctrl.isCordova"><md-button aria-label="CLOSE" class="md-accent" ng-click="$ctrl.onClose($event)">{{::\'ERROR_UNKNOWN_CLOSE\' | translate}}</md-button></div><div class="h48" ng-if="$ctrl.error_details && $ctrl.error_details.status"><md-button aria-label="DETAILS" class="md-accent" ng-click="$ctrl.onDetails($event)">{{::\'ERROR_UNKNOWN_DETAILS\' | translate}}</md-button></div></div></div></div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('pipErrors.Templates');
+} catch (e) {
+  module = angular.module('pipErrors.Templates', []);
+}
+module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection/NoConnectionErrorPage.html',
     '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.errorConfig.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_NO_CONNECTION_RETRY\' | translate}}</md-button></div></div></div>');
 }]);
@@ -865,18 +874,6 @@ try {
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('no_connection_panel/NoConnectionPanel.html',
     '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.error.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.error.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.error.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_NO_CONNECTION_RETRY\' | translate}}</md-button></div></div>');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('pipErrors.Templates');
-} catch (e) {
-  module = angular.module('pipErrors.Templates', []);
-}
-module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('unknown/UnknownErrorPage.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><img src="{{$ctrl.config.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.config.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.config.SubTitle | translate}}</div><div class="pip-error-subtext" ng-if="$ctrl.showError && $ctrl.error_details && $ctrl.error_details.message"><div ng-if="$ctrl.error_details.code">Code: {{$ctrl.error_details.code}}</div><div ng-if="$ctrl.error_details.message">Description: {{$ctrl.error_details.message}}</div><div ng-if="$ctrl.error_details.status">HTTP status: {{$ctrl.error_details.status}}</div><div ng-if="$ctrl.error_details.server_stacktrace">Server stacktrace: {{$ctrl.error_details.server_stacktrace}}</div><div ng-if="$ctrl.error_details.client_stacktrace">Client stacktrace stacktrace: {{$ctrl.error_details.client_stacktrace}}</div></div><div class="pip-error-actions layout-column layout-align-center-center"><div class="h48" ng-if="$ctrl.isCordova"><md-button aria-label="CLOSE" class="md-accent" ng-click="$ctrl.onClose($event)">{{::\'ERROR_UNKNOWN_CLOSE\' | translate}}</md-button></div><div class="h48" ng-if="$ctrl.error_details && $ctrl.error_details.status"><md-button aria-label="DETAILS" class="md-accent" ng-click="$ctrl.onDetails($event)">{{::\'ERROR_UNKNOWN_DETAILS\' | translate}}</md-button></div></div></div></div>');
 }]);
 })();
 

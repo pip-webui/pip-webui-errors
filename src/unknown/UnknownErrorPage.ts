@@ -1,3 +1,5 @@
+export let ErrorsUnknownState = 'errors_unknown';
+export let ErrorsUnknownEvent = 'pipUnknownError';
 
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
@@ -80,7 +82,7 @@ function configureUnknownErrorPageRoute (
     "ngInject";
 
     $stateProvider
-            .state('errors_unknown', {
+            .state(ErrorsUnknownState, {
                 url: '/errors/unknown',
                 params: {
                     error: null
@@ -102,9 +104,9 @@ function initUnknownErrorPage(
 
     if (!config.Unknown.Active) return;
 
-    $rootScope.$on('pipUnknownError',
+    $rootScope.$on(ErrorsUnknownEvent,
     (event: angular.IAngularEvent, params) => { 
-        this.$state.go('errors_unknown', params);
+        this.$state.go(ErrorsUnknownState, params);
     });
 }
 
