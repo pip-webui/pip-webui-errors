@@ -44,7 +44,7 @@
                 }
             }
 
-            $urlRouterProvider.otherwise('/error_example');
+            $urlRouterProvider.otherwise('/');
 
             // pipErrorsServiceProvider.configureErrorByKey('MissingRoute', {
             //         Active: true,
