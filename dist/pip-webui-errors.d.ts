@@ -1,6 +1,17 @@
 declare module pip.errors {
 
 
+
+
+export interface IFormErrorsService {
+    errorsWithHint(field: any): any;
+    touchedErrorsWithHint(form: ng.IFormController, field: any): any;
+    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
+    resetFieldsErrors(form: ng.IFormController, field: any): void;
+    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
+    goToUnhandledErrorPage(error: any): any;
+}
+
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -36,17 +47,6 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     setAllErrorPageConfigs(configs: ErrorPageConfigs): void;
     setSupportedBrowsers(browsers: SupportedBrowsers): void;
     configs: ErrorPageConfigs;
-}
-
-
-
-export interface IFormErrorsService {
-    errorsWithHint(field: any): any;
-    touchedErrorsWithHint(form: ng.IFormController, field: any): any;
-    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
-    resetFieldsErrors(form: ng.IFormController, field: any): void;
-    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
-    goToUnhandledErrorPage(error: any): any;
 }
 
 
