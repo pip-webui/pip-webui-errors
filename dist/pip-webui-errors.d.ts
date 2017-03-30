@@ -1,7 +1,6 @@
 declare module pip.errors {
 
 
-
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -50,18 +49,19 @@ export interface IFormErrorsService {
     goToUnhandledErrorPage(error: any): any;
 }
 
+
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
-
-export let ErrorsConnectionState: string;
-export let ErrorsConnectionEvent: string;
 
 export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
 
+export let ErrorsConnectionState: string;
+export let ErrorsConnectionEvent: string;
+
+
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
-
 
 
 }
