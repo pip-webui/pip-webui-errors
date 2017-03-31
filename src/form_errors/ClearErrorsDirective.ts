@@ -19,7 +19,7 @@
             });
         }
 
-        private clearFieldErrors() {
+        public clearFieldErrors() {
             let errors = this._fieldController.$error;
 
             for (let prop in errors) {
@@ -29,7 +29,7 @@
             }
         }
 
-        private clearFormErrors() {
+        public clearFormErrors() {
             this._formController.$serverError = {};
         }
     }
