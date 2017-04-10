@@ -1,5 +1,6 @@
 declare module pip.errors {
 
+
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -48,7 +49,6 @@ export interface IFormErrorsService {
     setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
     goToUnhandledErrorPage(error: any): any;
 }
-
 
 export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
