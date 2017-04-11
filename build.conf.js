@@ -1,7 +1,7 @@
 module.exports = {
     module: {
         name: 'pipErrors',
-        styles: 'errors',
+        styles: 'index',
         export: 'pip.errors',
         standalone: 'pip.errors'
     },
@@ -11,11 +11,17 @@ module.exports = {
         tsd: true,
         bundle: true,
         html: true,
-        less: true,
+        sass: true,
         lib: true,
         images: true,
         dist: false
     },
+     browserify: {
+        entries: [ 
+            './temp/pip-webui-errors-html.min.js',
+            './src/index.ts'
+        ]
+    }, 
     file: {
         lib: [
             '../pip-webui-lib/dist/**/*',            

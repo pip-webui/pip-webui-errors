@@ -3,7 +3,12 @@
 (function () {
     'use strict';
     var content = [
-        { title: 'Error example', state: 'error_example', url: '/error_example', controller: 'SampleErrorsController', templateUrl: 'errors.html' } 
+        { title: 'Error pages examples with code', state: 'error_example', url: '/', controller: 'SampleErrorsController', templateUrl: 'errors.html' },
+        { title: 'No connection', state: 'errors_no_connection'}, 
+        { title: 'Maintenance', state: 'errors_maintenance'}, 
+        { title: 'Missing Route', state: 'errors_missing_route'}, 
+        { title: 'Unknown', state: 'errors_unknown'}, 
+        { title: 'Unsuppported', state: 'errors_unsupported'}, 
     ];
 
     var thisModule = angular.module('appErrorSample', 
@@ -23,7 +28,7 @@
 
     thisModule.config(
         function ($stateProvider, $urlRouterProvider, $mdIconProvider,
-                  $compileProvider, $httpProvider, $mdDateLocaleProvider, pipErrorsServiceProvider) { 
+                  $compileProvider, $httpProvider, $mdDateLocaleProvider) {  // pipErrorsServiceProvider
 
             $compileProvider.debugInfoEnabled(false);
             $httpProvider.useApplyAsync(true);
@@ -34,10 +39,12 @@
 
             for (i = 0; i < content.length; i++) {
                 contentItem = content[i];
-                $stateProvider.state(contentItem.state, contentItem);
+                if (contentItem.controller) {
+                    $stateProvider.state(contentItem.state, contentItem);
+                }
             }
 
-            $urlRouterProvider.otherwise('/error_example');
+            $urlRouterProvider.otherwise('/');
 
             // pipErrorsServiceProvider.configureErrorByKey('MissingRoute', {
             //         Active: true,
@@ -60,14 +67,14 @@
 
             if (pipTranslate) {
                 pipTranslate.setTranslations('en', {
-                    DATE_TIME: 'Date and time Controls and filters',
+                    TITLE: 'Error pages and controls',
                 });
                 pipTranslate.setTranslations('ru', {
-                    DATE_TIME: 'Элементы и фильтры для работы с датой и временем',
+                    TITLE: 'Элементы и страницы для обработки ошибок',
                 });
-                $scope.dateTimeLabel = pipTranslate.translate('DATE_TIME');
+                $scope.title = pipTranslate.translate('TITLE');
             } else {
-                $scope.dateTimeLabel = 'Date and time Controls and filters';
+                $scope.title = 'Error pages and controls';
             }
 
             $scope.isTranslated = !!pipTranslate;

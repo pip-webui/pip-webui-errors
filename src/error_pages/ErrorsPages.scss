@@ -1,0 +1,169 @@
+$pip-error-page-padding-big: 24px;
+$pip-error-page-padding: 16px;
+$pip-error-page-padding-small: 8px;
+
+.pip-error-page {
+  .pip-local-error {
+    max-width: 440px!important;
+    padding-right: $pip-error-page-padding-big;
+    padding-left: $pip-error-page-padding-big;
+  }
+
+  .pip-error-text {
+    @extend .pip-local-error;
+    margin-top: 32px;
+    font: $font-title;
+    opacity: $opacity-primary;
+    text-align: center;
+  }
+
+  .pip-error-subtext {
+    @extend .pip-local-error;
+    margin-top:$pip-error-page-padding;
+    font: $font-body1;
+    margin-bottom: $pip-error-page-padding;
+    opacity: $opacity-secondary;
+    text-align: center;
+  }
+
+  .pip-error-details {
+    @extend .pip-local-error;
+    padding-top:$pip-error-page-padding-small;
+
+    .pip-error-details-item {
+      .text-body2 {
+        color: #0288D1;
+        text-align: center;
+      }
+
+      .text-body1 {
+        opacity: $opacity-secondary;
+        text-align: center;
+      }
+
+      div.pip-pic {
+        height: 88px!important;
+        width: 88px!important;
+        min-height: 0px!important;
+        margin: 0px $pip-error-page-padding-big;
+      }
+
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1200px) {
+    div.pip-pic {
+      margin: 0px $pip-error-page-padding;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pip-error-text, .pip-error-subtext, .pip-error-actions, .pip-error-details {
+      padding-right: $pip-error-page-padding;
+      padding-left: $pip-error-page-padding;
+      min-height: 0 !important;
+    }
+
+    .pip-error-text {
+      margin-top: 0;
+    }
+
+    div.pip-pic {
+      height: 64px !important;
+      width: 64px !important;
+      min-height: 0 !important;
+      margin: 0px$pip-error-page-padding-small;
+    }
+  }
+}
+
+.pip-error-scroll-body {
+  overflow: auto;
+  width: 100%;
+}
+
+.pip-error-page {
+  margin: 0 auto;
+  height: calc(100vh - 64px);
+  @media (max-width: 1200px) {
+    height: calc(100vh - 48px);
+  }
+  @media (max-width: 768px) {
+    height: calc(100vh - 56px);
+  }    
+  @include flex();
+  @include flex-direction(column);
+  .pip-pic {
+    width: 350px !important;
+    height: 250px !important;
+    min-height: 250px !important;
+    margin: 25px 25px 0;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+  .pip-text {
+    width: 400px;
+    margin-top: 25px;
+    text-align: center;
+    font: $font-body1;
+    color: rgba(0, 0, 0, 0.38);
+  }
+  .pip-actions {
+    margin-top: $pip-error-page-padding;
+    margin-bottom: $pip-error-page-padding;
+    width: 400px;
+    @include flex-direction('column');
+
+  .md-button {
+    width: 384px !important;
+    max-height: 72px !important;
+    margin-bottom: 0;
+    margin-top: 0;
+    span {
+      display: block;
+      white-space: normal;
+      line-height: 20px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+  }
+}}
+
+@media (max-width: 768px) {
+
+  .pip-error-page {
+    .pip-pic, .pip-text, .pip-actions {
+      margin: 0 auto;
+    }
+    .pip-pic {
+      width: 80% !important;
+      min-height: 80%;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      margin-bottom: $pip-error-page-padding;
+      & .pip-no-image-sm {
+        width: 0px;
+        height: 0px;
+        display: none;
+      }
+    }
+
+    .pip-text {
+      width: 80%;
+      padding-left: $pip-error-page-padding;
+      padding-right: $pip-error-page-padding;
+      font: $font-body1;
+    }
+
+    .pip-actions {
+      width: 80%;
+      padding-left: $pip-error-page-padding;
+      padding-right: $pip-error-page-padding;
+
+      .md-button {
+        width: calc(100% - $pip-error-page-padding) !important;
+      }
+    }
+  }
+
+}
