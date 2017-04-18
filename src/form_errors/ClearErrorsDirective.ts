@@ -10,6 +10,8 @@
             $attrs: ng.IAttributes,
             $ctrls
         ) {
+            'ngInject';
+
             this._fieldController = $ctrls[0];
             this._formController = $ctrls[1];
 
@@ -38,7 +40,14 @@
         return {
             restrict: 'A',
             require: ['ngModel', '^?form'],
-            link: ClearErrorsLink
+            link: function (
+                $scope: ng.IScope,
+                $element: ng.IRootElementService,
+                $attrs: ng.IAttributes,
+                $ctrls
+            ) {
+                new ClearErrorsLink($scope, $element, $attrs, $ctrls);
+            }
         };
     }
 
