@@ -33,7 +33,7 @@ class FormErrorsService {
         form['$serverError'] = {};
     }
 
-    public resetFieldsErrors(form: ng.IFormController, field: any): void {
+    public resetFieldsErrors(form: ng.IFormController, field?: any): void {
         if (!form) return;
         if (field && form[field] && form[field].$error) {
             form[field].$error = {};
