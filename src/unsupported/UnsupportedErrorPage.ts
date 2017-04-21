@@ -1,3 +1,5 @@
+export let ErrorsUnsupportedState = 'errors_unsupported';
+export let ErrorsUnsupportedEvent = 'pipUnsupportedError';
 
 import { IErrorPageConfigService } from '../error_pages/IErrorPageConfigService';
 import { ErrorPageConfigs, ErrorPageConfig } from '../error_pages/ErrorPageConfig';
@@ -54,7 +56,7 @@ function configureUnsupportedErrorPageRoute(
     "ngInject";
 
     $stateProvider
-        .state('errors_unsupported', {
+        .state(ErrorsUnsupportedState, {
             url: '/errors/unsupported',
             params: {
                 error: null
@@ -91,7 +93,7 @@ function initUnsupportedErrorPage(
         return;
     }
     // if not supported
-    this.$state.go('errors_unsupported');
+    this.$state.go(ErrorsUnsupportedState);
 }
 
 function setUnsupportedErrorPageResources($injector: angular.auto.IInjectorService) {
