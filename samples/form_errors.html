@@ -1,0 +1,33 @@
+<div class="pip-entry" style="padding:  10px;">
+
+<form name="form" novalidate >
+
+    <md-input-container class="display  bp4">
+        <label>{{::'EMAIL' | translate}}</label>
+        <input name="email" type="email" ng-model="data.email" required step="any" ng-keypress="onEnter($event)"
+            pip-clear-errors tabindex="2" pip-test="input-email" />
+
+        <div class="hint" ng-if="touchedErrorsWithHint(form, form.email).hint && !hideObject.hint">
+            {{::'HINT_EMAIL' | translate}}
+        </div>
+
+        <div ng-messages="touchedErrorsWithHint(form, form.email)" md-auto-hide="false">
+            <div ng-message="required">{{::'ERROR_EMAIL_INVALID' | translate }}</div>
+            <div ng-message="email">{{::'ERROR_EMAIL_INVALID' | translate }}</div>
+            <div ng-message="ERROR_1100">{{::'ERROR_1100' | translate}}</div>
+            <div ng-message="ERROR_1106">{{::'ERROR_1106' | translate}}</div>
+            <div ng-message="ERROR_1114">{{::'ERROR_1114' | translate}}</div>
+        </div>
+    </md-input-container>
+
+    <md-button  ng-click="onSignin()" aria-label="SIGNIN" class="md-raised md-accent w-stretch m0"
+        tabindex="6" 
+        pip-test="button-signin">
+        {{::'SIGNIN_TITLE' | translate}}
+    </md-button>
+</form>
+<h2> Email: error</h2>
+<p>
+        {{touchedErrorsWithHint(form, form.email)}}
+</p>
+</div>

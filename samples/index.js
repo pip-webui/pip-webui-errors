@@ -9,11 +9,12 @@
         { title: 'Missing Route', state: 'errors_missing_route'}, 
         { title: 'Unknown', state: 'errors_unknown'}, 
         { title: 'Unsuppported', state: 'errors_unsupported'}, 
+        { title: 'Form errors example', state: 'form_error_example', url: '/form_error_example', controller: 'SampleFormErrorsController', templateUrl: 'form_errors.html' }
     ];
 
     var thisModule = angular.module('appErrorSample', 
         [
-            'ngMaterial',
+            'ngMaterial', 'ngMessages',
             'ui.router', 'ui.utils', 
             'LocalStorageModule', 
 
@@ -22,7 +23,8 @@
 
 
             'pipErrors',
-            'pipErrorsSample'
+            'pipErrorsSample',
+            'pipFormErrorsSample'
         ]
     );
 
