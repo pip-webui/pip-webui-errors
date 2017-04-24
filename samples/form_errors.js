@@ -3,10 +3,34 @@
 
     var thisModule = angular.module('pipFormErrorsSample', ['pipTranslate', 'ui.router', 'pipErrors.Pages', 'ngMessages']);
 
+    thisModule.config(
+        function ($stateProvider, pipTranslateProvider) {
+
+            // Set translation strings for the module
+            pipTranslateProvider.translations('en', {
+                'EMAIL': 'Email',
+                'HINT_EMAIL': 'Please, type your email address.',
+                'ERROR_EMAIL_INVALID_REQUIRED': 'Enter email',
+                'ERROR_EMAIL_INVALID': 'Enter a valid email',
+                'TEXT': 'Text',
+                'SEND': 'Send',
+
+            });
+
+            pipTranslateProvider.translations('ru', {
+                'EMAIL': 'Адрес эл.почты',
+                'HINT_EMAIL': 'Введите адрес своей эл.почты',
+                'ERROR_EMAIL_INVALID_REQUIRED': 'Введите адрес электронной почты',
+                'ERROR_EMAIL_INVALID': 'Введите правильно адрес электронной почты',
+                'TEXT': 'Текст',
+                'SEND': 'Отправить',
+            });
+
+        }
+    );
+
     thisModule.controller('SampleFormErrorsController',
         function ($scope, $rootScope, $state, $timeout, pipFormErrors) {
-
-
 
             setElementVisability();
 
