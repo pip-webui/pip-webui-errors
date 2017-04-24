@@ -38,6 +38,10 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     configs: ErrorPageConfigs;
 }
 
+export let ErrorsMaintenanceState: string;
+export let MaintenanceErrorEvent: string;
+
+
 
 
 export interface IFormErrorsService {
@@ -48,10 +52,6 @@ export interface IFormErrorsService {
     setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
     goToUnhandledErrorPage(error: any): any;
 }
-
-
-export let ErrorsMaintenanceState: string;
-export let MaintenanceErrorEvent: string;
 
 export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
