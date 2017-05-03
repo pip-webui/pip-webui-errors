@@ -1,38 +1,38 @@
 {
-    "name":  "pip-webui-errors",
-    "version":  "2.0.2",
-    "description":  "Error pages and handlers for Pip.WebUI",
-    "main":  "",
-    "authors":  [
-                    {
-                        "name":  "Sergey Seroukhov",
-                        "email":  "seroukhov@gmail.com"
-                    },
-                    {
-                        "name":  "Katerina Negrienko",
-                        "email":  "katya@negrienko.com"
-                    }
-                ],
-    "license":  "MIT",
-    "keywords":  [
-                     "pip",
-                     "webui",
-                     "pages",
-                     "settings",
-                     "help"
-                 ],
-    "homepage":  "https://github.com/pip-webui/pip-webui-errors",
-    "ignore":  [
-                   ".gitignore",
-                   "cordova",
-                   "node_modules",
-                   "bower_components",
-                   "src",
-                   "tests",
-                   "samples",
-                   "scripts",
-                   "build.*",
-                   "gulpfile.js",
-                   "karma.conf.js"
-               ]
+  "name": "pip-webui-errors",
+  "version": "2.1.0",
+  "description": "Error pages and handlers for Pip.WebUI",
+  "main": "",
+  "authors": [
+    {
+      "name": "Sergey Seroukhov",
+      "email": "seroukhov@gmail.com"
+    },
+    {
+      "name": "Katerina Negrienko",
+      "email": "katya@negrienko.com"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "pip",
+    "webui",
+    "pages",
+    "settings",
+    "help"
+  ],
+  "homepage": "https://github.com/pip-webui/pip-webui-errors",
+  "ignore": [
+    ".gitignore",
+    "cordova",
+    "node_modules",
+    "bower_components",
+    "src",
+    "tests",
+    "samples",
+    "scripts",
+    "build.*",
+    "gulpfile.js",
+    "karma.conf.js"
+  ]
 }

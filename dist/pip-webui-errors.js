@@ -70,6 +70,7 @@ var SupportedBrowsers = (function () {
     return SupportedBrowsers;
 }());
 exports.SupportedBrowsers = SupportedBrowsers;
+
 },{}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -130,6 +131,7 @@ var ErrorPageConfigProvider = (function () {
         .module('pipErrorPageConfigService', [])
         .provider('pipErrorPageConfigService', ErrorPageConfigProvider);
 })();
+
 },{"./ErrorPageConfig":1}],3:[function(require,module,exports){
 (function () {
     var ClearErrorsLink = (function () {
@@ -170,6 +172,7 @@ var ErrorPageConfigProvider = (function () {
         .module('pipClearErrors', [])
         .directive('pipClearErrors', clearErrorsDirective);
 })();
+
 },{}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -269,6 +272,7 @@ var FormErrorsService = (function () {
         .module('pipFormErrors', [])
         .service('pipFormErrors', FormErrorsService);
 })();
+
 },{}],5:[function(require,module,exports){
 "use strict";
 function __export(m) {
@@ -298,6 +302,7 @@ angular
     'pipFormErrors'
 ]);
 __export(require("./error_pages/ErrorPageConfig"));
+
 },{"./error_pages/ErrorPageConfig":1,"./error_pages/ErrorPageConfigService":2,"./form_errors/ClearErrorsDirective":3,"./form_errors/FormErrorsService":4,"./maintenance/MaintenanceErrorPage":6,"./missing_route/MissingRouteErrorPage":7,"./no_connection/NoConnectionErrorPage":8,"./no_connection_panel/NoConnectionPanel":9,"./unknown/UnknownErrorPage":10,"./unsupported/UnsupportedErrorPage":11}],6:[function(require,module,exports){
 "use strict";
 configureMaintenanceErrorPageRoute.$inject = ['$stateProvider'];
@@ -397,6 +402,7 @@ function setMaintenanceErrorPageResources($injector) {
         .run(initMaintenanceErrorPage)
         .run(setMaintenanceErrorPageResources);
 })();
+
 },{}],7:[function(require,module,exports){
 "use strict";
 configureMissingRouteErrorPageRoute.$inject = ['$stateProvider'];
@@ -500,6 +506,7 @@ function setMissingRouteErrorPageResources($injector) {
         .run(initMissingRouteErrorPage)
         .run(setMissingRouteErrorPageResources);
 })();
+
 },{}],8:[function(require,module,exports){
 "use strict";
 configureNoConnectionErrorPageRoute.$inject = ['$injector', '$stateProvider'];
@@ -586,6 +593,7 @@ function setNoConnectionErrorPageResources($injector) {
         .run(initNoConnectionErrorPage)
         .run(setNoConnectionErrorPageResources);
 })();
+
 },{}],9:[function(require,module,exports){
 (function () {
     var NoConnectionPanelController = (function () {
@@ -615,6 +623,7 @@ function setNoConnectionErrorPageResources($injector) {
         };
     });
 })();
+
 },{}],10:[function(require,module,exports){
 "use strict";
 configureUnknownErrorPageRoute.$inject = ['$injector', '$stateProvider'];
@@ -712,6 +721,7 @@ function setUnknownErrorPageResources($injector) {
         .run(initUnknownErrorPage)
         .run(setUnknownErrorPageResources);
 })();
+
 },{}],11:[function(require,module,exports){
 "use strict";
 configureUnsupportedErrorPageRoute.$inject = ['$stateProvider'];
@@ -822,6 +832,7 @@ function setUnsupportedErrorPageResources($injector) {
         .run(initUnsupportedErrorPage)
         .run(setUnsupportedErrorPageResources);
 })();
+
 },{}],12:[function(require,module,exports){
 (function(module) {
 try {
@@ -866,8 +877,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('no_connection_panel/NoConnectionPanel.html',
-    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.error.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.error.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.error.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_NO_CONNECTION_RETRY\' | translate}}</md-button></div></div>');
+  $templateCache.put('unsupported/UnsupportedErrorPage.html',
+    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-details layout-row layout-align-center-center" ng-if="$ctrl.media(\'gt-xs\')"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div><div class="pip-error-details" ng-if="$ctrl.media(\'xs\')"><div class="layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div></div><div class="tm16 layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div></div></div></div>');
 }]);
 })();
 
@@ -890,8 +901,8 @@ try {
   module = angular.module('pipErrors.Templates', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('unsupported/UnsupportedErrorPage.html',
-    '<div class="pip-error-scroll-body pip-scroll"><div class="pip-error pip-error-page layout-column flex layout-align-center-center"><div class="pip-error-text">{{::$ctrl.errorConfig.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.errorConfig.SubTitle | translate}}</div><div class="pip-error-details layout-row layout-align-center-center" ng-if="$ctrl.media(\'gt-xs\')"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div><div class="pip-error-details" ng-if="$ctrl.media(\'xs\')"><div class="layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/ie.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.microsoft.com/en-us/download/internet-explorer-11-for-windows-7-details.aspx">{{::\'ERROR_UNSUPPORTED_IE\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_IE_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/fm.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.mozilla.org/ru/firefox/new/">{{::\'ERROR_UNSUPPORTED_FM\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_FM_VER\' | translate}}</p></div></div></div><div class="tm16 layout-row layout-align-center-center"><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/gc.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="https://www.google.com/chrome/browser/desktop/index.html?platform=win64#">{{::\'ERROR_UNSUPPORTED_GC\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_GC_VER\' | translate}}</p></div></div><div class="pip-error-details-item layout-column layout-align-center-center"><div style="background-image: url(\'images/o.svg\');" class="pip-pic"></div><div class="h64 tp16 bp16"><a class="text-body2 m0" target="_blank" href="http://www.opera.com/ru/download">{{::\'ERROR_UNSUPPORTED_O\' | translate}}</a><p class="text-body1 m0">{{::\'ERROR_UNSUPPORTED_O_VER\' | translate}}</p></div></div></div></div></div></div>');
+  $templateCache.put('no_connection_panel/NoConnectionPanel.html',
+    '<div class="pip-error-page pip-error layout-column layout-align-center-center flex"><img src="{{$ctrl.error.Image}}" class="pip-pic block"><div class="pip-error-text">{{::$ctrl.error.Title | translate}}</div><div class="pip-error-subtext">{{::$ctrl.error.SubTitle | translate}}</div><div class="pip-error-actions h48 layout-column layout-align-center-center"><md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">{{::\'ERROR_NO_CONNECTION_RETRY\' | translate}}</md-button></div></div>');
 }]);
 })();
 
