@@ -53,18 +53,18 @@ export interface IFormErrorsService {
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
 
+
 export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
 
 export let ErrorsConnectionState: string;
 export let ErrorsConnectionEvent: string;
 
+export let ErrorsUnsupportedState: string;
+export let ErrorsUnsupportedEvent: string;
 
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
-
-export let ErrorsUnsupportedState: string;
-export let ErrorsUnsupportedEvent: string;
 
 }
 
