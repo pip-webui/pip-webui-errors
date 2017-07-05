@@ -1,18 +1,6 @@
 declare module pip.errors {
 
 
-
-export interface IFormErrorsService {
-    errorsWithHint(field: any): any;
-    touchedErrorsWithHint(form: ng.IFormController, field: any): any;
-    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
-    resetFieldsErrors(form: ng.IFormController, field: any): void;
-    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
-    goToUnhandledErrorPage(error: any): any;
-}
-
-
-
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -50,15 +38,27 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     configs: ErrorPageConfigs;
 }
 
-export let ErrorsMissingRouteState: string;
-export let StateNotFoundEvent: string;
+
+
+
+export interface IFormErrorsService {
+    errorsWithHint(field: any): any;
+    touchedErrorsWithHint(form: ng.IFormController, field: any): any;
+    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
+    resetFieldsErrors(form: ng.IFormController, field: any): void;
+    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
+    goToUnhandledErrorPage(error: any): any;
+}
 
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
 
+export let ErrorsMissingRouteState: string;
+export let StateNotFoundEvent: string;
 
 export let ErrorsConnectionState: string;
 export let ErrorsConnectionEvent: string;
+
 
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
