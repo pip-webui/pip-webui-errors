@@ -50,11 +50,11 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     configs: ErrorPageConfigs;
 }
 
-export let ErrorsMissingRouteState: string;
-export let StateNotFoundEvent: string;
-
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
+
+export let ErrorsMissingRouteState: string;
+export let StateNotFoundEvent: string;
 
 export let ErrorsConnectionState: string;
 export let ErrorsConnectionEvent: string;
