@@ -1,10 +1,6 @@
 (() => {
 
-    interface IHttpResponseInterceptor {
-        responseError(rejection);
-    }
-
-    class HttpResponseInterceptor implements IHttpResponseInterceptor{
+    class HttpResponseInterceptor implements ng.IHttpInterceptor {
         constructor(
             private $q: ng.IQService, 
             private $location: ng.ILocationService, 
