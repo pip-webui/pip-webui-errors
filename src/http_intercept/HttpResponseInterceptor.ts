@@ -1,4 +1,4 @@
-(() => {
+
 
     class HttpResponseInterceptor implements ng.IHttpInterceptor {
         constructor(
@@ -9,7 +9,7 @@
                 "ngInject";
         }
 
-        public responseError(rejection) {
+        public responseError = (rejection: any): ng.IPromise<any> => {
             switch (rejection.status) {
                 case 503:
                     //available (maintenance)
@@ -41,5 +41,5 @@
         .config(configureHttpInterceptor)
         .service('pipHttpResponseInterceptor', HttpResponseInterceptor);
 
-})();
+
 
