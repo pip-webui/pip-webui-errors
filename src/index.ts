@@ -8,6 +8,7 @@ import './missing_route/MissingRouteErrorPage';
 import './no_connection/NoConnectionErrorPage';
 import './unknown/UnknownErrorPage';
 import './unsupported/UnsupportedErrorPage';
+import './http_intercept/HttpResponseInterceptor';
 
 import './error_pages/ErrorPageConfigService';
 import './no_connection_panel/NoConnectionPanel';
