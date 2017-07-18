@@ -91,7 +91,7 @@ function initMaintenanceErrorPage(
 
     $rootScope.$on(MaintenanceErrorEvent,
     (event: angular.IAngularEvent, params) => { 
-        this.$state.go(ErrorsMaintenanceState, params);
+        $state.go(ErrorsMaintenanceState, params);
     });
 }
 

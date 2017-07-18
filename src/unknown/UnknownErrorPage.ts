@@ -106,7 +106,7 @@ function initUnknownErrorPage(
 
     $rootScope.$on(ErrorsUnknownEvent,
     (event: angular.IAngularEvent, params) => { 
-        this.$state.go(ErrorsUnknownState, params);
+        $state.go(ErrorsUnknownState, params);
     });
 }
 

@@ -93,7 +93,7 @@ function initUnsupportedErrorPage(
         return;
     }
     // if not supported
-    this.$state.go(ErrorsUnsupportedState);
+    $state.go(ErrorsUnsupportedState);
 }
 
 function setUnsupportedErrorPageResources($injector: angular.auto.IInjectorService) {

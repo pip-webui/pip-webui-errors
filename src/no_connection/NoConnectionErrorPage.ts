@@ -87,7 +87,7 @@ function initNoConnectionErrorPage(
 
     $rootScope.$on(ErrorsConnectionEvent,
         (event: angular.IAngularEvent, params) => {
-            this.$state.go(ErrorsConnectionState, params);
+            $state.go(ErrorsConnectionState, params);
         });
 }
 
