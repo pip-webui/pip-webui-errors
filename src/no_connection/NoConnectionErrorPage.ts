@@ -20,7 +20,7 @@ class NoConnectionErrorPageController {
     constructor(
         private $window: ng.IWindowService,
         $scope: ng.IScope,
-        $state: ng.ui.IStateService,
+        private $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
         $mdMedia: angular.material.IMedia,
         $injector: angular.auto.IInjectorService,
@@ -51,7 +51,13 @@ class NoConnectionErrorPageController {
     }
 
     public onRetry() {
-        this.$window.history.back();
+        if (this.$state.params && this.$state.params['fromState']) {
+            this.$state.go(this.$state.params['fromState'], this.$state.params['fromParams']);
+
+        } else {
+            this.$window.history.back();
+        }
+        // this.$window.history.back();
     }
 }
 
@@ -65,7 +71,9 @@ function configureNoConnectionErrorPageRoute(
         .state(ErrorsConnectionState, {
             url: '/errors/no_connection',
             params: {
-                error: null
+                error: null,
+                fromState: null,
+                fromParams: null
             },
             controller: NoConnectionErrorPageController,
             controllerAs: '$ctrl',
@@ -84,9 +92,16 @@ function initNoConnectionErrorPage(
 
     if (!config.NoConnection.Active) return;
 
-
     $rootScope.$on(ErrorsConnectionEvent,
         (event: angular.IAngularEvent, params) => {
+            params = params ? params : {};
+
+            if ($state.current.name == config.NoConnection.Name) {
+                return;
+            } else {
+                params.fromState = $state.current.name;
+                params.fromParams = $state.params;
+            }
             $state.go(ErrorsConnectionState, params);
         });
 }
