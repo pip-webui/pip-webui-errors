@@ -8,6 +8,7 @@ export class ErrorPageConfig {
     Breadcrumb: string;
     Image: string;
     Params?: any;
+    RedirectSateDefault?: string;
 }
 
 export class ErrorPageConfigs {

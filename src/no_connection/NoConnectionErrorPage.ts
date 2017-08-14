@@ -51,9 +51,10 @@ class NoConnectionErrorPageController {
     }
 
     public onRetry() {
-        if (this.$state.params && this.$state.params['fromState']) {
+        if (this.$state.params && this.$state.params['fromState'] && this.$state.params['fromState'] != this.errorConfig.Name ) {
             this.$state.go(this.$state.params['fromState'], this.$state.params['fromParams']);
-
+        } else if (this.errorConfig.RedirectSateDefault) {
+            this.$state.go(this.errorConfig.RedirectSateDefault);
         } else {
             this.$window.history.back();
         }
