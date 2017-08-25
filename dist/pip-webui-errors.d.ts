@@ -65,9 +65,9 @@ export let MaintenanceErrorEvent: string;
 export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
 
+
 export let ErrorsConnectionState: string;
 export let ErrorsConnectionEvent: string;
-
 
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
