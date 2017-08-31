@@ -1,5 +1,6 @@
 declare module pip.errors {
 
+
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -37,7 +38,6 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     setSupportedBrowsers(browsers: SupportedBrowsers): void;
     configs: ErrorPageConfigs;
 }
-
 
 class HttpResponseInterceptor implements ng.IHttpInterceptor {
     private $q;
