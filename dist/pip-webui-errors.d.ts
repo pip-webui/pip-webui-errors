@@ -55,16 +55,6 @@ export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
 
 
-export let ErrorsConnectionState: string;
-export let ErrorsConnectionEvent: string;
-
-export let ErrorsUnknownState: string;
-export let ErrorsUnknownEvent: string;
-
-export let ErrorsUnsupportedState: string;
-export let ErrorsUnsupportedEvent: string;
-
-
 
 export interface IFormErrorsService {
     errorsWithHint(field: any): any;
@@ -74,6 +64,16 @@ export interface IFormErrorsService {
     setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
     goToUnhandledErrorPage(error: any): any;
 }
+
+export let ErrorsConnectionState: string;
+export let ErrorsConnectionEvent: string;
+
+
+export let ErrorsUnknownState: string;
+export let ErrorsUnknownEvent: string;
+
+export let ErrorsUnsupportedState: string;
+export let ErrorsUnsupportedEvent: string;
 
 }
 
