@@ -107,29 +107,29 @@ function setUnsupportedErrorPageResources($injector: angular.auto.IInjectorServi
         'and easier to use. Unfortunately, your browser doesn\'t support those ' +
         'technologies. Download one of these great browsers and you\'ll be on your way:',
         'ERROR_UNSUPPORTED_O': 'Opera',
-        'ERROR_UNSUPPORTED_O_VER': 'Version 36+',
+        'ERROR_UNSUPPORTED_O_VER': 'Version',
         'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
-        'ERROR_UNSUPPORTED_IE_VER': 'Version 11+',
+        'ERROR_UNSUPPORTED_IE_VER': 'Version',
         'ERROR_UNSUPPORTED_GC': 'Google Chrome',
-        'ERROR_UNSUPPORTED_GC_VER': 'Version 48+',
+        'ERROR_UNSUPPORTED_GC_VER': 'Version',
         'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
-        'ERROR_UNSUPPORTED_FM_VER': 'Version 45+'
+        'ERROR_UNSUPPORTED_FM_VER': 'Version'
 
     });
 
     pipTranslate.translations('ru', {
-        'ERROR_UNSUPPORTED_TITLE': 'This browser is not supported',
-        'ERROR_UNSUPPORTED_SUBTITLE': 'Our application using the latest technology. This makes the application faster ' +
-        'and easier to use. Unfortunately, your browser doesn\'t support those ' +
-        'technologies. Download one of these great browsers and you\'ll be on your way:',
+        'ERROR_UNSUPPORTED_TITLE': 'Этот браузер не поддерживается. ',
+        'ERROR_UNSUPPORTED_SUBTITLE': 'Наше приложение использует новейшие технологии. Это делает приложение более быстрым ' +
+        'и простым в использовании. К сожалению, ваш браузер не поддерживает эти технологии. ' +
+        'Загрузите один из этих великолепных браузеров, и вы будете в пути:',
         'ERROR_UNSUPPORTED_O': 'Opera',
-        'ERROR_UNSUPPORTED_O_VER': 'Version 35+',
+        'ERROR_UNSUPPORTED_O_VER': 'Версия',
         'ERROR_UNSUPPORTED_IE': 'Internet Explorer',
-        'ERROR_UNSUPPORTED_IE_VER': 'Version 11+',
+        'ERROR_UNSUPPORTED_IE_VER': 'Версия',
         'ERROR_UNSUPPORTED_GC': 'Google Chrome',
-        'ERROR_UNSUPPORTED_GC_VER': 'Version 47+',
+        'ERROR_UNSUPPORTED_GC_VER': 'Версия',
         'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
-        'ERROR_UNSUPPORTED_FM_VER': 'Version 43+'
+        'ERROR_UNSUPPORTED_FM_VER': 'Версия'
 
     });
 }

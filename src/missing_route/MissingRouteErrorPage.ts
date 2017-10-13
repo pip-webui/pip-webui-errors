@@ -128,12 +128,12 @@ function setMissingRouteErrorPageResources($injector: angular.auto.IInjectorServ
     });
 
     pipTranslate.translations('ru', {
-        'ERROR_MISSING_ROUTE_TITLE': 'Sorry, the page isn\'t available',
-        'ERROR_MISSING_ROUTE_SUBTITLE': 'The link you followed may be broken, or the page may have been removed.',
-        'ERROR_MISSING_ROUTE_CONTINUE': 'Continue',
-        'ERROR_MISSING_ROUTE_TRY_AGAIN': 'Try again',
-        'ERROR_MISSING_ROUTE_GO_BACK': 'Go Back',
-        'ERROR_MISSING_ROUTE_PAGE_TITLE': 'Wrong page'
+        'ERROR_MISSING_ROUTE_TITLE': 'К сожалению, страница недоступна',
+        'ERROR_MISSING_ROUTE_SUBTITLE': 'Введенная Вами ссылка не коректная или страница может быть удалена.',
+        'ERROR_MISSING_ROUTE_CONTINUE': 'Продолжить',
+        'ERROR_MISSING_ROUTE_TRY_AGAIN': 'Попробовать еще',
+        'ERROR_MISSING_ROUTE_GO_BACK': 'Вернуться',
+        'ERROR_MISSING_ROUTE_PAGE_TITLE': 'Ошибочная страница'
     });
 }
 

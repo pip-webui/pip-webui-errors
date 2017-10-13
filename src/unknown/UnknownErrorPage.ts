@@ -123,10 +123,10 @@ function setUnknownErrorPageResources($injector: angular.auto.IInjectorService) 
     });
 
     pipTranslate.translations('ru', {
-        'ERROR_UNKNOWN_TITLE': 'Oops. Something went wrong',
-        'ERROR_UNKNOWN_SUBTITLE': 'Unknown error occurred, but don\'t worry we already have been notified.',
-        'ERROR_UNKNOWN_CLOSE': 'Close',
-        'ERROR_UNKNOWN_DETAILS': 'Details',
+        'ERROR_UNKNOWN_TITLE': 'Что-то пошло не так',
+        'ERROR_UNKNOWN_SUBTITLE': 'Произошла неизвестная ошибка, но не беспокойтесь, мы уже уведомлены.',
+        'ERROR_UNKNOWN_CLOSE': 'Закрыть',
+        'ERROR_UNKNOWN_DETAILS': 'Подробнее',
     });
 }
 

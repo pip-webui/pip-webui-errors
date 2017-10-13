@@ -119,9 +119,9 @@ function setNoConnectionErrorPageResources($injector: angular.auto.IInjectorServ
     });
 
     pipTranslate.translations('ru', {
-        'ERROR_NO_CONNECTION_TITLE': 'No connection to the server',
-        'ERROR_NO_CONNECTION_SUBTITLE': 'Unable to connect to server. Check your Internet connection and try again.',
-        'ERROR_NO_CONNECTION_RETRY': 'Retry',
+        'ERROR_NO_CONNECTION_TITLE': 'Нет подключения к серверу',
+        'ERROR_NO_CONNECTION_SUBTITLE': 'Невозможно подключиться к серверу. Проверьте подключение к Интернету и повторите попытку.',
+        'ERROR_NO_CONNECTION_RETRY': 'Повторить',
     });
 }
 

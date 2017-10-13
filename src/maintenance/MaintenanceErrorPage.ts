@@ -28,7 +28,8 @@ class MaintenanceErrorPageController {
 
     constructor(
         $scope: ng.IScope,
-        $state: ng.ui.IStateService,
+        private $window: ng.IWindowService,
+        private $state: ng.ui.IStateService,
         $rootScope: ng.IRootScopeService,
         $mdMedia: angular.material.IMedia,
         $injector: angular.auto.IInjectorService,
@@ -58,6 +59,18 @@ class MaintenanceErrorPageController {
         this.pipNavService.icon.showMenu();
         this.pipNavService.breadcrumb.text = this.config.Breadcrumb;
         this.pipNavService.actions.hide();
+    }
+
+    
+    public onRetry() {
+        if (this.$state.params && this.$state.params['fromState'] && this.$state.params['fromState'] != this.config.Name ) {
+            this.$state.go(this.$state.params['fromState'], this.$state.params['fromParams']);
+        } else if (this.config.RedirectSateDefault) {
+            this.$state.go(this.config.RedirectSateDefault);
+        } else {
+            this.$window.history.back();
+        }
+        // this.$window.history.back();
     }
 }
 
@@ -105,15 +118,16 @@ function setMaintenanceErrorPageResources($injector: angular.auto.IInjectorServi
         'ERROR_MAINTENANCE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
         'a short period. We\'ll be back soon. Thank for your patience.',
         'ERROR_MAINTENANCE_CLOSE': 'Close',
-        'ERROR_MAINTENANCE_TRY_AGAIN': 'Try after'
+        'ERROR_MAINTENANCE_TRY_AGAIN': 'Try after',
+        ERROR_MAINTENANCE_RETRY: 'Retry'
     });
 
     pipTranslate.translations('ru', {
-        'ERROR_MAINTENANCE_TITLE': 'The server is on maintenance',
-        'ERROR_MAINTENANCE_SUBTITLE': 'Sorry for the inconvenience. This application is undergoing maintenance for ' +
-        'a short period. We\'ll be back soon. Thank for your patience.',
-        'ERROR_MAINTENANCE_CLOSE': 'Close',
-        'ERROR_MAINTENANCE_TRY_AGAIN': 'Try after'
+        'ERROR_MAINTENANCE_TITLE': 'Сервер находится на обслуживании',
+        'ERROR_MAINTENANCE_SUBTITLE': 'Приносим извинения за неудобства. Это приложение проходит техническое обслуживание на короткий период времени. Мы скоро вернемся. Благодарим за терпение.',
+        'ERROR_MAINTENANCE_CLOSE': 'Закрыть',
+        'ERROR_MAINTENANCE_TRY_AGAIN': 'Попробовать еще',
+        ERROR_MAINTENANCE_RETRY: 'Попробовать еще'
     });
 }
 

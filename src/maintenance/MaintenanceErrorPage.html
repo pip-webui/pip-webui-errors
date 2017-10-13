@@ -12,5 +12,10 @@
             {{::'ERROR_MAINTENANCE_CLOSE' | translate}}
         </md-button>
     </div>
+    <div class="pip-error-actions h48 layout-column layout-align-center-center" ng-if="!$ctrl.isCordova">
+        <md-button aria-label="RETRY" class="md-accent" ng-click="$ctrl.onRetry($event)">
+            {{::'ERROR_MAINTENANCE_RETRY' | translate}}
+        </md-button>
+    </div>    
 </div>
 </div>
