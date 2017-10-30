@@ -1,15 +1,6 @@
 declare module pip.errors {
 
 
-class HttpResponseInterceptor implements ng.IHttpInterceptor {
-    private $q;
-    private $location;
-    private $rootScope;
-    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
-    responseError: (rejection: any) => ng.IPromise<any>;
-}
-function configureHttpInterceptor($stateProvider: ng.ui.IStateProvider, $httpProvider: ng.IHttpProvider): void;
-
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -47,6 +38,15 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     setSupportedBrowsers(browsers: SupportedBrowsers): void;
     configs: ErrorPageConfigs;
 }
+
+class HttpResponseInterceptor implements ng.IHttpInterceptor {
+    private $q;
+    private $location;
+    private $rootScope;
+    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
+    responseError: (rejection: any) => ng.IPromise<any>;
+}
+function configureHttpInterceptor($stateProvider: ng.ui.IStateProvider, $httpProvider: ng.IHttpProvider): void;
 
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
