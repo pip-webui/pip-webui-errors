@@ -11,6 +11,7 @@ export class ErrorPageConfig {
     Image: string;
     Params?: any;
     RedirectSateDefault?: string;
+    StateIgnored?: string[];
 }
 export class ErrorPageConfigs {
     Maintenance: ErrorPageConfig;
@@ -68,9 +69,9 @@ export let StateNotFoundEvent: string;
 export let ErrorsConnectionState: string;
 export let ErrorsConnectionEvent: string;
 
+
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
-
 
 export let ErrorsUnsupportedState: string;
 export let ErrorsUnsupportedEvent: string;

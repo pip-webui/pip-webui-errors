@@ -90,6 +90,8 @@ function initNoConnectionErrorPage(
     "ngInject";
 
     let config: ErrorPageConfigs = pipErrorPageConfigService.configs;
+    if (!config.NoConnection.StateIgnored) config.NoConnection.StateIgnored = [];
+    config.NoConnection.StateIgnored.push(config.NoConnection.Name);
 
     if (!config.NoConnection.Active) return;
 
@@ -97,7 +99,7 @@ function initNoConnectionErrorPage(
         (event: angular.IAngularEvent, params) => {
             params = params ? params : {};
 
-            if ($state.current.name == config.NoConnection.Name) {
+            if (config.NoConnection.StateIgnored.indexOf($state.current.name) > -1) {
                 return;
             } else {
                 params.fromState = $state.current.name;

@@ -9,6 +9,7 @@ export class ErrorPageConfig {
     Image: string;
     Params?: any;
     RedirectSateDefault?: string;
+    StateIgnored?: string[];
 }
 
 export class ErrorPageConfigs {
@@ -41,7 +42,8 @@ export class ErrorPageConfigs {
         Title: 'ERROR_NO_CONNECTION_TITLE',
         SubTitle: 'ERROR_NO_CONNECTION_SUBTITLE',
         Breadcrumb: 'ERROR_NO_CONNECTION_TITLE',
-        Image: 'images/no_response.svg'
+        Image: 'images/no_response.svg',
+        StateIgnored: []
     };
 
     Unknown: ErrorPageConfig = {
