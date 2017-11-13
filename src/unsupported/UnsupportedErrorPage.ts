@@ -113,8 +113,11 @@ function setUnsupportedErrorPageResources($injector: angular.auto.IInjectorServi
         'ERROR_UNSUPPORTED_GC': 'Google Chrome',
         'ERROR_UNSUPPORTED_GC_VER': 'Version',
         'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
-        'ERROR_UNSUPPORTED_FM_VER': 'Version'
-
+        'ERROR_UNSUPPORTED_FM_VER': 'Version',
+        ERROR_UNSUPPORTED_EDGE: 'Edge',
+        ERROR_UNSUPPORTED_EDGE_VER: 'Version',
+        ERROR_UNSUPPORTED_SAFARI_VER: 'Version',
+        ERROR_UNSUPPORTED_SAFARI: 'Safari'
     });
 
     pipTranslate.translations('ru', {
@@ -129,8 +132,11 @@ function setUnsupportedErrorPageResources($injector: angular.auto.IInjectorServi
         'ERROR_UNSUPPORTED_GC': 'Google Chrome',
         'ERROR_UNSUPPORTED_GC_VER': 'Версия',
         'ERROR_UNSUPPORTED_FM': 'Mozilla Firefox',
-        'ERROR_UNSUPPORTED_FM_VER': 'Версия'
-
+        'ERROR_UNSUPPORTED_FM_VER': 'Версия',
+        ERROR_UNSUPPORTED_EDGE: 'Edge',
+        ERROR_UNSUPPORTED_EDGE_VER: 'Версия',
+        ERROR_UNSUPPORTED_SAFARI_VER: 'Версия',
+        ERROR_UNSUPPORTED_SAFARI: 'Safari'
     });
 }
 
