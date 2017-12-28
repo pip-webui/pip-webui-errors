@@ -51,7 +51,7 @@ class NoConnectionErrorPageController {
     }
 
     public onRetry() {
-        if (this.$state.params && this.$state.params['fromState'] && this.$state.params['fromState'] != this.errorConfig.Name ) {
+        if (this.$state.params && this.$state.params['fromState'] && this.$state.params['fromState'] != this.errorConfig.Name) {
             this.$state.go(this.$state.params['fromState'], this.$state.params['fromParams']);
         } else if (this.errorConfig.RedirectSateDefault) {
             this.$state.go(this.errorConfig.RedirectSateDefault);
@@ -104,6 +104,15 @@ function initNoConnectionErrorPage(
             } else {
                 params.fromState = $state.current.name;
                 params.fromParams = $state.params;
+            }
+
+            // todo make configure, as array of state
+            if ($state.current.name == 'recover_password' || $state.current.name == 'change_password'
+                || $state.current.name == 'expire_change_password' || $state.current.name == 'reset_password'
+                || $state.current.name == 'verify_email' || $state.current.name == 'verify_email_success'
+                || $state.current.name == 'signin' || $state.current.name == 'signup') {
+
+                return
             }
             $state.go(ErrorsConnectionState, params);
         });
