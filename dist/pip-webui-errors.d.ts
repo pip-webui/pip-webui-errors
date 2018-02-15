@@ -1,6 +1,5 @@
 declare module pip.errors {
 
-
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -40,6 +39,7 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     configs: ErrorPageConfigs;
 }
 
+
 class HttpResponseInterceptor implements ng.IHttpInterceptor {
     private $q;
     private $location;
@@ -63,18 +63,18 @@ export interface IFormErrorsService {
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
 
-export let ErrorsConnectionState: string;
-export let ErrorsConnectionEvent: string;
-
 export let ErrorsMissingRouteState: string;
 export let StateNotFoundEvent: string;
 
+export let ErrorsConnectionState: string;
+export let ErrorsConnectionEvent: string;
 
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
 
 export let ErrorsUnsupportedState: string;
 export let ErrorsUnsupportedEvent: string;
+
 
 }
 
