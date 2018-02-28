@@ -185,12 +185,12 @@ var FormErrorsService = (function () {
         return _.isEmpty(field.$error) ? { hint: true } : field.$error;
     };
     ;
-    FormErrorsService.prototype.touchedErrorsWithHint = function (form, field) {
+    FormErrorsService.prototype.touchedErrorsWithHint = function (form, field, notSubmited) {
         if (form == null)
             return;
         if (field == null)
             return;
-        if (form.$submitted && (field.$touched || form.$dirty) || !form.$submitted && (field.$touched || field.$dirty)) {
+        if (form.$submitted && (field.$touched || field.$dirty) || notSubmited && (field.$touched || field.$dirty)) {
             var result = _.isEmpty(field.$error) ? { hint: true } : field.$error;
             return result;
         }
