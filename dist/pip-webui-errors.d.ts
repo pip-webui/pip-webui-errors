@@ -1,6 +1,15 @@
 declare module pip.errors {
 
 
+class HttpResponseInterceptor implements ng.IHttpInterceptor {
+    private $q;
+    private $location;
+    private $rootScope;
+    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
+    responseError: (rejection: any) => ng.IPromise<any>;
+}
+function configureHttpInterceptor($stateProvider: ng.ui.IStateProvider, $httpProvider: ng.IHttpProvider): void;
+
 
 
 export interface IFormErrorsService {
@@ -11,15 +20,6 @@ export interface IFormErrorsService {
     setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
     goToUnhandledErrorPage(error: any): any;
 }
-
-class HttpResponseInterceptor implements ng.IHttpInterceptor {
-    private $q;
-    private $location;
-    private $rootScope;
-    constructor($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService);
-    responseError: (rejection: any) => ng.IPromise<any>;
-}
-function configureHttpInterceptor($stateProvider: ng.ui.IStateProvider, $httpProvider: ng.IHttpProvider): void;
 
 export class ErrorPageConfig {
     Active: boolean;
@@ -72,9 +72,9 @@ export let ErrorsConnectionEvent: string;
 export let ErrorsUnknownState: string;
 export let ErrorsUnknownEvent: string;
 
+
 export let ErrorsUnsupportedState: string;
 export let ErrorsUnsupportedEvent: string;
-
 
 }
 

@@ -25,9 +25,9 @@
             let errors = this._fieldController.$error;
 
             for (let prop in errors) {
-                if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
+                // if (errors.hasOwnProperty(prop) && prop.substring(0, 6) == 'ERROR_') {
                     this._fieldController.$setValidity(prop, true);
-                }
+                // }
             }
         }
 
