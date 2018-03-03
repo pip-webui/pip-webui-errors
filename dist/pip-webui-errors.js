@@ -188,7 +188,7 @@ var FormErrorsService = (function () {
             return;
         if (field == null)
             return;
-        if (form.$submitted && (field.$touched || field.$dirty) || notSubmited && (field.$touched || field.$dirty)) {
+        if (form.$submitted || notSubmited && (field.$touched || field.$dirty)) {
             var result = _.isEmpty(field.$error) ? { hint: true } : field.$error;
             return result;
         }
