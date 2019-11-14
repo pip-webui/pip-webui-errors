@@ -1,6 +1,17 @@
 declare module pip.errors {
 
 
+
+
+export interface IFormErrorsService {
+    errorsWithHint(field: any): any;
+    touchedErrorsWithHint(form: ng.IFormController, field: any, notSubmited?: boolean): any;
+    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
+    resetFieldsErrors(form: ng.IFormController, field: any): void;
+    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
+    goToUnhandledErrorPage(error: any): any;
+}
+
 export class ErrorPageConfig {
     Active: boolean;
     Name: string;
@@ -40,16 +51,8 @@ export interface IErrorPageConfigProvider extends ng.IServiceProvider {
     configs: ErrorPageConfigs;
 }
 
-
-
-export interface IFormErrorsService {
-    errorsWithHint(field: any): any;
-    touchedErrorsWithHint(form: ng.IFormController, field: any, notSubmited?: boolean): any;
-    resetFormErrors(form: ng.IFormController, errors?: boolean): void;
-    resetFieldsErrors(form: ng.IFormController, field: any): void;
-    setFormError(form: ng.IFormController, error: any, errorFieldMap: any): void;
-    goToUnhandledErrorPage(error: any): any;
-}
+export let ErrorsMissingRouteState: string;
+export let StateNotFoundEvent: string;
 
 class HttpResponseInterceptor implements ng.IHttpInterceptor {
     private $q;
@@ -62,9 +65,6 @@ function configureHttpInterceptor($stateProvider: ng.ui.IStateProvider, $httpPro
 
 export let ErrorsMaintenanceState: string;
 export let MaintenanceErrorEvent: string;
-
-export let ErrorsMissingRouteState: string;
-export let StateNotFoundEvent: string;
 
 export let ErrorsConnectionState: string;
 export let ErrorsConnectionEvent: string;
