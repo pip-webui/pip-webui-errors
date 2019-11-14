@@ -4,7 +4,7 @@
         constructor(
             private $q: ng.IQService, 
             private $location: ng.ILocationService, 
-            private $rootScope: ng.IRootScopeService,
+            private $rootScope: ng.IRootScopeService
         ) {
                 "ngInject";
         }
